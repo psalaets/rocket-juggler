@@ -1,0 +1,16 @@
+{
+  "name": "rocket-juggler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "./node_modules/.bin/beefy index.js:bundle.js --live"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "beefy": "^2.1.1",
+    "browserify": "^6.3.2"
+  }
+}
