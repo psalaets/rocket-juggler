@@ -15,10 +15,15 @@
     "browserify-shim": "^3.8.0"
   },
   "browserify": {
-    "transform": ["browserify-shim"]
+    "transform": [
+      "browserify-shim"
+    ]
   },
   "browserify-shim": {
     "createjs": "global:createjs",
     "window": "global:window"
+  },
+  "dependencies": {
+    "p2": "^0.6.0"
   }
 }

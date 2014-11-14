@@ -1,6 +1,8 @@
 var createjs = require('createjs');
 var document = require('window').document;
 
+var p2 = require('p2');
+
 var canvas = document.getElementById('stage');
 
 var stage = new createjs.Stage(canvas);
