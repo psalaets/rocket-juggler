@@ -18,6 +18,7 @@
     "transform": ["browserify-shim"]
   },
   "browserify-shim": {
-    "createjs": "global:createjs"
+    "createjs": "global:createjs",
+    "window": "global:window"
   }
 }
