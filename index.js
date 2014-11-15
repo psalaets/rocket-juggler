@@ -1,28 +1,41 @@
 var createjs = require('createjs');
 var document = require('window').document;
 
-var p2 = require('p2');
-
 var canvas = document.getElementById('stage');
-
 var stage = new createjs.Stage(canvas);
 
-var s = new createjs.Shape();
-s.x = 100;
-s.y = 100;
+var p2 = require('p2');
 
-var g = s.graphics;
-g.setStrokeStyle(1);
-g.beginStroke(createjs.Graphics.getRGB(0,0,0));
-g.beginFill(createjs.Graphics.getRGB(255,0,0));
-g.drawCircle(0, 0, 20);
+var Ball = require('./lib/ball');
 
-stage.addChild(s);
 
-createjs.Ticker.setFPS(60);
+var world = new p2.World({
+  gravity: [5, 180]
+});
+
+var objects = [];
+
+objects.push(createBall(10, 10, 20));
+objects.push(createBall(100, 100, 50));
+objects.push(createBall(200, 200, 5));
+
+createjs.Ticker.setFPS(30);
 createjs.Ticker.addEventListener('tick', function(event) {
-  s.x = stage.mouseX;
-  s.y = stage.mouseY;
+
+  world.step(event.delta / 1000)
+
+  for (var i = 0; i < objects.length; i++) {
+    objects[i].update && objects[i].update(event);
+  }
 
   stage.update();
 });
+
+function createBall(x, y, radius) {
+  var ball = new Ball(x, y, radius);
+
+  stage.addChild(ball);
+  world.addBody(ball.body);
+
+  return ball;
+}
