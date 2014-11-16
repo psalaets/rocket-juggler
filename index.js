@@ -23,16 +23,17 @@ var balls = [
 var wallWidth = 20;
 var floorHeight = 20;
 var ceilingHeight = 20;
+var extraPadding = 500;
 
 var walls = [
   // left
-  createWall(0, 0 + ceilingHeight, wallWidth, (768 - floorHeight) - ceilingHeight),
+  createWall(0 - extraPadding, 0 + ceilingHeight, wallWidth + extraPadding, (768 - floorHeight) - ceilingHeight),
   // right
-  createWall(1024 - wallWidth, 0, wallWidth, 768 - floorHeight),
+  createWall(1024 - wallWidth, 0, wallWidth + extraPadding, 768 - floorHeight),
   // floor
-  createWall(0, 768 - floorHeight, 1024, floorHeight),
+  createWall(0, 768 - floorHeight, 1024, floorHeight + extraPadding),
   // ceiling
-  createWall(0, 0, 1024, ceilingHeight)
+  createWall(0, 0 - extraPadding, 1024, ceilingHeight + extraPadding)
 ];
 
 var objects = [];
