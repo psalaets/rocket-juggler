@@ -5,9 +5,11 @@ var canvas = document.getElementById('stage');
 var stage = new createjs.Stage(canvas);
 
 var p2 = require('p2');
+var Vec2 = require('vec2');
 
 var Ball = require('./lib/ball');
 var Wall = require('./lib/wall');
+var Rocket = require('./lib/rocket');
 
 var world = new p2.World({
   gravity: [0, 293]
@@ -36,6 +38,21 @@ var walls = [
   createWall(0, 0 - extraPadding, 1024, ceilingHeight + extraPadding)
 ];
 
+var keys = {};
+
+document.onkeydown = function onKeyDown(event) {
+  keys[event.keyCode] = true;
+};
+
+document.onkeyup = function onKeyUp(event) {
+  delete keys[event.keyCode];
+};
+
+var anchor = {
+  x: 1024 / 2,
+  y: 768 - floorHeight - 20
+}
+
 var aimLine = new createjs.Shape();
 stage.addChild(aimLine);
 
@@ -43,14 +60,30 @@ var objects = [];
 objects.push.apply(objects, balls);
 objects.push.apply(objects, walls);
 
+var fireDelay = 300;
+var lastFireTime;
+
 createjs.Ticker.setFPS(60);
 createjs.Ticker.addEventListener('tick', function(event) {
+  var now = event.time;
+
+  if (keys[16]) { // shift
+    if (!lastFireTime || now > lastFireTime + fireDelay) {
+      var aimVector = new Vec2(stage.mouseX, stage.mouseY);
+      aimVector.subtract(anchor.x, anchor.y);
+      aimVector.normalize();
+
+      objects.push(createRocket(anchor.x, anchor.y, aimVector));
+
+      lastFireTime = now;
+    }
+  }
 
   aimLine.graphics
     .clear()
     .beginStroke('#00ff00')
     .setStrokeStyle(5)
-    .moveTo(1024 / 2, 768 - floorHeight)
+    .moveTo(anchor.x, anchor.y)
     .lineTo(stage.mouseX, stage.mouseY);
 
   world.step(event.delta / 1000)
@@ -64,18 +97,28 @@ createjs.Ticker.addEventListener('tick', function(event) {
 
 function createBall(x, y, radius) {
   var ball = new Ball(x, y, radius);
-
-  stage.addChild(ball);
-  world.addBody(ball.body);
-
-  return ball;
+  return addEntity(ball);
 }
 
 function createWall(x, y, width, height) {
   var wall = new Wall(x, y, width, height);
+  return addEntity(wall);
+}
 
-  stage.addChild(wall);
-  world.addBody(wall.body);
+function createRocket(x, y, aimVector) {
+  var rocket = new Rocket(x, y);
+  addEntity(rocket);
 
-  return wall;
+  var speed = 500;
+  aimVector.multiply(speed);
+  rocket.body.velocity = [aimVector.x, aimVector.y];
+
+  return rocket;
+}
+
+function addEntity(entity) {
+  stage.addChild(entity);
+  world.addBody(entity.body);
+
+  return entity;
 }
