@@ -36,11 +36,6 @@ var walls = [
   createWall(0, 0 - extraPadding, 1024, ceilingHeight + extraPadding)
 ];
 
-var anchor = {
-  x: 1024 / 2,
-  y: 768 - floorHeight
-};
-
 var aimLine = new createjs.Shape();
 stage.addChild(aimLine);
 
@@ -51,7 +46,8 @@ objects.push.apply(objects, walls);
 createjs.Ticker.setFPS(60);
 createjs.Ticker.addEventListener('tick', function(event) {
 
-  aimLine.graphics.clear()
+  aimLine.graphics
+    .clear()
     .beginStroke('#00ff00')
     .setStrokeStyle(5)
     .moveTo(1024 / 2, 768 - floorHeight)
