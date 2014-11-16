@@ -14,7 +14,7 @@ var world = new p2.World({
 });
 
 var balls = [
-  createBall(205, 10, 20),
+  createBall(205, 200, 20),
   createBall(200, 100, 20),
   createBall(600, 100, 5),
   createBall(300, 100, 20)
@@ -22,14 +22,22 @@ var balls = [
 
 var wallWidth = 20;
 var floorHeight = 20;
+var ceilingHeight = 20;
 
-var left = createWall(0, 0, wallWidth, 768 - floorHeight);
-var right = createWall(1024 - wallWidth, 0, wallWidth, 768 - floorHeight);
-var floor = createWall(0, 768 - floorHeight, 1024, floorHeight);
+var walls = [
+  // left
+  createWall(0, 0 + ceilingHeight, wallWidth, (768 - floorHeight) - ceilingHeight),
+  // right
+  createWall(1024 - wallWidth, 0, wallWidth, 768 - floorHeight),
+  // floor
+  createWall(0, 768 - floorHeight, 1024, floorHeight),
+  // ceiling
+  createWall(0, 0, 1024, ceilingHeight)
+];
 
 var objects = [];
 objects.push.apply(objects, balls);
-objects.push(left, right, floor);
+objects.push.apply(objects, walls);
 
 createjs.Ticker.setFPS(60);
 createjs.Ticker.addEventListener('tick', function(event) {
