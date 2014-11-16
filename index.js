@@ -10,15 +10,15 @@ var Ball = require('./lib/ball');
 var Wall = require('./lib/wall');
 
 var world = new p2.World({
-  gravity: [0, 180]
+  gravity: [0, 293]
 });
 
-var objects = [];
-
-objects.push(createBall(100, 100, 20));
-objects.push(createBall(200, 200, 50));
-objects.push(createBall(303, 0, 50));
-objects.push(createBall(300, 300, 50));
+var balls = [
+  createBall(205, 10, 20),
+  createBall(200, 100, 20),
+  createBall(600, 100, 5),
+  createBall(300, 100, 20)
+];
 
 var wallWidth = 20;
 var floorHeight = 20;
@@ -27,9 +27,11 @@ var left = createWall(0, 0, wallWidth, 768 - floorHeight);
 var right = createWall(1024 - wallWidth, 0, wallWidth, 768 - floorHeight);
 var floor = createWall(0, 768 - floorHeight, 1024, floorHeight);
 
+var objects = [];
+objects.push.apply(objects, balls);
 objects.push(left, right, floor);
 
-createjs.Ticker.setFPS(30);
+createjs.Ticker.setFPS(60);
 createjs.Ticker.addEventListener('tick', function(event) {
 
   world.step(event.delta / 1000)
