@@ -99,7 +99,13 @@ function createWall(x, y, width, height) {
 }
 
 function addEntity(entity) {
-  stage.addChild(entity);
+
+  if (entity.view) {
+    stage.addChild(entity.view);
+  } else {
+    stage.addChild(entity);
+  }
+
   world.addBody(entity.body);
 
   return entity;
