@@ -59,9 +59,6 @@ var objects = [];
 objects.push.apply(objects, balls);
 objects.push.apply(objects, walls);
 
-var fireDelay = 300;
-var lastFireTime;
-
 createjs.Ticker.setFPS(60);
 createjs.Ticker.addEventListener('tick', function(event) {
 
