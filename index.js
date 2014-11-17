@@ -9,7 +9,7 @@ var Vec2 = require('vec2');
 
 var Ball = require('./lib/ball');
 var Wall = require('./lib/wall');
-var Rocket = require('./lib/rocket');
+var Launcher = require('./lib/launcher');
 
 var world = new p2.World({
   gravity: [0, 293]
@@ -48,10 +48,9 @@ document.onkeyup = function onKeyUp(event) {
   delete keys[event.keyCode];
 };
 
-var anchor = {
-  x: 1024 / 2,
-  y: 768 - floorHeight - 20
-}
+var launcher = new Launcher();
+launcher.move(1024 / 2, 768 - floorHeight - 20);
+
 
 var aimLine = new createjs.Shape();
 stage.addChild(aimLine);
@@ -65,17 +64,14 @@ var lastFireTime;
 
 createjs.Ticker.setFPS(60);
 createjs.Ticker.addEventListener('tick', function(event) {
-  var now = event.time;
+
+  launcher.aim(stage.mouseX, stage.mouseY);
+  launcher.update(event);
 
   if (keys[16]) { // shift
-    if (!lastFireTime || now > lastFireTime + fireDelay) {
-      var aimVector = new Vec2(stage.mouseX, stage.mouseY);
-      aimVector.subtract(anchor.x, anchor.y);
-      aimVector.normalize();
-
-      objects.push(createRocket(anchor.x, anchor.y, aimVector));
-
-      lastFireTime = now;
+    var rocket = launcher.fire();
+    if (rocket) {
+      objects.push(addEntity(rocket));
     }
   }
 
@@ -83,8 +79,8 @@ createjs.Ticker.addEventListener('tick', function(event) {
     .clear()
     .beginStroke('#00ff00')
     .setStrokeStyle(5)
-    .moveTo(anchor.x, anchor.y)
-    .lineTo(stage.mouseX, stage.mouseY);
+    .moveTo(launcher.source.x, launcher.source.y)
+    .lineTo(launcher.target.x, launcher.target.y);
 
   world.step(event.delta / 1000)
 
@@ -103,17 +99,6 @@ function createBall(x, y, radius) {
 function createWall(x, y, width, height) {
   var wall = new Wall(x, y, width, height);
   return addEntity(wall);
-}
-
-function createRocket(x, y, aimVector) {
-  var rocket = new Rocket(x, y);
-  addEntity(rocket);
-
-  var speed = 500;
-  aimVector.multiply(speed);
-  rocket.body.velocity = [aimVector.x, aimVector.y];
-
-  return rocket;
 }
 
 function addEntity(entity) {
