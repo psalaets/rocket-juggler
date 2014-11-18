@@ -3,8 +3,9 @@ var canvas = document.getElementById('stage');
 
 var Game = require('./lib/game');
 var gameplay = require('./lib/gameplay');
+var title = require('./lib/title');
 
 var game = new Game(canvas);
-game.setCurrentState(gameplay);
+game.changeState(title);
 
 game.start();
