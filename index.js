@@ -102,8 +102,6 @@ function addEntity(entity) {
 
   if (entity.view) {
     stage.addChild(entity.view);
-  } else {
-    stage.addChild(entity);
   }
 
   world.addBody(entity.body);
