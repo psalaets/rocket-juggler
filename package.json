@@ -21,7 +21,8 @@
   },
   "browserify-shim": {
     "createjs": "global:createjs",
-    "window": "global:window"
+    "window": "global:window",
+    "local-storage": "global:localStorage"
   },
   "dependencies": {
     "ghost-body": "^1.1.1",
