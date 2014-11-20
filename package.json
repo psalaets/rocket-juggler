@@ -10,9 +10,9 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "beefy": "^2.1.1",
-    "browserify": "^6.3.2",
-    "browserify-shim": "^3.8.0"
+    "beefy": "2.1.1",
+    "browserify": "6.3.2",
+    "browserify-shim": "3.8.0"
   },
   "browserify": {
     "transform": [
@@ -25,8 +25,8 @@
     "local-storage": "global:localStorage"
   },
   "dependencies": {
-    "ghost-body": "^1.1.1",
-    "p2": "^0.6.0",
-    "vec2": "^1.6.0"
+    "ghost-body": "1.1.1",
+    "p2": "0.6.0",
+    "vec2": "1.6.0"
   }
 }
