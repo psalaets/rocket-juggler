@@ -13,9 +13,9 @@
     "beefy": "2.1.1",
     "browserify": "6.3.2",
     "browserify-shim": "3.8.0",
-    "gulp": "^3.8.10",
-    "vinyl-source-stream": "^1.0.0",
-    "watchify": "^2.1.1"
+    "gulp": "3.8.10",
+    "vinyl-source-stream": "1.0.0",
+    "watchify": "2.1.1"
   },
   "browserify": {
     "transform": [
