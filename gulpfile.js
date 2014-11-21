@@ -4,7 +4,14 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream')
 
 gulp.task('watch', function() {
-  var bundler = browserify(watchify.args);
+  var bundler = browserify({
+    // begin options required by watchify
+    cache: {},
+    packageCache: {},
+    fullPaths: true,
+    // end options required by watchify
+    debug: true // generate inline source maps
+  });
   bundler = watchify(bundler);
 
   bundler.add('./index.js');
