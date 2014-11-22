@@ -9,19 +9,28 @@ var gulp        = require('gulp'),
     rev         = require('gulp-rev'),
     inject      = require('gulp-inject');
 
-gulp.task('watch-commonjs', function() {
+// when true bundle node modules with watchify, when false browserify
+var watchifyBundle = true;
+// when true include source maps with commonjs bundle
+var inlineSourceMaps = true;
+
+gulp.task('browserify', function() {
   var bundler = browserify({
     // begin options required by watchify
     cache: {},
     packageCache: {},
     fullPaths: true,
     // end options required by watchify
-    debug: true // generate inline source maps
+    debug: inlineSourceMaps // generate inline source maps
   });
-  bundler = watchify(bundler);
 
+  if (watchifyBundle) {
+    bundler = watchify(bundler);
+    bundler.on('update', rebundle);
+  }
+
+  // index.js is code's entry point to requiring node modules
   bundler.add('./app/index.js');
-  bundler.on('update', rebundle);
 
   function rebundle() {
     return bundler.bundle()
@@ -41,7 +50,7 @@ gulp.task('browser-sync-server', function() {
   });
 });
 
-gulp.task('dev', ['watch-commonjs', 'browser-sync-server'], function() {
+gulp.task('dev', ['browserify', 'browser-sync-server'], function() {
   gulp.watch([
     // reload when commonjs bundle changes
     'app/build/bundle.js',
@@ -50,7 +59,12 @@ gulp.task('dev', ['watch-commonjs', 'browser-sync-server'], function() {
   ], {}, browserSync.reload);
 });
 
-gulp.task('prep-scripts', function() {
+gulp.task('set-prod-flags', function() {
+  watchifyBundle = false;
+  inlineSourceMaps = false;
+});
+
+gulp.task('prep-scripts', ['browserify'], function() {
   var jsFilter = filter('**/*.js');
 
   return gulp.src('app/index.html')
@@ -85,6 +99,6 @@ gulp.task('prep-html', ['prep-scripts'], function() {
     .pipe(gulp.dest('build'));
 });
 
-gulp.task('prod', ['prep-html']);
+gulp.task('prod', ['set-prod-flags', 'prep-html']);
 
 gulp.task('default', ['dev']);
