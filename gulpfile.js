@@ -108,4 +108,11 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('prod', ['set-prod-flags', 'clean', 'prep-html']);
+
+gulp.task('gh-pages', ['prod'], function() {
+  // copy stuff in build dir to project root
+  return gulp.src('build/*')
+    .pipe(gulp.dest('.'));
+});
+
 gulp.task('default', ['dev']);
