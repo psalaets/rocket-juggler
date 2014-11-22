@@ -36,7 +36,7 @@ gulp.task('browser-sync-server', function() {
   });
 });
 
-gulp.task('default', ['watch-commonjs', 'browser-sync-server'], function() {
+gulp.task('dev', ['watch-commonjs', 'browser-sync-server'], function() {
   gulp.watch([
     // reload when commonjs bundle changes
     'app/build/bundle.js',
@@ -44,3 +44,5 @@ gulp.task('default', ['watch-commonjs', 'browser-sync-server'], function() {
     'app/index.html'
   ], {}, browserSync.reload);
 });
+
+gulp.task('default', ['dev']);
