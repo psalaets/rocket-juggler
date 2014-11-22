@@ -7,7 +7,8 @@ var gulp        = require('gulp'),
     filter      = require('gulp-filter'),
     uglify      = require('gulp-uglify'),
     rev         = require('gulp-rev'),
-    inject      = require('gulp-inject');
+    inject      = require('gulp-inject'),
+    del         = require('del');
 
 // when true bundle node modules with watchify, when false browserify
 var watchifyBundle = true;
@@ -99,6 +100,12 @@ gulp.task('prep-html', ['prep-scripts'], function() {
     .pipe(gulp.dest('build'));
 });
 
-gulp.task('prod', ['set-prod-flags', 'prep-html']);
+gulp.task('clean', function(cb) {
+  del([
+    'build',
+    'app/build'
+  ], cb);
+});
 
+gulp.task('prod', ['set-prod-flags', 'clean', 'prep-html']);
 gulp.task('default', ['dev']);
