@@ -1,9 +1,10 @@
 var gulp = require('gulp'),
     browserify = require('browserify'),
     watchify = require('watchify'),
-    source = require('vinyl-source-stream')
+    source = require('vinyl-source-stream'),
+    browserSync = require('browser-sync')
 
-gulp.task('watch', function() {
+gulp.task('watch-commonjs', function() {
   var bundler = browserify({
     // begin options required by watchify
     cache: {},
@@ -25,4 +26,17 @@ gulp.task('watch', function() {
   }
 
   return rebundle();
+});
+
+gulp.task('browser-sync-server', function() {
+  browserSync({
+    server: {
+      baseDir: './app/'
+    }
+  });
+});
+
+gulp.task('default', ['watch-commonjs', 'browser-sync-server'], function() {
+  // reload when commonjs bundle changes
+  gulp.watch('app/build/*.js', {}, browserSync.reload);
 });
