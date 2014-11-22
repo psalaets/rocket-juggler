@@ -1,13 +1,13 @@
-var gulp = require('gulp'),
-    browserify = require('browserify'),
-    watchify = require('watchify'),
-    source = require('vinyl-source-stream'),
+var gulp        = require('gulp'),
+    browserify  = require('browserify'),
+    watchify    = require('watchify'),
+    source      = require('vinyl-source-stream'),
     browserSync = require('browser-sync'),
-    useref = require('gulp-useref'),
-    filter = require('gulp-filter'),
-    uglify = require('gulp-uglify'),
-    rev = require('gulp-rev'),
-    inject = require('gulp-inject')
+    useref      = require('gulp-useref'),
+    filter      = require('gulp-filter'),
+    uglify      = require('gulp-uglify'),
+    rev         = require('gulp-rev'),
+    inject      = require('gulp-inject');
 
 gulp.task('watch-commonjs', function() {
   var bundler = browserify({
