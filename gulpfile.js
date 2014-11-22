@@ -80,12 +80,12 @@ gulp.task('prep-scripts', ['clean', 'browserify'], function() {
     .pipe(uglify())
     // assign unique filename based on content
     .pipe(rev())
-    .pipe(gulp.dest('build'));
+    .pipe(gulp.dest('build/scripts'));
 });
 
 gulp.task('prep-html', ['clean', 'prep-scripts'], function() {
-  var vendorFile = gulp.src('build/vendor-*.js', {read: false});
-  var mainFile = gulp.src('build/main-*.js', {read: false});
+  var vendorFile = gulp.src('build/scripts/vendor-*.js', {read: false});
+  var mainFile = gulp.src('build/scripts/main-*.js', {read: false});
 
   return gulp.src('app/index.html')
     .pipe(inject(vendorFile, {
@@ -114,7 +114,7 @@ gulp.task('gh-pages', ['prod'], function() {
   console.log('Copying files to project root:')
 
   // copy stuff in build dir to project root
-  return gulp.src('build/*')
+  return gulp.src('build/**/*')
     .pipe(gulp.dest('.'))
     .pipe(filelog());
 });
