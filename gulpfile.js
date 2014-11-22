@@ -38,5 +38,5 @@ gulp.task('browser-sync-server', function() {
 
 gulp.task('default', ['watch-commonjs', 'browser-sync-server'], function() {
   // reload when commonjs bundle changes
-  gulp.watch('app/build/*.js', {}, browserSync.reload);
+  gulp.watch('app/build/bundle.js', {}, browserSync.reload);
 });
