@@ -14,14 +14,14 @@ gulp.task('watch', function() {
   });
   bundler = watchify(bundler);
 
-  bundler.add('./index.js');
+  bundler.add('./app/index.js');
   bundler.on('update', rebundle);
 
   function rebundle() {
     return bundler.bundle()
       // convert regular node stream into gulp compatible stream
       .pipe(source('bundle.js'))
-      .pipe(gulp.dest('./build'));
+      .pipe(gulp.dest('./app/build'));
   }
 
   return rebundle();
