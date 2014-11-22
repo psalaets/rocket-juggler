@@ -8,7 +8,8 @@ var gulp        = require('gulp'),
     uglify      = require('gulp-uglify'),
     rev         = require('gulp-rev'),
     inject      = require('gulp-inject'),
-    del         = require('del');
+    del         = require('del'),
+    filelog     = require('gulp-filelog');
 
 // when true bundle node modules with watchify, when false browserify
 var watchifyBundle = true;
@@ -110,9 +111,12 @@ gulp.task('clean', function(cb) {
 gulp.task('prod', ['set-prod-flags', 'clean', 'prep-html']);
 
 gulp.task('gh-pages', ['prod'], function() {
+  console.log('Copying files to project root:')
+
   // copy stuff in build dir to project root
   return gulp.src('build/*')
-    .pipe(gulp.dest('.'));
+    .pipe(gulp.dest('.'))
+    .pipe(filelog());
 });
 
 gulp.task('default', ['dev']);
