@@ -16,7 +16,16 @@
 <body>
     <canvas id="stage" width="1024" height="768"></canvas>
 
+    <!-- build:js vendor.js -->
+    <!-- inject-vendor:js -->
     <script src="bower_components/easeljs/lib/easeljs-0.7.1.min.js"></script>
+    <!-- endinject -->
+    <!-- endbuild -->
+
+    <!-- build:js main.js -->
+    <!-- inject-main:js -->
     <script src="build/bundle.js"></script>
+    <!-- endinject -->
+    <!-- endbuild -->
 </body>
 </html>
