@@ -37,6 +37,10 @@ gulp.task('browser-sync-server', function() {
 });
 
 gulp.task('default', ['watch-commonjs', 'browser-sync-server'], function() {
-  // reload when commonjs bundle changes
-  gulp.watch('app/build/bundle.js', {}, browserSync.reload);
+  gulp.watch([
+    // reload when commonjs bundle changes
+    'app/build/bundle.js',
+    // reload when html page changes
+    'app/index.html'
+  ], {}, browserSync.reload);
 });
