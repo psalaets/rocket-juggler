@@ -1,0 +1,19 @@
+{
+  "name": "rocket-juggler",
+  "main": "index.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/psalaets/rocket-juggler",
+  "authors": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "easeljs": "release_v0.7.1"
+  }
+}
