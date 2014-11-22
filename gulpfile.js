@@ -16,7 +16,7 @@ var watchifyBundle = true;
 // when true include source maps with commonjs bundle
 var inlineSourceMaps = true;
 
-gulp.task('browserify', function() {
+gulp.task('browserify', ['clean'], function() {
   var bundler = browserify({
     // begin options required by watchify
     cache: {},
@@ -66,7 +66,7 @@ gulp.task('set-prod-flags', function() {
   inlineSourceMaps = false;
 });
 
-gulp.task('prep-scripts', ['browserify'], function() {
+gulp.task('prep-scripts', ['clean', 'browserify'], function() {
   var jsFilter = filter('**/*.js');
 
   return gulp.src('app/index.html')
@@ -83,7 +83,7 @@ gulp.task('prep-scripts', ['browserify'], function() {
     .pipe(gulp.dest('build'));
 });
 
-gulp.task('prep-html', ['prep-scripts'], function() {
+gulp.task('prep-html', ['clean', 'prep-scripts'], function() {
   var vendorFile = gulp.src('build/vendor-*.js', {read: false});
   var mainFile = gulp.src('build/main-*.js', {read: false});
 
