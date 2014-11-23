@@ -26,6 +26,8 @@ function createWalls() {
 
 var gameplayState = {
   setUp: function(game) {
+    this.game = game;
+
     var collisionHandler = createCollisionHandler(game, this);
 
     game.createWorld(function(world) {
@@ -68,20 +70,8 @@ var gameplayState = {
     this.launcher = new Launcher();
     this.launcher.move(1024 / 2, 768 - 120);
 
-    // mouse event is optional
-    this.fire = function(mouseEvent) {
-      if (mouseEvent) {
-        this.launcher.aim(mouseEvent.stageX, mouseEvent.stageY);
-      }
-
-      var rocket = this.launcher.fire();
-      if (rocket) {
-        game.addRocket(rocket);
-      }
-    };
-
     game.withStage(function(stage) {
-      stage.on('stagemousedown', this.fire, this);
+      stage.on('stagemousedown', this.mouseFire, this);
     }.bind(this));
 
     // debug related
@@ -110,8 +100,19 @@ var gameplayState = {
     game.timer.clearCountdowns();
 
     game.withStage(function(stage) {
-      stage.off('stagemousedown', this.fire);
+      // TODO figure out why stage#off isn't working for this
+      stage.removeAllEventListeners('stagemousedown');
     }.bind(this));
+  },
+  fire: function() {
+    var rocket = this.launcher.fire();
+    if (rocket) {
+      this.game.addRocket(rocket);
+    }
+  },
+  mouseFire: function(mouseEvent) {
+    this.launcher.aim(mouseEvent.stageX, mouseEvent.stageY);
+    this.fire();
   }
 };
 
