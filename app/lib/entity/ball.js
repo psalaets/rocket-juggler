@@ -3,7 +3,9 @@ var p2 = require('p2');
 
 module.exports = Ball;
 
-function Ball(x, y, radius) {
+function Ball(x, y) {
+  var radius = 50;
+
   this.view = createView(radius);
   this.view.x = x;
   this.view.y = y;
