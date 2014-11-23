@@ -185,6 +185,26 @@ p.reset = function() {
 
   this.entities = [];
   this.entitiesByBodyId = {};
+
+  // remove all input related listeners from stage
+  [
+    'click',
+    'dblclick',
+    'drawend',
+    'drawstart',
+    'mousedown',
+    'mouseenter',
+    'mouseleave',
+    'mouseout',
+    'mouseover',
+    'pressmove',
+    'pressup',
+    'rollout',
+    'rollover',
+    'stagemousedown',
+    'stagemousemove',
+    'stagemouseup'
+  ].forEach(this.stage.removeAllEventListeners, this.stage);
 };
 
 p.start = function() {

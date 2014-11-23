@@ -105,9 +105,6 @@ var gameplayState = {
     game.timer.clearCountdowns();
 
     game.withStage(function(stage) {
-      // TODO figure out why stage#off isn't working for this
-      stage.removeAllEventListeners('stagemousedown');
-
       // turn off crosshair
       stage.canvas.classList.remove('playing');
     });
