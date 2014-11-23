@@ -68,6 +68,22 @@ var gameplayState = {
     this.launcher = new Launcher();
     this.launcher.move(1024 / 2, 768 - 120);
 
+    // mouse event is optional
+    this.fire = function(mouseEvent) {
+      if (mouseEvent) {
+        this.launcher.aim(mouseEvent.stageX, mouseEvent.stageY);
+      }
+
+      var rocket = this.launcher.fire();
+      if (rocket) {
+        game.addRocket(rocket);
+      }
+    };
+
+    game.withStage(function(stage) {
+      stage.on('stagemousedown', this.fire, this);
+    }.bind(this));
+
     // debug related
     this.actualFps = new Text(40, 30, '');
     this.targetFps = new Text(40, 40, '');
@@ -87,14 +103,15 @@ var gameplayState = {
 
     // react to input
     if (input.keys[16]) { // shift
-      var rocket = this.launcher.fire();
-      if (rocket) {
-        game.addRocket(rocket);
-      }
+      this.fire();
     }
   },
   tearDown: function(game) {
     game.timer.clearCountdowns();
+
+    game.withStage(function(stage) {
+      stage.off('stagemousedown', this.fire);
+    }.bind(this));
   }
 };
 

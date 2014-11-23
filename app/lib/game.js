@@ -1,8 +1,8 @@
 var p2 = require('p2');
 var createjs = require('createjs');
-var document = require('window').document;
 
 var timer = require('./ticker-countdown')();
+var input = require('./input');
 
 module.exports = Game;
 
@@ -30,21 +30,7 @@ function Game(canvasElement) {
   // holds next game state and any params passed to it
   this.nextStateInfo = null;
 
-  this.input = {
-    keys: {},
-    mouseLocation: {
-      x: 0,
-      y: 0
-    }
-  };
-
-  document.onkeydown = function(event) {
-    this.input.keys[event.keyCode] = true;
-  }.bind(this);
-
-  document.onkeyup = function(event) {
-    delete this.input.keys[event.keyCode];
-  }.bind(this);
+  this.input = input;
 }
 
 var p = Game.prototype;
@@ -108,8 +94,7 @@ p.removeViewOf = function(entity) {
 
 p.update = function(tickEvent) {
   // sync up game's view of mouse location
-  this.input.mouseLocation.x = this.stage.mouseX;
-  this.input.mouseLocation.y = this.stage.mouseY;
+  this.input.updateMouseLocation(this.stage.mouseX, this.stage.mouseY);
 
   // update physics
   if (this.world) {
@@ -141,6 +126,12 @@ p.update = function(tickEvent) {
   if (this.stateChangeRequested()) {
     this.changeToNextState();
   }
+};
+
+// give a state access to the game's easeljs stage
+// (mostly for setting up mouse listeners)
+p.withStage = function(fn) {
+  fn(this.stage);
 };
 
 // switch game state at next available moment
