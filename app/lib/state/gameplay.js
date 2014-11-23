@@ -26,6 +26,8 @@ function createWalls() {
 
 var gameplayState = {
   setUp: function(game) {
+    this.game = game;
+
     var collisionHandler = createCollisionHandler(game, this);
 
     game.createWorld(function(world) {
@@ -68,6 +70,14 @@ var gameplayState = {
     this.launcher = new Launcher();
     this.launcher.move(1024 / 2, 768 - 120);
 
+    game.withStage(function(stage) {
+      // fire rocket on mouse click
+      stage.on('stagemousedown', this.mouseFire, this);
+
+      // change mouse cursor
+      stage.canvas.classList.add('playing');
+    }.bind(this));
+
     // debug related
     this.actualFps = new Text(40, 30, '');
     this.targetFps = new Text(40, 40, '');
@@ -87,14 +97,29 @@ var gameplayState = {
 
     // react to input
     if (input.keys[16]) { // shift
-      var rocket = this.launcher.fire();
-      if (rocket) {
-        game.addRocket(rocket);
-      }
+      this.fire();
     }
   },
   tearDown: function(game) {
     game.timer.clearCountdowns();
+
+    game.withStage(function(stage) {
+      // TODO figure out why stage#off isn't working for this
+      stage.removeAllEventListeners('stagemousedown');
+
+      // turn off crosshair
+      stage.canvas.classList.remove('playing');
+    });
+  },
+  fire: function() {
+    var rocket = this.launcher.fire();
+    if (rocket) {
+      this.game.addRocket(rocket);
+    }
+  },
+  mouseFire: function(mouseEvent) {
+    this.launcher.aim(mouseEvent.stageX, mouseEvent.stageY);
+    this.fire();
   }
 };
 
