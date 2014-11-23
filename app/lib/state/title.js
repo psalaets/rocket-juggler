@@ -2,6 +2,9 @@ var Text = require('../entity/text');
 var highScore = require('../high-score');
 
 var titleState = {
+  init: function(game) {
+    this.game = game;
+  },
   setUp: function(game, score) {
     var highScoreText = 'High Score: '
 

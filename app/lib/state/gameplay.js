@@ -25,9 +25,10 @@ function createWalls() {
 }
 
 var gameplayState = {
-  setUp: function(game) {
+  init: function(game) {
     this.game = game;
-
+  },
+  setUp: function(game) {
     var collisionHandler = createCollisionHandler(game, this);
 
     game.createWorld(function(world) {

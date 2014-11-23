@@ -11,6 +11,7 @@ Entity is an object with any of (everything optional)
 
 Game state is an object that has (all required)
 
+- init function that takes a Game object, called when state is defined on Game
 - setUp function that takes a Game object
 - update function that takes Game, input object, tick event
 - tearDown function that takes a Game object

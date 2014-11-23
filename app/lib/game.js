@@ -36,6 +36,7 @@ function Game(canvasElement) {
 var p = Game.prototype;
 
 p.defineState = function(name, state) {
+  state.init(this);
   this.states[name] = state;
 };
 
