@@ -44,7 +44,7 @@ gulp.task('browserify', ['clean'], function() {
   return rebundle();
 });
 
-gulp.task('browser-sync-server', function() {
+gulp.task('browser-sync-server', ['browserify'], function() {
   browserSync({
     server: {
       baseDir: './app/'
