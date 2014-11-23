@@ -172,14 +172,11 @@ p.changeToNextState = function() {
 
 p.reset = function() {
   // clear stage
-  var views = this.stage.children.slice();
-  views.forEach(this.stage.removeChild, this.stage);
+  this.stage.removeAllChildren();
 
   // clear world then remove world
   if (this.world) {
-    var bodies = this.world.bodies.slice();
-    bodies.forEach(this.world.removeBody, this.world);
-
+    this.world.clear();
     delete this.world;
   }
 
