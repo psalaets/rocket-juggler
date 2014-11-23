@@ -102,7 +102,7 @@ var gameplayState = {
     game.withStage(function(stage) {
       // TODO figure out why stage#off isn't working for this
       stage.removeAllEventListeners('stagemousedown');
-    }.bind(this));
+    });
   },
   fire: function() {
     var rocket = this.launcher.fire();
