@@ -71,7 +71,11 @@ var gameplayState = {
     this.launcher.move(1024 / 2, 768 - 120);
 
     game.withStage(function(stage) {
+      // fire rocket on mouse click
       stage.on('stagemousedown', this.mouseFire, this);
+
+      // change mouse cursor
+      stage.canvas.classList.add('playing');
     }.bind(this));
 
     // debug related
@@ -102,6 +106,9 @@ var gameplayState = {
     game.withStage(function(stage) {
       // TODO figure out why stage#off isn't working for this
       stage.removeAllEventListeners('stagemousedown');
+
+      // turn off crosshair
+      stage.canvas.classList.remove('playing');
     });
   },
   fire: function() {
