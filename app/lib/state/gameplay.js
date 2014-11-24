@@ -1,8 +1,6 @@
 var ghostBody = require('ghost-body');
 
-var Ball = require('../entity/ball');
-var Wall = require('../entity/wall');
-var Text = require('../entity/text');
+var entities = require('../entity');
 var Launcher = require('../launcher');
 var createCollisionHandler = require('./gameplay-collision-handler');
 
@@ -13,10 +11,10 @@ function createWalls() {
   var extraPadding = 500;
 
   // wall pieces
-  var left = new Wall(0 - extraPadding, 0 + ceilingHeight, wallWidth + extraPadding, (768 - floorHeight) - ceilingHeight);
-  var right = new Wall(1024 - wallWidth, 0, wallWidth + extraPadding, 768 - floorHeight);
-  var ceiling = new Wall(0, 0 - extraPadding, 1024, ceilingHeight + extraPadding);
-  var floor = new Wall(0, 768 - floorHeight, 1024, floorHeight + extraPadding);
+  var left = entities.wall(0 - extraPadding, 0 + ceilingHeight, wallWidth + extraPadding, (768 - floorHeight) - ceilingHeight);
+  var right = entities.wall(1024 - wallWidth, 0, wallWidth + extraPadding, 768 - floorHeight);
+  var ceiling = entities.wall(0, 0 - extraPadding, 1024, ceilingHeight + extraPadding);
+  var floor = entities.wall(0, 768 - floorHeight, 1024, floorHeight + extraPadding);
 
   // flag to simplify detecting game over
   floor.isFloor = true;
@@ -51,7 +49,8 @@ var gameplayState = {
 
     // add a ball every 5 seconds
     var spawnBall = function() {
-      game.addBall(new Ball(1024 / 2, 80));
+      var ball = entities.ball(1024 / 2, 80);
+      game.addBall(ball);
       game.timer.addCountdown(5000, spawnBall);
     }
 
@@ -80,9 +79,9 @@ var gameplayState = {
     }.bind(this));
 
     // debug related
-    this.actualFps = new Text(40, 30, '');
-    this.targetFps = new Text(40, 40, '');
-    this.scoreText = new Text(40, 50, '');
+    this.actualFps = entities.text(40, 30);
+    this.targetFps = entities.text(40, 40);
+    this.scoreText = entities.text(40, 50);
 
     game.addEntity(this.actualFps);
     game.addEntity(this.targetFps);

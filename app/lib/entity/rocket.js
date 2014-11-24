@@ -2,18 +2,16 @@ var createjs = require('createjs');
 var p2 = require('p2');
 var ghostBody = require('ghost-body');
 
-var Explosion = require('./explosion');
-
 module.exports = Rocket;
 
-function Rocket(x, y) {
-  var radius = 10;
-
+function Rocket(x, y, radius) {
   this.view = createView(radius);
-  this.view.x = x;
-  this.view.y = y;
+  this.x = this.view.x = x;
+  this.y = this.view.y = y;
 
   this.body = createBody(x, y, radius);
+
+  this.speed = 800;
 }
 
 var p = Rocket.prototype;
@@ -49,15 +47,8 @@ function createBody(x, y, radius) {
 
 p.update = function(tickEvent) {
   // place shape at body's position
-  this.view.x = this.body.position[0];
-  this.view.y = this.body.position[1];
-};
-
-p.explode = function() {
-  // flag this for removal
-  this.inactive = true;
-  // generate explosion
-  return new Explosion(this.body.position[0], this.body.position[1]);
+  this.x = this.view.x = this.body.position[0];
+  this.y = this.view.y = this.body.position[1];
 };
 
 /**
@@ -66,10 +57,8 @@ p.explode = function() {
 * @param {vec2} aimVector - Non normalized aim vector
 */
 p.launch = function(aimVector) {
-  var speed = 800;
-
   aimVector.normalize();
-  aimVector.multiply(speed);
+  aimVector.multiply(this.speed);
 
   this.body.velocity = [aimVector.x, aimVector.y];
 };
