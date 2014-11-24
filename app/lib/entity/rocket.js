@@ -59,3 +59,16 @@ p.explode = function() {
   // generate explosion
   return new Explosion(this.body.position[0], this.body.position[1]);
 };
+
+/**
+* Launch this rocket.
+*
+* @param {vec2} aimVector - Non normalized aim vector
+* @param {number} speed - Rocket speed
+*/
+p.launch = function(aimVector, speed) {
+  aimVector.normalize();
+  aimVector.multiply(speed);
+
+  this.body.velocity = [aimVector.x, aimVector.y];
+};
