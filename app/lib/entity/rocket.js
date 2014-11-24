@@ -64,9 +64,10 @@ p.explode = function() {
 * Launch this rocket.
 *
 * @param {vec2} aimVector - Non normalized aim vector
-* @param {number} speed - Rocket speed
 */
-p.launch = function(aimVector, speed) {
+p.launch = function(aimVector) {
+  var speed = 800;
+
   aimVector.normalize();
   aimVector.multiply(speed);
 

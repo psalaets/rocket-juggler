@@ -37,7 +37,7 @@ p.fire = function() {
     this.lastFireTime = this.currentTime;
 
     var rocket = new Rocket(this.source.x, this.source.y);
-    rocket.launch(this.aimVector(), 800);
+    rocket.launch(this.aimVector());
     return rocket;
   }
 };
