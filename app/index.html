@@ -6,10 +6,18 @@
     <style>
         #stage {
             background: #ffffff;
+            float: left;
         }
 
         #stage.playing {
             cursor: crosshair;
+        }
+
+        #config-panel {
+            background: #ffffff;
+            float: left;
+            height: 768px;
+            padding: 0px 10px;
         }
 
         body {
@@ -19,6 +27,47 @@
 </head>
 <body>
     <canvas id="stage" width="1024" height="768"></canvas>
+
+    <div id="config-panel">
+        <h1>Config</h1>
+        <form data-bind="submit: updateGame">
+            <h2>Ball</h2>
+            <p>
+                <label for="ballRadius">Radius</label><br/>
+                <input name="ballRadius" type="number" data-bind="value: ballRadius"></input>
+            </p>
+            <p>
+                <label for="ballMass">Mass</label><br/>
+                <input name="ballMass" type="number" data-bind="value: ballMass"></input>
+            </p>
+
+            <h2>Rocket</h2>
+            <p>
+                <label for="rocketRadius">Radius</label><br/>
+                <input name="rocketRadius" type="number" data-bind="value: rocketRadius"></input>
+            </p>
+            <p>
+                <label for="rocketSpeed">Speed</label><br/>
+                <input name="rocketSpeed" type="number" data-bind="value: rocketSpeed"></input>
+            </p>
+
+            <h2>Explosion</h2>
+            <p>
+                <label for="explosionRadius">Radius</label><br/>
+                <input name="explosionRadius" type="number" data-bind="value: explosionRadius"></input>
+            </p>
+            <p>
+                <label for="explosionBallPush">Ball Push</label><br/>
+                <input name="explosionBallPush" type="number" data-bind="value: explosionBallPush"></input>
+            </p>
+            <p>
+                <label for="explosionDuration">Duration</label><br/>
+                <input name="explosionDuration" type="number" data-bind="value: explosionDuration"></input>
+            </p>
+
+            <button type="submit">Save</button>
+        </form>
+    </div>
 
     <!-- build:js vendor.js -->
     <!-- inject-vendor:js -->

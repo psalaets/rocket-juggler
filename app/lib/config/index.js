@@ -1,4 +1,4 @@
-var config = module.exports = {
+module.exports = {
   ballRadius: 50,
   ballMass: 1,
   rocketSpeed: 800,
