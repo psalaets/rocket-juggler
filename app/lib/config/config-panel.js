@@ -15,6 +15,15 @@ var viewModel = {
 
     // and persist those values
     configPersistence.save(gameConfig.values());
+  },
+  restoreDefaults: function() {
+    this.apply(gameConfig.defaultValues());
+    this.saveGameConfig();
+  },
+  apply: function(config) {
+    configKeys.forEach(function(key) {
+      this[key](config[key]);
+    }, this);
   }
 };
 
@@ -25,9 +34,7 @@ configKeys.forEach(function(key) {
 module.exports = {
   // apply incoming config object to view model
   updateViewModel: function(config) {
-    configKeys.forEach(function(key) {
-      viewModel[key](config[key]);
-    });
+    this.viewModel.apply(config);
   },
   viewModel: viewModel
 };
