@@ -49,7 +49,7 @@ var gameplayState = {
 
     // add a ball every 5 seconds
     var spawnBall = function() {
-      var ball = entities.ball(1024 / 2, 80);
+      var ball = entities.ball(1024 / 2 + 5, 80);
       game.addBall(ball);
       game.timer.addCountdown(5000, spawnBall);
     }
