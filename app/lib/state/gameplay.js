@@ -71,6 +71,9 @@ var gameplayState = {
     this.launcher = new Launcher();
     this.launcher.move(1024 / 2, 768 - 120);
 
+    this.player = entities.player(1024 / 2 - 64 / 2, 768 - 128);
+    game.addEntity(this.player);
+
     game.withStage(function(stage) {
       // fire rocket on mouse click
       stage.on('stagemousedown', this.mouseFire, this);
