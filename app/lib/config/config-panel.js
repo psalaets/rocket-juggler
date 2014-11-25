@@ -2,13 +2,13 @@ var ko = require('knockout');
 
 var gameConfig = require('./game-config');
 
-var configKeys = Object.keys(gameConfig);
+var configKeys = gameConfig.keys();
 
 var viewModel = {
   // apply view model's values to game config
   updateGameConfig: function() {
     configKeys.forEach(function(key) {
-      gameConfig[key] = this[key]();
+      gameConfig.set(key, this[key]());
     }, this);
   }
 };

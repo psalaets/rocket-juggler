@@ -11,7 +11,7 @@ ko.applyBindings(configPanel.viewModel);
 
 // loadConfig(default) - apply current config to vm and game config
 
-configPanel.updateViewModel(gameConfig);
+configPanel.updateViewModel(gameConfig.values());
 
 // create and start game
 
