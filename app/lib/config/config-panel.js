@@ -8,7 +8,8 @@ var viewModel = {
   // apply view model's values to game config
   updateGameConfig: function() {
     configKeys.forEach(function(key) {
-      gameConfig.set(key, this[key]());
+      var rawValue = this[key]();
+      gameConfig.set(key, asNumber(rawValue));
     }, this);
   }
 };
@@ -25,4 +26,8 @@ module.exports = {
     });
   },
   viewModel: viewModel
+};
+
+function asNumber(str) {
+  return parseInt(str, 10);
 };

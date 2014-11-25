@@ -1,21 +1,22 @@
 var document = require('window').document;
-var canvas = document.getElementById('stage');
-var ko = require('knockout');
 
-// get config set up
-
-var configPanel = require('./lib/config/config-panel');
+// load config and apply it to game
+var configPersistence = require('./lib/config/persistence');
 var gameConfig = require('./lib/config/game-config');
+gameConfig.apply(configPersistence.load());
 
-ko.applyBindings(configPanel.viewModel);
-
-// loadConfig(default) - apply current config to vm and game config
-
+// apply config to config panel view model
+var configPanel = require('./lib/config/config-panel');
 configPanel.updateViewModel(gameConfig.values());
 
-// create and start game
+// hook up config panel view model to UI
+var ko = require('knockout');
+ko.applyBindings(configPanel.viewModel);
 
+// create and start game
 var Game = require('./lib/game');
+
+var canvas = document.getElementById('stage');
 var game = new Game(canvas);
 
 game.defineState('title', require('./lib/state/title'));

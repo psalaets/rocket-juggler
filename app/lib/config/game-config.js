@@ -22,9 +22,17 @@ module.exports = {
   keys: function() {
     return Object.keys(defaults);
   },
+  // bulk apply some config settings
+  apply: function(config) {
+    for (var key in config) {
+      this.set(key, config[key]);
+    }
+  },
+  // get copy of config settings
   values: function() {
     return copy(values, {});
   },
+  // get copy of default config settings
   defaultValues: function() {
     return copy(defaults, {});
   }
