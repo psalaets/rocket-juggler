@@ -3,12 +3,7 @@ var Wall = require('../entity/wall');
 var Rocket = require('../entity/rocket');
 var Explosion = require('../entity/explosion');
 var createCollisionHandler = require('../collision-handler');
-
-function isFrom(constructorFn) {
-  return function isEntityFrom(entity) {
-    return entity instanceof constructorFn;
-  };
-}
+var entities = require('../entity');
 
 module.exports = function(game, gameplayState) {
   var collisionHandler = createCollisionHandler();
@@ -19,7 +14,7 @@ module.exports = function(game, gameplayState) {
       isFrom(Rocket),
       isFrom(Wall),
       function(rocket, wall) {
-        game.addEntity(rocket.explode());
+        game.addEntity(explode(rocket));
       }
     )
     // rockets explode on balls
@@ -27,7 +22,7 @@ module.exports = function(game, gameplayState) {
       isFrom(Rocket),
       isFrom(Ball),
       function(rocket, ball) {
-        game.addEntity(rocket.explode());
+        game.addEntity(explode(rocket));
       }
     )
     // explosions push balls
@@ -51,3 +46,14 @@ module.exports = function(game, gameplayState) {
 
   return collisionHandler;
 };
+
+function isFrom(constructorFn) {
+  return function isEntityFrom(entity) {
+    return entity instanceof constructorFn;
+  };
+}
+
+function explode(rocket) {
+  rocket.inactive = true;
+  return entities.explosion(rocket.x, rocket.y);
+}

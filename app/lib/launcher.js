@@ -1,5 +1,5 @@
 var Vec2 = require('vec2');
-var Rocket = require('./entity/rocket');
+var entities = require('./entity');
 
 module.exports = Launcher;
 
@@ -34,20 +34,18 @@ p.aim = function(x, y) {
 // fire a shot
 p.fire = function() {
   if (this.canFire()) {
-    var aimVector = new Vec2(this.target.x, this.target.y);
-    aimVector.subtract(this.source.x, this.source.y);
-    aimVector.normalize();
-
-    var speed = 800;
-    aimVector.multiply(speed);
-
-    var rocket = new Rocket(this.source.x, this.source.y);
-    rocket.body.velocity = [aimVector.x, aimVector.y];
-
     this.lastFireTime = this.currentTime;
 
+    var rocket = entities.rocket(this.source.x, this.source.y);
+    rocket.launch(this.aimVector());
     return rocket;
   }
+};
+
+p.aimVector = function() {
+  var vector = new Vec2(this.target.x, this.target.y);
+  vector.subtract(this.source.x, this.source.y);
+  return vector;
 };
 
 p.canFire = function() {

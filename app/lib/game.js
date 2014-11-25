@@ -36,6 +36,7 @@ function Game(canvasElement) {
 var p = Game.prototype;
 
 p.defineState = function(name, state) {
+  state.init(this);
   this.states[name] = state;
 };
 
@@ -171,19 +172,36 @@ p.changeToNextState = function() {
 
 p.reset = function() {
   // clear stage
-  var views = this.stage.children.slice();
-  views.forEach(this.stage.removeChild, this.stage);
+  this.stage.removeAllChildren();
 
   // clear world then remove world
   if (this.world) {
-    var bodies = this.world.bodies.slice();
-    bodies.forEach(this.world.removeBody, this.world);
-
+    this.world.clear();
     delete this.world;
   }
 
   this.entities = [];
   this.entitiesByBodyId = {};
+
+  // remove all input related listeners from stage
+  [
+    'click',
+    'dblclick',
+    'drawend',
+    'drawstart',
+    'mousedown',
+    'mouseenter',
+    'mouseleave',
+    'mouseout',
+    'mouseover',
+    'pressmove',
+    'pressup',
+    'rollout',
+    'rollover',
+    'stagemousedown',
+    'stagemousemove',
+    'stagemouseup'
+  ].forEach(this.stage.removeAllEventListeners, this.stage);
 };
 
 p.start = function() {

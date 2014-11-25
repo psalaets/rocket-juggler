@@ -5,9 +5,7 @@ var Vec2 = require('vec2');
 
 module.exports = Explosion;
 
-function Explosion(x, y) {
-  var radius = 70;
-
+function Explosion(x, y, radius) {
   this.view = createView(radius);
   this.view.x = x;
   this.view.y = y;
@@ -16,6 +14,8 @@ function Explosion(x, y) {
 
   // how many ms an explosion lasts
   this.timeLeft = 100;
+
+  this.ballPush = 800;
 
   // remember what balls have been hit so they aren't hit 2+ times
   this.alreadyHit = [];
@@ -72,8 +72,7 @@ p.pushBall = function(ball) {
     pushVector.subtract(this.body.position[0], this.body.position[1]);
     pushVector.normalize();
 
-    var power = 800;
-    pushVector.multiply(power);
+    pushVector.multiply(this.ballPush);
 
     var ballVelocity = ball.body.velocity;
     ballVelocity[0] += pushVector.x;
