@@ -1,7 +1,7 @@
 var defaults = {
   ballRadius: 50,
   ballMass: 1,
-  ballSpawnDelay: 5000,
+  ballSpawnDelay: 10000,
   rocketSpeed: 800,
   rocketRadius: 10,
   explosionBallPush: 800,
