@@ -3,6 +3,7 @@ var ghostBody = require('ghost-body');
 var entities = require('../entity');
 var Launcher = require('../launcher');
 var createCollisionHandler = require('./gameplay-collision-handler');
+var gameConfig = require('../config/game-config');
 
 function createWalls() {
   var wallWidth = 20;
@@ -51,7 +52,7 @@ var gameplayState = {
     var spawnBall = function() {
       var ball = entities.ball(1024 / 2 + 5, 80);
       game.addBall(ball);
-      game.timer.addCountdown(5000, spawnBall);
+      game.timer.addCountdown(gameConfig.get('ballSpawnDelay'), spawnBall);
     }
 
     spawnBall();
