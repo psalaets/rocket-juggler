@@ -28,6 +28,8 @@ function createView(radius) {
 function createBody(x, y, radius) {
   var body = new p2.Body({
     mass: 1,
+    // doesn't spin
+    fixedRotation: true,
     position: [x, y]
   });
   body.addShape(new p2.Circle(radius));

@@ -40,14 +40,14 @@ function createBody(x, y, width, height) {
   var body = new p2.Body({
     // can't collide with it, only moves when its velocity is manually changed
     type: p2.Body.KINEMATIC,
+    // doesn't spin
+    fixedRotation: true,
     position: [x, y]
   });
 
   // not affected by gravity
   body.gravityScale = 0;
 
-  // doesn't spin
-  body.fixedRotation = true;
 
   var halfHeight = height / 2;
   var radius = width / 2;
