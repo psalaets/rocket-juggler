@@ -18,7 +18,7 @@ function createView(width, height) {
   g.drawRect(0, 0, width, height);
 
   return new createjs.Shape(g);
-};
+}
 
 function createBody(x, y, width, height) {
   var body = new p2.Body({
@@ -30,4 +30,4 @@ function createBody(x, y, width, height) {
   body.addShape(new p2.Rectangle(width, height));
 
   return body;
-};
+}
