@@ -28,7 +28,7 @@ function createView(x, y, width, height) {
   var leftOffset = -width / 2;
 
   g.drawCircle(0, topOffset + radius, radius);
-  g.drawRect(topOffset + radius, leftOffset, width, height);
+  g.drawRect(leftOffset, topOffset + radius, width, height - radius);
 
   var shape = new createjs.Shape(g);
   shape.x = x;
