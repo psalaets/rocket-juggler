@@ -71,7 +71,7 @@ var gameplayState = {
     this.launcher = new Launcher();
     this.launcher.move(1024 / 2, 768 - 120);
 
-    this.player = entities.player(1024 / 2 - 64 / 2, 768 - 128);
+    this.player = entities.player(1024 / 2 - 64 / 2, 768 - 20 - 128 / 2);
     game.addEntity(this.player);
 
     game.withStage(function(stage) {

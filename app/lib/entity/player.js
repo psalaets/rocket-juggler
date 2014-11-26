@@ -3,19 +3,42 @@ var p2 = require('p2');
 
 module.exports = Player;
 
+// x and y are center of rect
 function Player(x, y) {
-  this.view = createView();
+  var width = 64;
+  var height = 128;
+
+  this.view = createView(x, y, width, height);
   this.view.x = x;
   this.view.y = y;
+
+  this.body = createBody(x, y, width, height);
 }
 
-function createView() {
+function createView(x, y, width, height) {
   var g = new createjs.Graphics();
 
   g.beginFill('#000');
-  g.drawRect(0, 0, 64, 128);
+  g.drawRect(-width / 2, -height / 2, width, height);
 
-  return new createjs.Shape(g);
+  var shape = new createjs.Shape(g);
+  return shape;
+}
+
+function createBody(x, y, width, height) {
+  var body = new p2.Body({
+    mass: 1,
+    position: [x, y]
+  });
+
+  // not affected by gravity
+  body.gravityScale = 0;
+
+  // doesn't spin
+  body.fixedRotation = true;
+
+  body.addShape(new p2.Rectangle(width, height));
+  return body;
 }
 
 var p = Player.prototype;
