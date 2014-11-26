@@ -16,10 +16,10 @@ function createView(radius) {
 
   // 1 pixel black outline
   graphics.setStrokeStyle(1);
-  graphics.beginStroke(createjs.Graphics.getRGB(0, 0, 0));
+  graphics.beginStroke('#000000');
 
   // red inside
-  graphics.beginFill(createjs.Graphics.getRGB(255, 0, 0));
+  graphics.beginFill('#ff0000');
 
   graphics.drawCircle(0, 0, radius);
   return new createjs.Shape(graphics);

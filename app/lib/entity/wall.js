@@ -14,7 +14,7 @@ function Wall(x, y, width, height) {
 function createView(width, height) {
   var g = new createjs.Graphics();
 
-  g.beginFill(createjs.Graphics.getRGB(0, 0, 0));
+  g.beginFill('#000000');
   g.drawRect(0, 0, width, height);
 
   return new createjs.Shape(g);
