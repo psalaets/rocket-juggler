@@ -15,7 +15,7 @@ function Player(x, y) {
 function createView(x, y, width, height) {
   var g = new createjs.Graphics();
 
-  g.beginFill('#000');
+  g.beginFill('#bbbbbb');
 
   /**
   * Draw rectangle with rounded top (using a circle to make rounded top)
