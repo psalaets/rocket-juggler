@@ -9,9 +9,6 @@ function Player(x, y) {
   var height = 128;
 
   this.view = createView(x, y, width, height);
-  this.view.x = x;
-  this.view.y = y;
-
   this.body = createBody(x, y, width, height);
 }
 
@@ -22,6 +19,8 @@ function createView(x, y, width, height) {
   g.drawRect(-width / 2, -height / 2, width, height);
 
   var shape = new createjs.Shape(g);
+  shape.x = x;
+  shape.y = y;
   return shape;
 }
 
