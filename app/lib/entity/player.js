@@ -62,3 +62,15 @@ p.update = function(tickEvent) {
   this.view.x = this.body.position[0];
   this.view.y = this.body.position[1];
 };
+
+p.moveLeft = function(speed) {
+  this.body.velocity[0] = -speed;
+};
+
+p.moveRight = function(speed) {
+  this.body.velocity[0] = speed;
+};
+
+p.stop = function() {
+  this.body.velocity[0] = 0;
+};

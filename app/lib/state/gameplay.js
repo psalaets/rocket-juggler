@@ -100,8 +100,16 @@ var gameplayState = {
     this.launcher.update(tickEvent);
 
     // react to input
-    if (input.keys[16]) { // shift
+    if (input.keys[16]) { // shift key
       this.fire();
+    }
+
+    if (input.keys[65]) { // A key
+      this.player.moveLeft(gameConfig.get('playerSpeed'));
+    } else if (input.keys[68]) { // D key
+      this.player.moveRight(gameConfig.get('playerSpeed'));
+    } else {
+      this.player.stop();
     }
   },
   tearDown: function(game) {

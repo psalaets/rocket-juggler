@@ -6,7 +6,8 @@ var defaults = {
   rocketRadius: 10,
   explosionBallPush: 800,
   explosionRadius: 70,
-  explosionDuration: 100
+  explosionDuration: 100,
+  playerSpeed: 400
 };
 
 var values = copy(defaults, {});
