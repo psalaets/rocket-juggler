@@ -67,11 +67,8 @@ var gameplayState = {
 
     incrementScore();
 
-    // rockets come from this
-    this.launcher = new Launcher();
-    this.launcher.move(1024 / 2, 768 - 120);
-
     this.player = entities.player(1024 / 2 - 64 / 2, 768 - 20 - 128 / 2);
+    this.player.launcher = new Launcher();
     game.addEntity(this.player);
 
     game.withStage(function(stage) {
@@ -96,8 +93,7 @@ var gameplayState = {
     this.targetFps.message = createjs.Ticker.getFPS();
     this.scoreText.message = 'Score: ' + this.score;
 
-    this.launcher.aim(input.mouseLocation.x, input.mouseLocation.y);
-    this.launcher.update(tickEvent);
+    this.player.aim(input.mouseLocation.x, input.mouseLocation.y);
 
     // react to input
     if (input.keys[16]) { // shift key
@@ -121,13 +117,13 @@ var gameplayState = {
     });
   },
   fire: function() {
-    var rocket = this.launcher.fire();
+    var rocket = this.player.fire();
     if (rocket) {
       this.game.addRocket(rocket);
     }
   },
   mouseFire: function(mouseEvent) {
-    this.launcher.aim(mouseEvent.stageX, mouseEvent.stageY);
+    this.player.aim(mouseEvent.stageX, mouseEvent.stageY);
     this.fire();
   }
 };
