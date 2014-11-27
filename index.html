@@ -16,8 +16,7 @@
         #config-panel {
             background: #ffffff;
             float: left;
-            height: 768px;
-            padding: 0px 10px;
+            padding: 0px 10px 10px 10px;
         }
 
         body {
@@ -68,6 +67,12 @@
                 <input name="explosionDuration" type="number" data-bind="value: explosionDuration"></input>
             </p>
 
+            <h1>Player</h1>
+            <p>
+                <label for="playerSpeed">Speed</label><br/>
+                <input name="playerSpeed" type="number" data-bind="value: playerSpeed"></input>
+            </p>
+
             <button type="submit">Save</button>
             <button data-bind="click: restoreDefaults">Restore Defaults</button>
         </form>
@@ -81,7 +86,7 @@
 
     <!-- build:js main.js -->
     <!-- inject-main:js -->
-    <script src="scripts/main-e9c325dc.js"></script>
+    <script src="scripts/main-f9aec2c0.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
 </body>
