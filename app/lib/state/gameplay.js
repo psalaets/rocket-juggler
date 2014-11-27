@@ -4,6 +4,7 @@ var entities = require('../entity');
 var Launcher = require('../launcher');
 var createCollisionHandler = require('./gameplay-collision-handler');
 var gameConfig = require('../config/game-config');
+var createSpawnLocations = require('./spawn-locations');
 
 function createWalls(game) {
   var gameWidth = game.width;
@@ -52,8 +53,11 @@ var gameplayState = {
     createWalls(game).forEach(game.addWall, game);
 
     // add a ball every 5 seconds
+    var ballSpawnLocations = createSpawnLocations();
     var spawnBall = function() {
-      var ball = entities.ball(1024 / 2 + 5, 80);
+      var location = ballSpawnLocations.nextLocation();
+
+      var ball = entities.ball(location.x, location.y);
       game.addBall(ball);
       game.timer.addCountdown(gameConfig.get('ballSpawnDelay'), spawnBall);
     }
