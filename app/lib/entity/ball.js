@@ -16,10 +16,10 @@ function createView(radius) {
 
   // 1 pixel black outline
   graphics.setStrokeStyle(1);
-  graphics.beginStroke(createjs.Graphics.getRGB(0, 0, 0));
+  graphics.beginStroke('#000000');
 
   // red inside
-  graphics.beginFill(createjs.Graphics.getRGB(255, 0, 0));
+  graphics.beginFill('#ff0000');
 
   graphics.drawCircle(0, 0, radius);
   return new createjs.Shape(graphics);
@@ -28,6 +28,8 @@ function createView(radius) {
 function createBody(x, y, radius) {
   var body = new p2.Body({
     mass: 1,
+    // doesn't spin
+    fixedRotation: true,
     position: [x, y]
   });
   body.addShape(new p2.Circle(radius));

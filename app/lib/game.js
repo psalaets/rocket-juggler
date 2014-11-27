@@ -8,6 +8,8 @@ module.exports = Game;
 
 function Game(canvasElement) {
   this.stage = new createjs.Stage(canvasElement);
+  this.width = canvasElement.width;
+  this.height = canvasElement.height;
 
   this.entities = [];
   // hash of body id => entity for easier collision reactions

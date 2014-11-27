@@ -16,8 +16,7 @@
         #config-panel {
             background: #ffffff;
             float: left;
-            height: 768px;
-            padding: 0px 10px;
+            padding: 0px 10px 10px 10px;
         }
 
         body {
@@ -66,6 +65,12 @@
             <p>
                 <label for="explosionDuration">Duration (ms)</label><br/>
                 <input name="explosionDuration" type="number" data-bind="value: explosionDuration"></input>
+            </p>
+
+            <h1>Player</h1>
+            <p>
+                <label for="playerSpeed">Speed</label><br/>
+                <input name="playerSpeed" type="number" data-bind="value: playerSpeed"></input>
             </p>
 
             <button type="submit">Save</button>

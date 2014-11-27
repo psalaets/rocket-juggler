@@ -29,14 +29,13 @@ function createView(radius) {
 function createBody(x, y, radius) {
   var body = new p2.Body({
     mass: 10,
+    // doesn't spin
+    fixedRotation: true,
     position: [x, y]
   });
 
   // not affected by gravity
   body.gravityScale = 0;
-
-  // doesn't spin
-  body.fixedRotation = true;
 
   // doesn't hit stuff but overlaps still detected
   ghostBody.ghostify(body);

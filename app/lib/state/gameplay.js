@@ -4,18 +4,22 @@ var entities = require('../entity');
 var Launcher = require('../launcher');
 var createCollisionHandler = require('./gameplay-collision-handler');
 var gameConfig = require('../config/game-config');
+var createSpawnLocations = require('./spawn-locations');
 
-function createWalls() {
+function createWalls(game) {
+  var gameWidth = game.width;
+  var gameHeight = game.height;
+
   var wallWidth = 20;
   var floorHeight = 20;
   var ceilingHeight = 20;
   var extraPadding = 500;
 
   // wall pieces
-  var left = entities.wall(0 - extraPadding, 0 + ceilingHeight, wallWidth + extraPadding, (768 - floorHeight) - ceilingHeight);
-  var right = entities.wall(1024 - wallWidth, 0, wallWidth + extraPadding, 768 - floorHeight);
-  var ceiling = entities.wall(0, 0 - extraPadding, 1024, ceilingHeight + extraPadding);
-  var floor = entities.wall(0, 768 - floorHeight, 1024, floorHeight + extraPadding);
+  var left = entities.wall(0 - extraPadding, 0 + ceilingHeight, wallWidth + extraPadding, (gameHeight - floorHeight) - ceilingHeight);
+  var right = entities.wall(gameWidth - wallWidth, ceilingHeight, wallWidth + extraPadding, (gameHeight - floorHeight) - ceilingHeight);
+  var ceiling = entities.wall(0 - extraPadding, 0 - extraPadding, gameWidth + (2 * extraPadding), ceilingHeight + extraPadding);
+  var floor = entities.wall(0 - extraPadding, gameHeight - floorHeight, gameWidth + (2 * extraPadding), floorHeight + extraPadding);
 
   // flag to simplify detecting game over
   floor.isFloor = true;
@@ -46,11 +50,14 @@ var gameplayState = {
       });
     });
 
-    createWalls().forEach(game.addWall, game);
+    createWalls(game).forEach(game.addWall, game);
 
     // add a ball every 5 seconds
+    var ballSpawnLocations = createSpawnLocations();
     var spawnBall = function() {
-      var ball = entities.ball(1024 / 2 + 5, 80);
+      var location = ballSpawnLocations.nextLocation();
+
+      var ball = entities.ball(location.x, location.y);
       game.addBall(ball);
       game.timer.addCountdown(gameConfig.get('ballSpawnDelay'), spawnBall);
     }
@@ -67,9 +74,9 @@ var gameplayState = {
 
     incrementScore();
 
-    // rockets come from this
-    this.launcher = new Launcher();
-    this.launcher.move(1024 / 2, 768 - 120);
+    this.player = entities.player(400, 684);
+    this.player.launcher = new Launcher();
+    game.addEntity(this.player);
 
     game.withStage(function(stage) {
       // fire rocket on mouse click
@@ -93,12 +100,19 @@ var gameplayState = {
     this.targetFps.message = createjs.Ticker.getFPS();
     this.scoreText.message = 'Score: ' + this.score;
 
-    this.launcher.aim(input.mouseLocation.x, input.mouseLocation.y);
-    this.launcher.update(tickEvent);
+    this.player.aim(input.mouseLocation.x, input.mouseLocation.y);
 
     // react to input
-    if (input.keys[16]) { // shift
+    if (input.keys[16]) { // shift key
       this.fire();
+    }
+
+    if (input.keys[65]) { // A key
+      this.player.moveLeft(gameConfig.get('playerSpeed'));
+    } else if (input.keys[68]) { // D key
+      this.player.moveRight(gameConfig.get('playerSpeed'));
+    } else {
+      this.player.stop();
     }
   },
   tearDown: function(game) {
@@ -110,13 +124,13 @@ var gameplayState = {
     });
   },
   fire: function() {
-    var rocket = this.launcher.fire();
+    var rocket = this.player.fire();
     if (rocket) {
       this.game.addRocket(rocket);
     }
   },
   mouseFire: function(mouseEvent) {
-    this.launcher.aim(mouseEvent.stageX, mouseEvent.stageY);
+    this.player.aim(mouseEvent.stageX, mouseEvent.stageY);
     this.fire();
   }
 };

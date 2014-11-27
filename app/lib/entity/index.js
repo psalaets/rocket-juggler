@@ -5,6 +5,7 @@ var Wall = require('./wall');
 var Explosion = require('./explosion');
 var Rocket = require('./rocket');
 var Text = require('./text');
+var Player = require('./player');
 
 module.exports = {
   rocket: function(x, y) {
@@ -28,5 +29,8 @@ module.exports = {
   },
   text: function(x, y, message) {
     return new Text(x, y, message);
+  },
+  player: function(x, y) {
+    return new Player(x, y);
   }
 };
