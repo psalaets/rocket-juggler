@@ -74,7 +74,7 @@ var gameplayState = {
 
     incrementScore();
 
-    this.player = entities.player(1024 / 2 - 64 / 2, 768 - 20 - 128 / 2);
+    this.player = entities.player(400, 684);
     this.player.launcher = new Launcher();
     game.addEntity(this.player);
 
