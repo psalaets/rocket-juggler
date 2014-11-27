@@ -22,11 +22,14 @@ var titleState = {
 
     game.addEntity(entities.text(500, 100, 'ROCKET JUGGLER'));
     game.addEntity(entities.text(500, 120, 'Press <enter> to begin'));
-    game.addEntity(entities.text(500, 150, highScoreText));
+    game.addEntity(entities.text(500, 140, 'Press <h> for help'));
+    game.addEntity(entities.text(500, 170, highScoreText));
   },
   update: function(game, input, tickEvent) {
     if (input.keys[13]) { // enter
       game.changeState('gameplay');
+    } else if (input.keys[72]) { // H key
+      game.changeState('help');
     }
   },
   tearDown: function(game) {
