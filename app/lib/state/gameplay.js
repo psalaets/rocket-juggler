@@ -5,17 +5,20 @@ var Launcher = require('../launcher');
 var createCollisionHandler = require('./gameplay-collision-handler');
 var gameConfig = require('../config/game-config');
 
-function createWalls() {
+function createWalls(game) {
+  var gameWidth = game.width;
+  var gameHeight = game.height;
+
   var wallWidth = 20;
   var floorHeight = 20;
   var ceilingHeight = 20;
   var extraPadding = 500;
 
   // wall pieces
-  var left = entities.wall(0 - extraPadding, 0 + ceilingHeight, wallWidth + extraPadding, (768 - floorHeight) - ceilingHeight);
-  var right = entities.wall(1024 - wallWidth, 0, wallWidth + extraPadding, 768 - floorHeight);
-  var ceiling = entities.wall(0, 0 - extraPadding, 1024, ceilingHeight + extraPadding);
-  var floor = entities.wall(0, 768 - floorHeight, 1024, floorHeight + extraPadding);
+  var left = entities.wall(0 - extraPadding, 0 + ceilingHeight, wallWidth + extraPadding, (gameHeight - floorHeight) - ceilingHeight);
+  var right = entities.wall(gameWidth - wallWidth, ceilingHeight, wallWidth + extraPadding, (gameHeight - floorHeight) - ceilingHeight);
+  var ceiling = entities.wall(0 - extraPadding, 0 - extraPadding, gameWidth + (2 * extraPadding), ceilingHeight + extraPadding);
+  var floor = entities.wall(0 - extraPadding, gameHeight - floorHeight, gameWidth + (2 * extraPadding), floorHeight + extraPadding);
 
   // flag to simplify detecting game over
   floor.isFloor = true;
@@ -46,7 +49,7 @@ var gameplayState = {
       });
     });
 
-    createWalls().forEach(game.addWall, game);
+    createWalls(game).forEach(game.addWall, game);
 
     // add a ball every 5 seconds
     var spawnBall = function() {
