@@ -32,15 +32,11 @@ function createView(x, y, width, height) {
 
 function createBody(x, y, width, height) {
   var body = new p2.Body({
-    // can't push it via collision, only moves when its velocity is manually changed
-    type: p2.Body.KINEMATIC,
+    mass: 1,
     // doesn't spin
     fixedRotation: true,
     position: [x, y]
   });
-
-  // not affected by gravity
-  body.gravityScale = 0;
 
   body.addShape(new p2.Rectangle(width, height));
   return body;
