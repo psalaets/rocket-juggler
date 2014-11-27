@@ -17,18 +17,12 @@ function createView(x, y, width, height) {
 
   g.beginFill('#bbbbbb');
 
-  /**
-  * Draw rectangle with rounded top (using a circle to make rounded top)
-  */
-
-  var radius = width / 2;
   // y value for top edge of player, relative to player center
   var topOffset = -height / 2;
   // x value for left edge of player, relative to player center
   var leftOffset = -width / 2;
 
-  g.drawCircle(0, topOffset + radius, radius);
-  g.drawRect(leftOffset, topOffset + radius, width, height - radius);
+  g.drawRect(leftOffset, topOffset, width, height);
 
   var shape = new createjs.Shape(g);
   shape.x = x;
@@ -48,11 +42,7 @@ function createBody(x, y, width, height) {
   // not affected by gravity
   body.gravityScale = 0;
 
-  var halfHeight = height / 2;
-  var radius = width / 2;
-
-  body.addShape(new p2.Circle(radius), [0, radius - halfHeight]);
-  body.addShape(new p2.Rectangle(width, height - radius, [0, -radius / 2]));
+  body.addShape(new p2.Rectangle(width, height));
   return body;
 }
 
