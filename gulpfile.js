@@ -123,8 +123,8 @@ gulp.task('default', function() {
   console.log();
   console.log('Available tasks:');
   console.log();
-  console.log('  dev        Serves page locally with auto-refresh');
-  console.log('  prod       Drops minified files into build/');
-  console.log('  gh-pages   Moves minified files into gh-pages location');
+  console.log('  dev        Serve page locally with auto-refresh');
+  console.log('  prod       Drop minified files into build/');
+  console.log('  gh-pages   Move minified files into gh-pages location');
   console.log();
 });
