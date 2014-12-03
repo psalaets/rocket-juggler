@@ -107,9 +107,9 @@ var gameplayState = {
       this.fire();
     }
 
-    if (input.keys[65]) { // A key
+    if (input.keys[65] || input.keys[37]) { // A, left arrow key
       this.player.moveLeft(gameConfig.get('playerSpeed'));
-    } else if (input.keys[68]) { // D key
+    } else if (input.keys[68] || input.keys[39]) { // D, right arrow key
       this.player.moveRight(gameConfig.get('playerSpeed'));
     } else {
       this.player.stop();
