@@ -9,7 +9,8 @@ var gulp        = require('gulp'),
     rev         = require('gulp-rev'),
     inject      = require('gulp-inject'),
     del         = require('del'),
-    filelog     = require('gulp-filelog');
+    filelog     = require('gulp-filelog'),
+    mocha       = require('gulp-mocha');
 
 // when true bundle node modules with watchify, when false browserify
 var watchifyBundle = true;
@@ -108,7 +109,7 @@ gulp.task('clean', function(cb) {
   ], cb);
 });
 
-gulp.task('prod', ['set-prod-flags', 'clean', 'prep-html']);
+gulp.task('prod', ['set-prod-flags', 'clean', 'test', 'prep-html']);
 
 gulp.task('gh-pages', ['prod'], function() {
   console.log('Copying files to project root:')
@@ -119,4 +120,18 @@ gulp.task('gh-pages', ['prod'], function() {
     .pipe(filelog());
 });
 
-gulp.task('default', ['dev']);
+gulp.task('test', function() {
+  return gulp.src('test/**/*.js')
+    .pipe(mocha());
+});
+
+gulp.task('default', function() {
+  console.log();
+  console.log('Available tasks:');
+  console.log();
+  console.log('  dev        Serve page locally with auto-refresh');
+  console.log('  prod       Drop minified files into build/');
+  console.log('  gh-pages   Move minified files into gh-pages location');
+  console.log('  test       Runs tests. Can also use `npm test`');
+  console.log();
+});
