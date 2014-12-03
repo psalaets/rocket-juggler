@@ -7,8 +7,8 @@ var helpState = {
   setUp: function(game, score) {
     var messages = [
       '***don\'t drop a ball***',
-      'a = move left',
-      'd = move right',
+      'a, left arrow = move left',
+      'd, right arrow = move right',
       'mouse aims',
       'mouse click = shoot'
     ].forEach(function(msg, index) {
