@@ -9,7 +9,9 @@ function Player(x, y) {
   this.height = 192;
 
   this.view = createContainer(x, y, this.width, this.height);
-  //this.view = createView(x, y, this.width, this.height);
+  this.view.addChild(createRect(width, height));
+  this.view.addChild(createMesh());
+
   this.body = createBody(x, y, this.width, this.height);
 }
 
@@ -17,14 +19,10 @@ function createContainer(x, y, width, height) {
   var c = new createjs.Container();
   c.x = x;
   c.y = y;
-
-  c.addChild(createView(width, height));
-  c.addChild(createMesh());
-
   return c;
 }
 
-function createView(width, height) {
+function createRect(width, height) {
   // y value for top edge of player, relative to player center
   var topOffset = -height / 2;
   // x value for left edge of player, relative to player center
