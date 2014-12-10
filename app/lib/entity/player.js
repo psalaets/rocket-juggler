@@ -8,14 +8,14 @@ function Player(x, y) {
   this.width = 64;
   this.height = 192;
 
-  this.view = createContainer(x, y, this.width, this.height);
-  this.view.addChild(createRect(width, height));
+  this.view = createContainer(x, y);
+  this.view.addChild(createRect(this.width, this.height));
   this.view.addChild(createMesh());
 
   this.body = createBody(x, y, this.width, this.height);
 }
 
-function createContainer(x, y, width, height) {
+function createContainer(x, y) {
   var c = new createjs.Container();
   c.x = x;
   c.y = y;
@@ -33,7 +33,7 @@ function createRect(width, height) {
   g.drawRect(leftOffset, topOffset, width, height);
   g.endFill();
 
-  return createjs.Shape(g);
+  return new createjs.Shape(g);
 }
 
 function createMesh() {
