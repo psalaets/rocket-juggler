@@ -124,10 +124,10 @@ p.updateLauncher = function(tickEvent) {
 
     // update aim line for debug purposes
     this.aimLine.graphics
-      .clear();
-      .beginStroke('#00f');
+      .clear()
+      .beginStroke('#00f')
       // these locations are relative to player position
-      .moveTo(0, 0);
+      .moveTo(0, 0)
       .lineTo(this.launcher.target.x - x, this.launcher.target.y - y);
   }
 }
