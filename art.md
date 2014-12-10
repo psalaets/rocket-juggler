@@ -81,12 +81,13 @@ Some kind of training room. Maybe similar to [x-men danger room](https://c2.stat
 
 - 64x64 tiles
 - Game size is 1026x768 so that'd be 16 tiles wide, 12 high
+- maybe this can be one big pre-rendered background
 
 # Buttons
 
 - "start game" button
 - "help" button
-- "return" button (to leave help screen)
+- "back" button (to leave help screen)
 
 # Logo
 
