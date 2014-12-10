@@ -8,11 +8,23 @@ function Player(x, y) {
   this.width = 64;
   this.height = 192;
 
-  this.view = createView(x, y, this.width, this.height);
+  this.view = createContainer(x, y, this.width, this.height);
+  //this.view = createView(x, y, this.width, this.height);
   this.body = createBody(x, y, this.width, this.height);
 }
 
-function createView(x, y, width, height) {
+function createContainer(x, y, width, height) {
+  var c = new createjs.Container();
+  c.x = x;
+  c.y = y;
+
+  c.addChild(createView(width, height));
+  c.addChild(createMesh());
+
+  return c;
+}
+
+function createView(width, height) {
   // y value for top edge of player, relative to player center
   var topOffset = -height / 2;
   // x value for left edge of player, relative to player center
@@ -23,16 +35,11 @@ function createView(x, y, width, height) {
   g.drawRect(leftOffset, topOffset, width, height);
   g.endFill();
 
-  drawMesh(g);
-
-  var shape = new createjs.Shape(g);
-  shape.x = x;
-  shape.y = y;
-  return shape;
+  return createjs.Shape(g);
 }
 
-function drawMesh(graphics) {
-  var g = graphics;
+function createMesh() {
+  var g = new createjs.Graphics();
   g.beginStroke('#f00');
 
   var radius = 100;
@@ -42,6 +49,8 @@ function drawMesh(graphics) {
   drawQuarterSpokes(g, radius, 1, -1); // top right
   drawQuarterSpokes(g, radius, -1, 1); // bottom left
   drawQuarterSpokes(g, radius, -1, -1); // top left
+
+  return new createjs.Shape(g);
 }
 
 function drawQuarterSpokes(g, radius, xModifier, yModifier) {
