@@ -13,21 +13,58 @@ function Player(x, y) {
 }
 
 function createView(x, y, width, height) {
-  var g = new createjs.Graphics();
-
-  g.beginFill('#bbbbbb');
-
   // y value for top edge of player, relative to player center
   var topOffset = -height / 2;
   // x value for left edge of player, relative to player center
   var leftOffset = -width / 2;
 
+  var g = new createjs.Graphics();
+  g.beginFill('#bbbbbb');
   g.drawRect(leftOffset, topOffset, width, height);
+  g.endFill();
+
+  drawMesh(g);
 
   var shape = new createjs.Shape(g);
   shape.x = x;
   shape.y = y;
   return shape;
+}
+
+function drawMesh(graphics) {
+  var g = graphics;
+  g.beginStroke('#f00');
+
+  var radius = 100;
+  g.drawCircle(0, 0, radius);
+
+  drawQuarterSpokes(g, radius, 1, 1); // bottom right
+  drawQuarterSpokes(g, radius, 1, -1); // top right
+  drawQuarterSpokes(g, radius, -1, 1); // bottom left
+  drawQuarterSpokes(g, radius, -1, -1); // top left
+}
+
+function drawQuarterSpokes(g, radius, xModifier, yModifier) {
+  // slice boundaries are 22.5 degrees apart
+  [11.25, 33.75, 56.25, 78.75].forEach(function(angle) {
+    var point = pointOnCircle(radius, angle);
+    point[0] = xModifier * point[0];
+    point[1] = yModifier * point[1];
+
+    g.moveTo(0, 0).lineTo.apply(g, point);
+  });
+}
+
+// returns [x, y]
+function pointOnCircle(radius, degrees) {
+  return [
+    Math.sin(degreesToRadians(degrees)) * radius,
+    Math.cos(degreesToRadians(degrees)) * radius
+  ];
+}
+
+function degreesToRadians(degrees) {
+  return degrees * Math.PI / 180;
 }
 
 function createBody(x, y, width, height) {
