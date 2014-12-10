@@ -10,7 +10,7 @@ function Player(x, y) {
 
   this.view = createContainer(x, y);
   this.view.addChild(createRect(this.width, this.height));
-  this.view.addChild(createMesh());
+  this.view.addChild(createWagonWheel());
 
   this.body = createBody(x, y, this.width, this.height);
 }
@@ -36,7 +36,7 @@ function createRect(width, height) {
   return new createjs.Shape(g);
 }
 
-function createMesh() {
+function createWagonWheel() {
   var g = new createjs.Graphics();
   g.beginStroke('#f00');
 
