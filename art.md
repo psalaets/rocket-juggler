@@ -26,49 +26,45 @@ Player can aim in any direction (mouse) and be running left or right (keyboard).
 
 I'm not quite sure of the "rocket launcher" size. If the end of the barrel sticks out too much it may cause issues with the game. So a weapon that is a little on the short side is okay. It doesn't even have to look like a true rocket launcher, can really be any projectile firing weapon.
 
-- player sprite size: 128x128
+- player sprite size: 192x192
 - made up of two actual sprites: torso and legs
 
 ### torso
 
 Although player can aim 360 degrees there will only be sprites for certain intervals along the circle. Invisible circle around the player is sliced up like a pie. When mouse is in a given slice, that slice's torso sprite is shown.
 
-20 slices, 18 degrees per slice. So 20 torso sprites per hip direction means 40 total. Is this too much work? The next level down that lines up nicely is 16 slices per hip direction, 22.5 degrees per slice.
+16 slices, 22.5 degrees per slice. So 16 torso sprites per hip direction means 32 total.
 
 First slice always faces up. For example, if we only had 4 slices the circle would be cut like &times; not like +. This is so the player can shoot straight up and it looks normal.
 
 #### hips facing left
 
-- aiming at any of 20 slices
+- aiming at any of 16 slices
 
 #### hips facing right
 
-- aiming at any of 20 slices
+- aiming at any of 16 slices
 
-#### Slice boundaries (20 slices, 18 degrees per slice)
+#### Slice boundaries (16 slices, 22.5 degrees per slice)
 
 Assuming 0 degrees is straight up, 90 degrees is right, 180 is down, 270 is left.
 
-- 9 (this is right boundary of up-facing slice)
-- 27
-- 45
-- 63
-- 81
-- 99
-- 117
-- 135
-- 153
-- 171
-- 189
-- 207
-- 225
-- 243
-- 261
-- 279
-- 297
-- 315
-- 333
-- 351 (this is left boundary of up-facing slice)
+- 11.25 (this is right boundary of up-facing slice)
+- 33.75
+- 56.25
+- 78.75
+- 101.25
+- 123.75
+- 146.25
+- 168.75
+- 191.25
+- 213.75
+- 236.25
+- 258.75
+- 281.25
+- 303.75
+- 326.25
+- 348.75 (this is left boundary of up-facing slice)
 
 ### legs
 
@@ -85,12 +81,13 @@ Some kind of training room. Maybe similar to [x-men danger room](https://c2.stat
 
 - 64x64 tiles
 - Game size is 1026x768 so that'd be 16 tiles wide, 12 high
+- maybe this can be one big pre-rendered background
 
 # Buttons
 
 - "start game" button
 - "help" button
-- "return" button (to leave help screen)
+- "back" button (to leave help screen)
 
 # Logo
 

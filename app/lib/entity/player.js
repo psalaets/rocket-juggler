@@ -8,26 +8,78 @@ function Player(x, y) {
   this.width = 64;
   this.height = 192;
 
-  this.view = createView(x, y, this.width, this.height);
+  this.view = createContainer(x, y);
+  this.view.addChild(createRect(this.width, this.height));
+  this.view.addChild(createWagonWheel());
+
+  this.aimLine = createAimLine();
+  this.view.addChild(this.aimLine);
+
   this.body = createBody(x, y, this.width, this.height);
 }
 
-function createView(x, y, width, height) {
+function createContainer(x, y) {
+  var c = new createjs.Container();
+  c.x = x;
+  c.y = y;
+  return c;
+}
+
+function createAimLine() {
   var g = new createjs.Graphics();
+  return new createjs.Shape(g);
+}
 
-  g.beginFill('#bbbbbb');
-
+function createRect(width, height) {
   // y value for top edge of player, relative to player center
   var topOffset = -height / 2;
   // x value for left edge of player, relative to player center
   var leftOffset = -width / 2;
 
+  var g = new createjs.Graphics();
+  g.beginFill('#bbbbbb');
   g.drawRect(leftOffset, topOffset, width, height);
+  g.endFill();
 
-  var shape = new createjs.Shape(g);
-  shape.x = x;
-  shape.y = y;
-  return shape;
+  return new createjs.Shape(g);
+}
+
+function createWagonWheel() {
+  var g = new createjs.Graphics();
+  g.beginStroke('#f00');
+
+  var radius = 100;
+  g.drawCircle(0, 0, radius);
+
+  drawQuarterSpokes(g, radius, 1, 1); // bottom right
+  drawQuarterSpokes(g, radius, 1, -1); // top right
+  drawQuarterSpokes(g, radius, -1, 1); // bottom left
+  drawQuarterSpokes(g, radius, -1, -1); // top left
+
+  return new createjs.Shape(g);
+}
+
+function drawQuarterSpokes(g, radius, xModifier, yModifier) {
+  // slice boundaries are 22.5 degrees apart
+  [11.25, 33.75, 56.25, 78.75].forEach(function(angle) {
+    var point = pointOnCircle(radius, angle);
+    point[0] = xModifier * point[0];
+    point[1] = yModifier * point[1];
+
+    g.moveTo(0, 0).lineTo.apply(g, point);
+  });
+}
+
+// returns [x, y]
+function pointOnCircle(radius, degrees) {
+  return [
+    Math.sin(degreesToRadians(degrees)) * radius,
+    Math.cos(degreesToRadians(degrees)) * radius
+  ];
+}
+
+function degreesToRadians(degrees) {
+  return degrees * Math.PI / 180;
 }
 
 function createBody(x, y, width, height) {
@@ -68,7 +120,15 @@ p.updateLauncher = function(tickEvent) {
     var y = this.body.position[1];
 
     // move launcher with player
-    this.launcher.move(x, y - (this.height / 2) - 10);
+    this.launcher.move(x, y);
+
+    // update aim line for debug purposes
+    this.aimLine.graphics
+      .clear();
+      .beginStroke('#00f');
+      // these locations are relative to player position
+      .moveTo(0, 0);
+      .lineTo(this.launcher.target.x - x, this.launcher.target.y - y);
   }
 }
 
