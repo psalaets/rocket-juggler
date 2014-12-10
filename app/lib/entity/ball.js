@@ -14,15 +14,13 @@ function Ball(x, y, radius) {
 function createView(radius) {
   var graphics = new createjs.Graphics();
 
-  // 1 pixel black outline
-  graphics.setStrokeStyle(1);
-  graphics.beginStroke('#000000');
-
   // red inside
   graphics.beginFill('#ff0000');
-
   graphics.drawCircle(0, 0, radius);
-  return new createjs.Shape(graphics);
+
+  var shape = new createjs.Shape(graphics);
+  shape.cache(-radius, -radius, radius * 2, radius * 2);
+  return shape;
 };
 
 function createBody(x, y, radius) {
