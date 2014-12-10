@@ -45,7 +45,7 @@ First slice always faces up. For example, if we only had 4 slices the circle wou
 
 - aiming at any of 20 slices
 
-#### Slice boundaries
+#### Slice boundaries (20 slices, 18 degrees per slice)
 
 Assuming 0 degrees is straight up, 90 degrees is right, 180 is down, 270 is left.
 
