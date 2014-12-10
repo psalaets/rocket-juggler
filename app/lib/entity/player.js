@@ -41,7 +41,10 @@ function createRect(width, height) {
   g.drawRect(leftOffset, topOffset, width, height);
   g.endFill();
 
-  return new createjs.Shape(g);
+  var shape = new createjs.Shape(g);
+  // try to reduce draw cost since rect never changes
+  shape.cache(leftOffset, topOffset, width, height);
+  return shape;
 }
 
 function createWagonWheel() {
@@ -56,7 +59,10 @@ function createWagonWheel() {
   drawQuarterSpokes(g, radius, -1, 1); // bottom left
   drawQuarterSpokes(g, radius, -1, -1); // top left
 
-  return new createjs.Shape(g);
+  var shape = new createjs.Shape(g);
+  // try to reduce draw cost since wagon wheel never changes
+  shape.cache(-radius, -radius, radius * 2, radius * 2);
+  return shape;
 }
 
 function drawQuarterSpokes(g, radius, xModifier, yModifier) {

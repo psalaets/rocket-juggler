@@ -23,7 +23,9 @@ function createView(radius) {
   g.beginFill('#0000ff');
   g.drawCircle(0, 0, radius);
 
-  return new createjs.Shape(g);
+  var shape = new createjs.Shape(g);
+  shape.cache(-radius, -radius, radius * 2, radius * 2);
+  return shape;
 }
 
 function createBody(x, y, radius) {
