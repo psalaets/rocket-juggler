@@ -6,7 +6,7 @@ module.exports = Player;
 // x and y are center of rect
 function Player(x, y) {
   this.width = 64;
-  this.height = 128;
+  this.height = 192;
 
   this.view = createView(x, y, this.width, this.height);
   this.body = createBody(x, y, this.width, this.height);
