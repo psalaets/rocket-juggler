@@ -12,6 +12,9 @@ function Player(x, y) {
   this.view.addChild(createRect(this.width, this.height));
   this.view.addChild(createWagonWheel());
 
+  this.aimLine = createAimLine();
+  this.view.addChild(this.aimLine);
+
   this.body = createBody(x, y, this.width, this.height);
 }
 
@@ -20,6 +23,11 @@ function createContainer(x, y) {
   c.x = x;
   c.y = y;
   return c;
+}
+
+function createAimLine() {
+  var g = new createjs.Graphics();
+  return new createjs.Shape(g);
 }
 
 function createRect(width, height) {
@@ -112,7 +120,15 @@ p.updateLauncher = function(tickEvent) {
     var y = this.body.position[1];
 
     // move launcher with player
-    this.launcher.move(x, y - (this.height / 2) - 10);
+    this.launcher.move(x, y);
+
+    // update aim line for debug purposes
+    this.aimLine.graphics
+      .clear();
+      .beginStroke('#00f');
+      // these locations are relative to player position
+      .moveTo(0, 0);
+      .lineTo(this.launcher.target.x - x, this.launcher.target.y - y);
   }
 }
 
