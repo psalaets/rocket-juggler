@@ -10,7 +10,7 @@ var helpState = {
       'a, left arrow = move left',
       'd, right arrow = move right',
       'mouse aims',
-      'mouse click = shoot'
+      'mouse click, shift key = shoot'
     ].forEach(function(msg, index) {
       var yOffset = 20 * index;
       game.addEntity(entities.text(500, 150 + yOffset, msg));
