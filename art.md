@@ -1,4 +1,4 @@
-# 1 Sprites
+# 1. Sprites
 ## 1.1 ball
 
 - non-rotating, roundish things
