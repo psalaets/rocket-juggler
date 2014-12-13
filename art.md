@@ -89,7 +89,7 @@ Some kind of training room. Maybe similar to [x-men danger room](https://c2.stat
 
 # 4. Logo
 
-Something for title screen
+Something that says "Rocket Juggler" for title screen
 
 # 5. Lettering
 
