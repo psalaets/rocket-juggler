@@ -37,11 +37,11 @@ Although player can aim 360 degrees there will only be sprites for certain inter
 
 First slice always faces up. For example, if we only had 4 slices the circle would be cut like &times; not like +. This is so the player can shoot straight up and it looks normal.
 
-#### hips facing left
+#### 1.4.1.1 hips facing left
 
 - aiming at any of 16 slices
 
-#### hips facing right
+#### 1.4.1.2 hips facing right
 
 - aiming at any of 16 slices
 
