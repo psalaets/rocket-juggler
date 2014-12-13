@@ -79,9 +79,7 @@ Player runs at 400 pixels per second.
 
 Some kind of training room. Maybe similar to [x-men danger room](https://c2.staticflickr.com/4/3623/3658562333_7dc8496ac7_z.jpg).
 
-- 64x64 tiles
-- Game size is 1026x768 so that'd be 16 tiles wide, 12 high
-- maybe this can be one big pre-rendered background
+- one big pre-rendered background 1024x768
 
 # 3. Buttons
 
