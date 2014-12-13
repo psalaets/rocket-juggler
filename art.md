@@ -84,7 +84,7 @@ Some kind of training room. Maybe similar to [x-men danger room](https://c2.stat
 # 3. Buttons
 
 - "start game" button
-- "help" button
+- "about" button
 - "back" button (to leave help screen)
 
 # 4. Logo
