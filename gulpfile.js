@@ -12,12 +12,11 @@ var gulp        = require('gulp'),
     filelog     = require('gulp-filelog'),
     mocha       = require('gulp-mocha');
 
-// when true bundle node modules with watchify, when false browserify
-var watchifyBundle = true;
-// when true include source maps with commonjs bundle
-var inlineSourceMaps = true;
+function makeBundle(options) {
+  options = options || {};
+  var watchifyBundle = !!options.watchifyBundle;
+  var inlineSourceMaps = !!options.inlineSourceMaps;
 
-gulp.task('browserify', ['clean'], function() {
   var bundler = browserify({
     // begin options required by watchify
     cache: {},
@@ -43,28 +42,32 @@ gulp.task('browserify', ['clean'], function() {
   }
 
   return rebundle();
+}
+
+gulp.task('browserify', ['clean'], function() {
+  return makeBundle();
 });
 
-gulp.task('browser-sync-server', ['browserify'], function() {
+gulp.task('watchify', ['clean'], function() {
+  return makeBundle({
+    watchifyBundle: true,
+    inlineSourceMaps: true
+  });
+});
+
+gulp.task('dev', ['watchify'], function() {
   browserSync({
     server: {
       baseDir: './app/'
     }
   });
-});
 
-gulp.task('dev', ['browserify', 'browser-sync-server'], function() {
   gulp.watch([
     // reload when commonjs bundle changes
     'app/build/bundle.js',
     // reload when html page changes
     'app/index.html'
   ], {}, browserSync.reload);
-});
-
-gulp.task('set-prod-flags', function() {
-  watchifyBundle = false;
-  inlineSourceMaps = false;
 });
 
 gulp.task('prep-scripts', ['clean', 'browserify'], function() {
@@ -109,7 +112,7 @@ gulp.task('clean', function(cb) {
   ], cb);
 });
 
-gulp.task('prod', ['set-prod-flags', 'clean', 'test', 'prep-html']);
+gulp.task('prod', ['clean', 'test', 'prep-html']);
 
 gulp.task('gh-pages', ['prod'], function() {
   console.log('Copying files to project root:')
@@ -130,7 +133,7 @@ gulp.task('default', function() {
   console.log('Available tasks:');
   console.log();
   console.log('  dev        Serve page locally with auto-refresh');
-  console.log('  prod       Drop minified files into build/');
+  console.log('  prod       Create minified files in build/');
   console.log('  gh-pages   Move minified files into gh-pages location');
   console.log('  test       Runs tests. Can also use `npm test`');
   console.log();
