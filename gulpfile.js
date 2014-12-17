@@ -55,7 +55,7 @@ gulp.task('watchify', ['clean'], function() {
   });
 });
 
-gulp.task('dev', ['watchify'], function() {
+gulp.task('watch', ['watchify'], function() {
   browserSync({
     server: {
       baseDir: './app/'
@@ -112,9 +112,9 @@ gulp.task('clean', function(cb) {
   ], cb);
 });
 
-gulp.task('prod', ['clean', 'test', 'prep-html']);
+gulp.task('build', ['clean', 'test', 'prep-html']);
 
-gulp.task('gh-pages', ['prod'], function() {
+gulp.task('gh-pages', ['build'], function() {
   console.log('Copying files to project root:')
 
   // copy stuff in build dir to project root
@@ -132,8 +132,8 @@ gulp.task('default', function() {
   console.log();
   console.log('Available tasks:');
   console.log();
-  console.log('  dev        Serve page locally with auto-refresh');
-  console.log('  prod       Create minified files in build/');
+  console.log('  watch      Serve page locally with auto-refresh');
+  console.log('  build      Create minified files in build/');
   console.log('  gh-pages   Move minified files into gh-pages location');
   console.log('  test       Runs tests. Can also use `npm test`');
   console.log();
