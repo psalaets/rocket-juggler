@@ -55,19 +55,22 @@ gulp.task('watchify', ['clean'], function() {
   });
 });
 
-gulp.task('watch', ['watchify'], function() {
+gulp.task('watch', ['watchify'], function(cb) {
   browserSync({
     server: {
       baseDir: './app/'
     }
-  });
+  }, function() {
+    gulp.watch([
+      // reload when commonjs bundle changes
+      'app/build/bundle.js',
+      // reload when html page changes
+      'app/index.html'
+    ], {}, browserSync.reload);
 
-  gulp.watch([
-    // reload when commonjs bundle changes
-    'app/build/bundle.js',
-    // reload when html page changes
-    'app/index.html'
-  ], {}, browserSync.reload);
+    // signal to gulp that this task is done
+    cb();
+  });
 });
 
 gulp.task('prep-scripts', ['clean', 'browserify'], function() {
