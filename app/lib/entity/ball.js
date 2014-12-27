@@ -31,6 +31,7 @@ function createBody(x, y, radius) {
     position: [x, y]
   });
   body.addShape(new p2.Circle(radius));
+  body.gravityScale = 0.5;
   return body;
 };
 
