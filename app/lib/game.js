@@ -11,6 +11,8 @@ function Game(canvasElement) {
   this.width = canvasElement.width;
   this.height = canvasElement.height;
 
+  this.desiredFps = 30;
+
   this.entities = [];
   // hash of body id => entity for easier collision reactions
   this.entitiesByBodyId = {};
@@ -101,8 +103,7 @@ p.update = function(tickEvent) {
 
   // update physics
   if (this.world) {
-    //this.world.step(tickEvent.delta / 1000);
-    this.world.step(1 / 40);
+    this.world.step(1 / this.desiredFps);
   }
 
   // update entities
@@ -209,7 +210,7 @@ p.reset = function() {
 p.start = function() {
   var self = this;
 
-  createjs.Ticker.setFPS(40);
+  createjs.Ticker.setFPS(this.desiredFps);
 
   createjs.Ticker.on('tick', this.timer);
   createjs.Ticker.on('tick', function(tickEvent) {
