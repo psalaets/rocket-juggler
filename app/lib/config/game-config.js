@@ -1,13 +1,13 @@
 var defaults = {
   ballRadius: 50,
-  ballMass: 1,
+  ballMass: 0.25,
   ballSpawnDelay: 10000,
-  rocketSpeed: 800,
+  rocketSpeed: 400,
   rocketRadius: 10,
-  explosionBallPush: 800,
+  explosionBallPush: 400,
   explosionRadius: 70,
   explosionDuration: 100,
-  playerSpeed: 400
+  playerSpeed: 200
 };
 
 var values = copy(defaults, {});
