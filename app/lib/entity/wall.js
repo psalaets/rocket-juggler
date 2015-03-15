@@ -4,9 +4,9 @@ var p2 = require('p2');
 module.exports = Wall;
 
 function Wall(x, y, width, height) {
-  this.view = createView(width, height);
-  this.view.x = x;
-  this.view.y = y;
+  //this.view = createView(width, height);
+  //this.view.x = x;
+  //this.view.y = y;
 
   this.body = createBody(x, y, width, height);
 }
