@@ -10,15 +10,14 @@ function createWalls(game) {
   var gameWidth = game.width;
   var gameHeight = game.height;
 
-  var wallWidth = 20;
   var floorHeight = 20;
-  var ceilingHeight = 20;
+  // make walls extra thick to prevent physics tunneling
   var extraPadding = 500;
 
   // wall pieces
-  var left = entities.wall(0 - extraPadding, 0 + ceilingHeight, wallWidth + extraPadding, (gameHeight - floorHeight) - ceilingHeight);
-  var right = entities.wall(gameWidth - wallWidth, ceilingHeight, wallWidth + extraPadding, (gameHeight - floorHeight) - ceilingHeight);
-  var ceiling = entities.wall(0 - extraPadding, 0 - extraPadding, gameWidth + (2 * extraPadding), ceilingHeight + extraPadding);
+  var left = entities.wall(0 - extraPadding, 0, extraPadding, gameHeight - floorHeight);
+  var right = entities.wall(gameWidth, 0, extraPadding, gameHeight - floorHeight);
+  var ceiling = entities.wall(0 - extraPadding, 0 - extraPadding, gameWidth + (2 * extraPadding), extraPadding);
   var floor = entities.wall(0 - extraPadding, gameHeight - floorHeight, gameWidth + (2 * extraPadding), floorHeight + extraPadding);
 
   // flag to simplify detecting game over

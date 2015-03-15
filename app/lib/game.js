@@ -103,7 +103,8 @@ p.update = function(tickEvent) {
 
   // update physics
   if (this.world) {
-    this.world.step(1 / this.desiredFps);
+    var maxSubSteps = 3;
+    this.world.step(1 / this.desiredFps, tickEvent.delta, maxSubSteps);
   }
 
   // update entities
