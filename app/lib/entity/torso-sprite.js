@@ -1,7 +1,7 @@
 var createjs = require('createjs');
 var pieSlice = require('pie-slice');
 
-// array indices are frame # that spritesheet will assign
+// array indices are the pie slice numbers and also spritesheet frame numbers
 var frameNames = [
   'N', 'N-NE', 'NE', 'E-NE',
   'E', 'E-SE', 'SE', 'S-SE',

@@ -1,6 +1,7 @@
 var createjs = require('createjs');
 var p2 = require('p2');
 var torsoSprite = require('./torso-sprite');
+var legsSprite = require('./legs-sprite');
 
 module.exports = Player;
 
@@ -13,8 +14,10 @@ function Player(x, y) {
   this.view.addChild(createRect(this.width, this.height));
 
   this.torso = torsoSprite;
+  this.legs = legsSprite;
 
   this.view.addChild(this.torso);
+  this.view.addChild(this.legs);
   this.view.addChild(createWagonWheel());
 
   this.aimLine = createAimLine();
