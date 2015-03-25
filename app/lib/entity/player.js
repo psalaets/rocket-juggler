@@ -118,11 +118,9 @@ p.update = function(tickEvent) {
 p.aim = function(x, y) {
   this.launcher.aim(x, y);
 
-  var position = this.body.position;
-
   var reference = {
-    x: position[0],
-    y: position[1]
+    x: this.body.position[0],
+    y: this.body.position[1]
   };
 
   var other = {
