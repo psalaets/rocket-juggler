@@ -1,6 +1,5 @@
 var createjs = require('createjs');
 var p2 = require('p2');
-var pieSlice = require('pie-slice');
 var torsoSprite = require('./torso-sprite');
 
 module.exports = Player;
