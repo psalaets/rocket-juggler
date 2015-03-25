@@ -13,14 +13,14 @@ function Player(x, y) {
   this.view = createContainer(x, y);
   this.view.addChild(createRect(this.width, this.height));
 
-  this.torso = torsoSprite;
-  this.torso.y = -20; // hack for now: offset by floor height
-
   this.legs = legsSprite;
   this.legs.y = -20; // hack for now: offset by floor height
-
   this.view.addChild(this.legs);
+
+  this.torso = torsoSprite;
+  this.torso.y = -20; // hack for now: offset by floor height
   this.view.addChild(this.torso);
+
   this.view.addChild(createWagonWheel());
 
   this.aimLine = createAimLine();
