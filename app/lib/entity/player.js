@@ -1,5 +1,7 @@
 var createjs = require('createjs');
 var p2 = require('p2');
+var torsoSprite = require('./torso-sprite');
+var legsSprite = require('./legs-sprite');
 
 module.exports = Player;
 
@@ -10,6 +12,15 @@ function Player(x, y) {
 
   this.view = createContainer(x, y);
   this.view.addChild(createRect(this.width, this.height));
+
+  this.torso = torsoSprite;
+  this.torso.y = -20; // hack for now: offset by floor height
+
+  this.legs = legsSprite;
+  this.legs.y = -20; // hack for now: offset by floor height
+
+  this.view.addChild(this.legs);
+  this.view.addChild(this.torso);
   this.view.addChild(createWagonWheel());
 
   this.aimLine = createAimLine();
@@ -112,6 +123,18 @@ p.update = function(tickEvent) {
 
 p.aim = function(x, y) {
   this.launcher.aim(x, y);
+
+  var reference = {
+    x: this.body.position[0],
+    y: this.body.position[1]
+  };
+
+  var other = {
+    x: x,
+    y: y
+  };
+
+  this.torso.aimChanged(reference, other);
 }
 
 p.fire = function() {

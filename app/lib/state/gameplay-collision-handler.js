@@ -40,7 +40,8 @@ module.exports = function(game, gameplayState) {
         return entityB.isFloor;
       },
       function(ball, floor) {
-        game.changeState('title', gameplayState.score);
+        // temporarily off for debug purposes
+        //game.changeState('title', gameplayState.score);
       }
     );
 
