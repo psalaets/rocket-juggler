@@ -19,8 +19,8 @@ function Player(x, y) {
   this.legs = legsSprite;
   this.legs.y = -20; // hack for now: offset by floor height
 
-  this.view.addChild(this.torso);
   this.view.addChild(this.legs);
+  this.view.addChild(this.torso);
   this.view.addChild(createWagonWheel());
 
   this.aimLine = createAimLine();
