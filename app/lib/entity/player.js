@@ -1,7 +1,33 @@
 var createjs = require('createjs');
 var p2 = require('p2');
+var pieSlice = require('pie-slice');
 
 module.exports = Player;
+
+var frameNames = [
+  'N', 'N-NE', 'NE', 'E-NE',
+  'E', 'E-SE', 'SE', 'S-SE',
+  'S', 'S-SW', 'SW', 'W-SW',
+  'W', 'W-NW', 'NW', 'N-NW'
+];
+
+var animations = {};
+frameNames.forEach(function(frameName, index) {
+  animations[frameName] = index;
+});
+
+var spritesheet = new createjs.SpriteSheet({
+  images: ['assets/torso.png'],
+  frames: {
+    width: 177,
+    height: 238,
+    regX: 88,
+    regY: 119,
+    spacing: 1,
+    margin: 1
+  },
+  animations: animations
+});
 
 // x and y are center of rect
 function Player(x, y) {
@@ -10,12 +36,21 @@ function Player(x, y) {
 
   this.view = createContainer(x, y);
   this.view.addChild(createRect(this.width, this.height));
+
+  this.torso = createTorsoSprite();
+
+  this.view.addChild(this.torso);
   this.view.addChild(createWagonWheel());
 
   this.aimLine = createAimLine();
   this.view.addChild(this.aimLine);
 
   this.body = createBody(x, y, this.width, this.height);
+
+  this.aimSlices = pieSlice.slice(16, {
+    firstSliceFacesUp: true,
+    yDown: true
+  });
 }
 
 function createContainer(x, y) {
@@ -23,6 +58,12 @@ function createContainer(x, y) {
   c.x = x;
   c.y = y;
   return c;
+}
+
+function createTorsoSprite() {
+  var sprite = new createjs.Sprite(spritesheet, 'E');
+
+  return sprite;
 }
 
 function createAimLine() {
@@ -112,6 +153,21 @@ p.update = function(tickEvent) {
 
 p.aim = function(x, y) {
   this.launcher.aim(x, y);
+
+  var position = this.body.position;
+
+  var reference = {
+    x: position[0],
+    y: position[1]
+  };
+
+  var other = {
+    x: x,
+    y: y
+  };
+
+  var slice = this.aimSlices.whatSlice(reference, other);
+  this.torso.gotoAndStop(frameNames[slice]);
 }
 
 p.fire = function() {
