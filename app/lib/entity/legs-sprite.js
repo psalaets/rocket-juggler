@@ -14,7 +14,7 @@ var spritesheet = new createjs.SpriteSheet({
     run: {
       frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
       // TODO figure out which of these is needed or both
-      speed: 0.3
+      speed: 0.4
       //framerate: 30
     }
   }
