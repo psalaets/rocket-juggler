@@ -115,8 +115,8 @@ var p = Player.prototype;
 
 p.update = function(tickEvent) {
   // move image to body location
-  this.view.x = this.body.position[0];
-  this.view.y = this.body.position[1];
+  this.view.x = Math.floor(this.body.position[0]);
+  this.view.y = Math.floor(this.body.position[1]);
 
   this.updateLauncher(tickEvent);
 };
