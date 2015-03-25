@@ -115,7 +115,13 @@ gulp.task('clean', function(cb) {
   ], cb);
 });
 
-gulp.task('build', ['clean', 'test', 'prep-html']);
+// for now this just copies assets to build/
+gulp.task('prep-assets', function() {
+  return gulp.src('app/assets/**/*')
+    .pipe(gulp.dest('build/assets'));
+});
+
+gulp.task('build', ['clean', 'test', 'prep-html', 'prep-assets']);
 
 gulp.task('gh-pages', ['build'], function() {
   console.log('Copying files to project root:')
