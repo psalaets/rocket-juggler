@@ -21,7 +21,7 @@ function Player(x, y) {
   this.torso.y = -20; // hack for now: offset by floor height
   this.view.addChild(this.torso);
 
-  this.view.addChild(createWagonWheel());
+  //this.view.addChild(createWagonWheel());
 
   this.aimLine = createAimLine();
   this.view.addChild(this.aimLine);
@@ -162,13 +162,26 @@ p.updateLauncher = function(tickEvent) {
 }
 
 p.moveLeft = function(speed) {
+  // if not already going left
+  if (this.body.velocity[0] >= 0) {
+    // TODO face left here
+    this.legs.gotoAndPlay('run');
+  }
+
   this.body.velocity[0] = -speed;
 };
 
 p.moveRight = function(speed) {
+  // if not already going right
+  if (this.body.velocity[0] <= 0) {
+    // TODO face right here
+    this.legs.gotoAndPlay('run');
+  }
+
   this.body.velocity[0] = speed;
 };
 
 p.stop = function() {
   this.body.velocity[0] = 0;
+  this.legs.gotoAndStop('stand');
 };
