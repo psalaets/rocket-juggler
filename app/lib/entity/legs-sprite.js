@@ -16,10 +16,11 @@ var spritesheet = new createjs.SpriteSheet({
       // TODO figure out which of these is needed or both
       speed: 0.4
       //framerate: 30
-    }
+    },
+    stand: 12
   }
 });
 
-var sprite = new createjs.Sprite(spritesheet, 'run');
+var sprite = new createjs.Sprite(spritesheet, 'stand');
 
 module.exports = sprite;
