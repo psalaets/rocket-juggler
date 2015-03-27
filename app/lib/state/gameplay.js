@@ -82,6 +82,9 @@ var gameplayState = {
       stage.on('stagemousedown', this.mouseFire, this);
 
       stage.on('stagemousemove', function(event) {
+        this.mouseStage.message = 'stage: ' + event.stageX + ', ' + event.stageY;
+        this.mouseRaw.message = 'raw: ' + event.rawX + ', ' + event.rawY;
+
         this.player.aim(event.rawX, event.rawY);
       }, this);
 
@@ -97,6 +100,12 @@ var gameplayState = {
     game.addEntity(this.actualFps);
     game.addEntity(this.targetFps);
     game.addEntity(this.scoreText);
+
+    this.mouseStage = entities.text(40, 70);
+    this.mouseRaw = entities.text(40, 80);
+
+    game.addEntity(this.mouseStage);
+    game.addEntity(this.mouseRaw);
   },
   update: function(game, input, tickEvent) {
     this.actualFps.message = createjs.Ticker.getMeasuredFPS();
