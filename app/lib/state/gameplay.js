@@ -81,6 +81,10 @@ var gameplayState = {
       // fire rocket on mouse click
       stage.on('stagemousedown', this.mouseFire, this);
 
+      stage.on('stagemousemove', function(event) {
+        this.player.aim(event.rawX, event.rawY);
+      }, this);
+
       // change mouse cursor
       stage.canvas.classList.add('playing');
     }.bind(this));
@@ -98,8 +102,6 @@ var gameplayState = {
     this.actualFps.message = createjs.Ticker.getMeasuredFPS();
     this.targetFps.message = createjs.Ticker.getFPS();
     this.scoreText.message = 'Score: ' + this.score;
-
-    this.player.aim(input.mouseLocation.x, input.mouseLocation.y);
 
     // react to input
     if (input.keys[16]) { // shift key
