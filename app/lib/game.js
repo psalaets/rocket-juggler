@@ -8,6 +8,9 @@ module.exports = Game;
 
 function Game(canvasElement) {
   this.stage = new createjs.Stage(canvasElement);
+  // detect mouse events outside of canvas
+  this.stage.mouseMoveOutside = true;
+
   this.width = canvasElement.width;
   this.height = canvasElement.height;
 
