@@ -17,6 +17,7 @@ module.exports = {
     x: 0,
     y: 0
   },
+  mousePressed: false,
   updateMouseLocation: function(x, y) {
     this.mouseLocation.x = x;
     this.mouseLocation.y = y;

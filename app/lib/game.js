@@ -101,9 +101,6 @@ p.removeViewOf = function(entity) {
 };
 
 p.update = function(tickEvent) {
-  // sync up game's view of mouse location
-  this.input.updateMouseLocation(this.stage.mouseX, this.stage.mouseY);
-
   // update physics
   if (this.world) {
     var maxSubSteps = 3;
@@ -170,11 +167,24 @@ p.changeToNextState = function() {
   // game is always first param to setUp
   params.unshift(this);
 
-  delete this.nextStateInfo;
+  this.nextStateInfo = null;
 
   this.reset();
 
   this.currentState.setUp.apply(this.currentState, params);
+
+  // set up listeners for mouse events
+  this.stage.on('stagemousedown', function(event) {
+    this.input.mousePressed = true;
+  }, this);
+
+  this.stage.on('stagemouseup', function(event) {
+    this.input.mousePressed = false;
+  }, this);
+
+  this.stage.on('stagemousemove', function(event) {
+    this.input.updateMouseLocation(event.rawX, event.rawY);
+  }, this);
 };
 
 p.reset = function() {
