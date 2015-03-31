@@ -22,7 +22,7 @@ function SpriteManager(torso, legs) {
   this.running = false;
 
   // how far from body's position that launcher aims from
-  this.launcherOffset: {
+  this.launcherOffset = {
     x: 0,
     // y offset never changes
     y: -30
