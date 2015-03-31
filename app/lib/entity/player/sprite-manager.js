@@ -20,6 +20,13 @@ function SpriteManager(torso, legs) {
 
   this.facingLeft = false;
   this.running = false;
+
+  // how far from body's position that launcher aims from
+  this.launcherOffset: {
+    x: 0,
+    // y offset never changes
+    y: -30
+  };
 }
 
 SpriteManager.prototype = {
@@ -72,11 +79,5 @@ SpriteManager.prototype = {
     };
 
     this.torso.aimChanged(reference, crosshair, this.facingLeft);
-  },
-  // how far from body's position that launcher aims from
-  launcherOffset: {
-    x: 0,
-    // y offset never changes
-    y: -30
   }
 };
