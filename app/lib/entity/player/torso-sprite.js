@@ -34,8 +34,15 @@ var aimSlices = pieSlice.slice(16, {
 
 var sprite = new createjs.Sprite(spritesheet, 'E');
 
-sprite.aimChanged = function aimChanged(reference, aim) {
+sprite.aimChanged = function aimChanged(reference, aim, facingLeft) {
   var slice = aimSlices.whatSlice(reference, aim);
+
+  // Since torso is flipped when facing left, we need to show slice that is
+  // on the opposite side of y-axis from slice that is shown for facing right.
+  if (facingLeft) {
+    slice = (16 - slice) % 16;
+  }
+
   this.gotoAndStop(frameNames[slice]);
 };
 

@@ -3,6 +3,8 @@ var p2 = require('p2');
 var torsoSprite = require('./torso-sprite');
 var legsSprite = require('./legs-sprite');
 
+var SpriteManager = require('./sprite-manager');
+
 module.exports = Player;
 
 // x and y are center of rect
@@ -27,6 +29,8 @@ function Player(x, y) {
   this.view.addChild(this.aimLine);
 
   this.body = createBody(x, y, this.width, this.height);
+
+  this.spriteManager = new SpriteManager(this.torso, this.legs);
 }
 
 function createContainer(x, y) {
@@ -119,22 +123,19 @@ p.update = function(tickEvent) {
   this.view.y = Math.floor(this.body.position[1]);
 
   this.updateLauncher(tickEvent);
+
+  this.spriteManager.update(this.body);
 };
 
 p.aim = function(x, y) {
   this.launcher.aim(x, y);
 
-  var reference = {
-    x: this.body.position[0],
-    y: this.body.position[1]
-  };
-
-  var other = {
+  var crosshair = {
     x: x,
     y: y
   };
 
-  this.torso.aimChanged(reference, other);
+  this.spriteManager.aimChanged(this.body, crosshair);
 }
 
 p.fire = function() {
@@ -149,39 +150,29 @@ p.updateLauncher = function(tickEvent) {
     var y = this.body.position[1];
 
     // move launcher with player
-    this.launcher.move(x, y);
+    var launcherX = x + this.spriteManager.launcherOffset.x;
+    var launcherY = y + this.spriteManager.launcherOffset.y;
+
+    this.launcher.move(launcherX, launcherY);
 
     // update aim line for debug purposes
     this.aimLine.graphics
       .clear()
       .beginStroke('#00f')
       // these locations are relative to player position
-      .moveTo(0, 0)
+      .moveTo(this.launcher.source.x - x, this.launcher.source.y - y)
       .lineTo(this.launcher.target.x - x, this.launcher.target.y - y);
   }
 }
 
 p.moveLeft = function(speed) {
-  // if not already going left
-  if (this.body.velocity[0] >= 0) {
-    // TODO face left here
-    this.legs.gotoAndPlay('run');
-  }
-
   this.body.velocity[0] = -speed;
 };
 
 p.moveRight = function(speed) {
-  // if not already going right
-  if (this.body.velocity[0] <= 0) {
-    // TODO face right here
-    this.legs.gotoAndPlay('run');
-  }
-
   this.body.velocity[0] = speed;
 };
 
 p.stop = function() {
   this.body.velocity[0] = 0;
-  this.legs.gotoAndStop('stand');
 };

@@ -78,16 +78,6 @@ var gameplayState = {
     game.addEntity(this.player);
 
     game.withStage(function(stage) {
-      // fire rocket on mouse click
-      stage.on('stagemousedown', this.mouseFire, this);
-
-      stage.on('stagemousemove', function(event) {
-        this.mouseStage.message = 'stage: ' + event.stageX + ', ' + event.stageY;
-        this.mouseRaw.message = 'raw: ' + event.rawX + ', ' + event.rawY;
-
-        this.player.aim(event.rawX, event.rawY);
-      }, this);
-
       // change mouse cursor
       stage.canvas.classList.add('playing');
     }.bind(this));
@@ -100,12 +90,6 @@ var gameplayState = {
     game.addEntity(this.actualFps);
     game.addEntity(this.targetFps);
     game.addEntity(this.scoreText);
-
-    this.mouseStage = entities.text(40, 70);
-    this.mouseRaw = entities.text(40, 80);
-
-    game.addEntity(this.mouseStage);
-    game.addEntity(this.mouseRaw);
   },
   update: function(game, input, tickEvent) {
     this.actualFps.message = createjs.Ticker.getMeasuredFPS();
@@ -124,6 +108,13 @@ var gameplayState = {
     } else {
       this.player.stop();
     }
+
+    // aim at mouse at all times
+    this.player.aim(input.mouseLocation.x, input.mouseLocation.y);
+
+    if (input.mousePressed) {
+      this.fire();
+    }
   },
   tearDown: function(game) {
     game.timer.clearCountdowns();
@@ -138,10 +129,6 @@ var gameplayState = {
     if (rocket) {
       this.game.addRocket(rocket);
     }
-  },
-  mouseFire: function(mouseEvent) {
-    this.player.aim(mouseEvent.stageX, mouseEvent.stageY);
-    this.fire();
   }
 };
 
