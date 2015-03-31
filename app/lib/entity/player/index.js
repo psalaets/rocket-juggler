@@ -150,14 +150,17 @@ p.updateLauncher = function(tickEvent) {
     var y = this.body.position[1];
 
     // move launcher with player
-    this.launcher.move(x, y);
+    var launcherX = x + this.spriteManager.launcherOffset.x;
+    var launcherY = y + this.spriteManager.launcherOffset.y;
+
+    this.launcher.move(launcherX, launcherY);
 
     // update aim line for debug purposes
     this.aimLine.graphics
       .clear()
       .beginStroke('#00f')
       // these locations are relative to player position
-      .moveTo(0, 0)
+      .moveTo(this.launcher.source.x - x, this.launcher.source.y - y)
       .lineTo(this.launcher.target.x - x, this.launcher.target.y - y);
   }
 }

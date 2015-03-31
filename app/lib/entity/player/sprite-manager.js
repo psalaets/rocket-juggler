@@ -47,9 +47,14 @@ SpriteManager.prototype = {
     if (this.facingLeft) {
       this.torso.scaleX = -1;
       this.legs.scaleX = -1;
+
+      this.launcherOffset.x = -11;
+
     } else {
       this.torso.scaleX = 1;
       this.legs.scaleX = 1;
+
+      this.launcherOffset.x = 11;
     }
   },
   startRunning: function() {
@@ -67,5 +72,11 @@ SpriteManager.prototype = {
     };
 
     this.torso.aimChanged(reference, crosshair, this.facingLeft);
+  },
+  // how far from body's position that launcher aims from
+  launcherOffset: {
+    x: 0,
+    // y offset never changes
+    y: -30
   }
 };
