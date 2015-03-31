@@ -44,6 +44,8 @@ sprite.aimChanged = function aimChanged(reference, aim, facingLeft) {
   }
 
   this.gotoAndStop(frameNames[slice]);
+
+  return slice;
 };
 
 module.exports = sprite;

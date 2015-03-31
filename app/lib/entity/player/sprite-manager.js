@@ -27,6 +27,9 @@ function SpriteManager(torso, legs) {
     // y offset never changes
     y: -30
   };
+
+  // current slice aim is in
+  this.slice = null;
 }
 
 SpriteManager.prototype = {
@@ -78,6 +81,22 @@ SpriteManager.prototype = {
       y: body.position[1]
     };
 
-    this.torso.aimChanged(reference, crosshair, this.facingLeft);
+    this.slice = this.torso.aimChanged(reference, crosshair, this.facingLeft);
+  },
+  // where rocket starts from relative to launcher
+  launchOffset: function() {
+    var offsets = [
+      {x: 0, y: -115}, // 0
+      {x: 42, y: -90},
+      {x: 70, y: -65},
+      {x: 85, y: -33},
+      {x: 86, y: 0},  // 4
+      {x: 78, y: 30},
+      {x: 56, y: 55},
+      {x: 36, y: 75},
+      {x: 5, y: 85} // 8
+    ];
+
+    return offsets[this.slice] || {x: 0, y: 0};
   }
 };

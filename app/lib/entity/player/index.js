@@ -139,7 +139,15 @@ p.aim = function(x, y) {
 }
 
 p.fire = function() {
-  return this.launcher.fire();
+  var x = this.launcher.source.x;
+  var y = this.launcher.source.y;
+
+  var launchOffset = this.spriteManager.launchOffset();
+
+  x += launchOffset.x;
+  y += launchOffset.y;
+
+  return this.launcher.fire(x, y);
 }
 
 p.updateLauncher = function(tickEvent) {
