@@ -18,12 +18,13 @@ function SpriteManager(torso, legs) {
   this.torso = torso;
   this.legs = legs;
 
-  this.facingLeft = true;
+  this.facingLeft = false;
   this.running = false;
 }
 
 SpriteManager.prototype = {
   update: function(body) {
+    // determine running vs standing
     var xVelocity = body.velocity[0];
 
     if (xVelocity < 0) {
@@ -41,6 +42,15 @@ SpriteManager.prototype = {
         this.stopRunning();
       }
     }
+
+    // flip sprite based on direction
+    if (this.facingLeft) {
+      this.torso.scaleX = -1;
+      this.legs.scaleX = -1;
+    } else {
+      this.torso.scaleX = 1;
+      this.legs.scaleX = 1;
+    }
   },
   startRunning: function() {
     this.running = true;
@@ -56,6 +66,6 @@ SpriteManager.prototype = {
       y: body.position[1]
     };
 
-    this.torso.aimChanged(reference, crosshair);
+    this.torso.aimChanged(reference, crosshair, this.facingLeft);
   }
 };
