@@ -3,6 +3,8 @@ var p2 = require('p2');
 var torsoSprite = require('./torso-sprite');
 var legsSprite = require('./legs-sprite');
 
+var SpriteManager = require('./sprite-manager');
+
 module.exports = Player;
 
 // x and y are center of rect
@@ -27,6 +29,8 @@ function Player(x, y) {
   this.view.addChild(this.aimLine);
 
   this.body = createBody(x, y, this.width, this.height);
+
+  this.spriteManager = new SpriteManager(this.torso, this.legs);
 }
 
 function createContainer(x, y) {
@@ -119,6 +123,8 @@ p.update = function(tickEvent) {
   this.view.y = Math.floor(this.body.position[1]);
 
   this.updateLauncher(tickEvent);
+
+  this.spriteManager.update(this.body);
 };
 
 p.aim = function(x, y) {
@@ -162,26 +168,13 @@ p.updateLauncher = function(tickEvent) {
 }
 
 p.moveLeft = function(speed) {
-  // if not already going left
-  if (this.body.velocity[0] >= 0) {
-    // TODO face left here
-    this.legs.gotoAndPlay('run');
-  }
-
   this.body.velocity[0] = -speed;
 };
 
 p.moveRight = function(speed) {
-  // if not already going right
-  if (this.body.velocity[0] <= 0) {
-    // TODO face right here
-    this.legs.gotoAndPlay('run');
-  }
-
   this.body.velocity[0] = speed;
 };
 
 p.stop = function() {
   this.body.velocity[0] = 0;
-  this.legs.gotoAndStop('stand');
 };
