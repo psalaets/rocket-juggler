@@ -51,6 +51,11 @@ SpriteManager.prototype = {
     this.legs.gotoAndStop('stand');
   },
   aimChanged: function(body, crosshair) {
+    var reference = {
+      x: body.position[0],
+      y: body.position[1]
+    };
 
+    this.torso.aimChanged(reference, crosshair);
   }
 };

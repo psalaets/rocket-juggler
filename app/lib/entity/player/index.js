@@ -130,17 +130,12 @@ p.update = function(tickEvent) {
 p.aim = function(x, y) {
   this.launcher.aim(x, y);
 
-  var reference = {
-    x: this.body.position[0],
-    y: this.body.position[1]
-  };
-
-  var other = {
+  var crosshair = {
     x: x,
     y: y
   };
 
-  this.torso.aimChanged(reference, other);
+  this.spriteManager.aimChanged(this.body, crosshair);
 }
 
 p.fire = function() {
