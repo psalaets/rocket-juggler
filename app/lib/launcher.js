@@ -32,11 +32,11 @@ p.aim = function(x, y) {
 };
 
 // fire a shot
-p.fire = function() {
+p.fire = function(x, y) {
   if (this.canFire()) {
     this.lastFireTime = this.currentTime;
 
-    var rocket = entities.rocket(this.source.x, this.source.y);
+    var rocket = entities.rocket(x, y);
     rocket.launch(this.aimVector());
     return rocket;
   }
