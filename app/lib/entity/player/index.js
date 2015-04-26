@@ -13,7 +13,7 @@ function Player(x, y) {
   this.height = 192;
 
   this.view = createContainer(x, y);
-  this.view.addChild(createRect(this.width, this.height));
+  //this.view.addChild(createRect(this.width, this.height));
 
   this.legs = legsSprite();
   this.legs.y = -20; // hack for now: offset by floor height
