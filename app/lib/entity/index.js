@@ -27,8 +27,8 @@ module.exports = {
     explosion.timeLeft = gameConfig.get('explosionDuration');
     return explosion;
   },
-  text: function(x, y, message) {
-    return new Text(x, y, message);
+  text: function(x, y, message, color) {
+    return new Text(x, y, message || '', color);
   },
   player: function(x, y) {
     return new Player(x, y);
