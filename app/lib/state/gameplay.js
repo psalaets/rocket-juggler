@@ -1,5 +1,6 @@
 var ghostBody = require('ghost-body');
 
+var loader = require('../loader');
 var entities = require('../entity');
 var Launcher = require('../launcher');
 var createCollisionHandler = require('./gameplay-collision-handler');
@@ -49,6 +50,14 @@ var gameplayState = {
       });
     });
 
+    game.withStage(function(stage) {
+      // change mouse cursor
+      stage.canvas.classList.add('playing');
+
+      // set background
+      stage.addChild(new createjs.Bitmap(loader.get('background')));
+    }.bind(this));
+
     createWalls(game).forEach(game.addWall, game);
 
     // add a ball every 5 seconds
@@ -76,11 +85,6 @@ var gameplayState = {
     this.player = entities.player(1024 / 2, 768 - (192 / 2) - 20);
     this.player.launcher = new Launcher();
     game.addEntity(this.player);
-
-    game.withStage(function(stage) {
-      // change mouse cursor
-      stage.canvas.classList.add('playing');
-    }.bind(this));
 
     // debug related
     this.actualFps = entities.text(40, 30);
