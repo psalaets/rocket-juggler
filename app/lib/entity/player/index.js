@@ -23,7 +23,8 @@ function Player(x, y) {
   this.torso.y = -20; // hack for now: offset by floor height
   this.view.addChild(this.torso);
 
-  //this.view.addChild(createWagonWheel());
+  this.wagonWheel = createWagonWheel();
+  this.view.addChild(this.wagonWheel);
 
   this.aimLine = createAimLine();
   this.view.addChild(this.aimLine);
@@ -66,7 +67,7 @@ function createWagonWheel() {
   var g = new createjs.Graphics();
   g.beginStroke('#f00');
 
-  var radius = 100;
+  var radius = 200;
   g.drawCircle(0, 0, radius);
 
   drawQuarterSpokes(g, radius, 1, 1); // bottom right
@@ -162,6 +163,11 @@ p.updateLauncher = function(tickEvent) {
     var launcherY = y + this.spriteManager.launcherOffset.y;
 
     this.launcher.move(launcherX, launcherY);
+
+    if (this.wagonWheel) {
+      this.wagonWheel.x = this.launcher.source.x - x;
+      this.wagonWheel.y = this.launcher.source.y - y;
+    }
 
     // update aim line for debug purposes
     this.aimLine.graphics
