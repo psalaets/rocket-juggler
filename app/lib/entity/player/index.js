@@ -162,7 +162,7 @@ p.updateLauncher = function(tickEvent) {
     var launcherX = x + this.spriteManager.launcherOffset.x;
     var launcherY = y + this.spriteManager.launcherOffset.y;
 
-    this.launcher.move(launcherX, launcherY);
+    this.launcher.moveTo(launcherX, launcherY);
 
     if (this.wagonWheel) {
       this.wagonWheel.x = this.launcher.source.x - x;

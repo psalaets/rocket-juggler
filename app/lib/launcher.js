@@ -20,7 +20,7 @@ function Launcher() {
 var p = Launcher.prototype;
 
 // change where shots are fired from
-p.move = function(x, y) {
+p.moveTo = function(x, y) {
   this.source.x = x;
   this.source.y = y;
 };
