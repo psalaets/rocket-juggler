@@ -26,6 +26,9 @@ function Player(x, y) {
   this.wagonWheel = createWagonWheel();
   this.view.addChild(this.wagonWheel);
 
+  this.wagonWheel2 = createWagonWheel(75);
+  this.view.addChild(this.wagonWheel2);
+
   this.aimLine = createAimLine();
   this.view.addChild(this.aimLine);
 
@@ -63,11 +66,11 @@ function createRect(width, height) {
   return shape;
 }
 
-function createWagonWheel() {
+function createWagonWheel(radius) {
   var g = new createjs.Graphics();
   g.beginStroke('#f00');
 
-  var radius = 200;
+  radius = radius || 200;
   g.drawCircle(0, 0, radius);
 
   drawQuarterSpokes(g, radius, 1, 1); // bottom right
@@ -168,6 +171,12 @@ p.updateLauncher = function(tickEvent) {
       // wagon wheel is relative to player sprite so subtract player x/y
       this.wagonWheel.x = this.launcher.source.x - x;
       this.wagonWheel.y = this.launcher.source.y - y;
+    }
+
+    if (this.wagonWheel2) {
+      // wagon wheel is relative to player sprite so subtract player x/y
+      this.wagonWheel2.x = this.launcher.source.x - x;
+      this.wagonWheel2.y = this.launcher.source.y - y;
     }
 
     // update aim line for debug purposes
