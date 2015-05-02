@@ -77,8 +77,8 @@ SpriteManager.prototype = {
   },
   aimChanged: function(body, crosshair) {
     var reference = {
-      x: body.position[0],
-      y: body.position[1]
+      x: body.position[0] + this.launcherOffset.x,
+      y: body.position[1] + this.launcherOffset.y
     };
 
     this.slice = this.torso.aimChanged(reference, crosshair, this.facingLeft);
