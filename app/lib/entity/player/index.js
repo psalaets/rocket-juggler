@@ -34,7 +34,7 @@ function Player(x, y) {
 
   this.body = createBody(x, y, this.width, this.height);
 
-  this.spriteManager = new SpriteManager(this.torso, this.legs);
+  this.spriteManager = new SpriteManager(this.body, this.torso, this.legs);
 }
 
 function createContainer(x, y) {
@@ -192,14 +192,14 @@ p.updateLauncher = function(tickEvent) {
   }
 }
 
-p.moveLeft = function(speed) {
-  this.body.velocity[0] = -speed;
+p.runLeft = function() {
+  this.spriteManager.runLeft();
 };
 
-p.moveRight = function(speed) {
-  this.body.velocity[0] = speed;
+p.runRight = function() {
+  this.spriteManager.runRight();
 };
 
 p.stop = function() {
-  this.body.velocity[0] = 0;
+  this.spriteManager.stopRunning();
 };

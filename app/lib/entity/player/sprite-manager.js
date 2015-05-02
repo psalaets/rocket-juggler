@@ -1,3 +1,5 @@
+var gameConfig = require('../../config/game-config');
+
 /*
 stuff in here:
 
@@ -14,12 +16,17 @@ launch from spot (based on direction and slice)
 
 module.exports = SpriteManager;
 
-function SpriteManager(torso, legs) {
+function SpriteManager(body, torso, legs) {
+  this.body = body;
   this.torso = torso;
   this.legs = legs;
 
   this.facingLeft = false;
   this.running = false;
+
+  // player left/right speed
+  this.horizontalSpeed = 0;
+  this.runningSpeed = gameConfig.get('playerSpeed');
 
   // how far from body's position that launcher aims from
   this.launcherOffset = {
@@ -34,38 +41,7 @@ function SpriteManager(torso, legs) {
 
 SpriteManager.prototype = {
   update: function(body) {
-    // determine running vs standing
-    var xVelocity = body.velocity[0];
-
-    if (xVelocity < 0) {
-      this.facingLeft = true;
-      if (!this.running) {
-        this.startRunning();
-      }
-    } else if (xVelocity > 0) {
-      this.facingLeft = false;
-      if (!this.running) {
-        this.startRunning();
-      }
-    } else {
-      if (this.running) {
-        this.stopRunning();
-      }
-    }
-
-    // flip sprite based on direction
-    if (this.facingLeft) {
-      this.torso.scaleX = -1;
-      this.legs.scaleX = -1;
-
-      this.launcherOffset.x = -11;
-
-    } else {
-      this.torso.scaleX = 1;
-      this.legs.scaleX = 1;
-
-      this.launcherOffset.x = 11;
-    }
+    body.velocity[0] = this.horizontalSpeed;
   },
   startRunning: function() {
     this.running = true;
@@ -74,7 +50,46 @@ SpriteManager.prototype = {
   stopRunning: function() {
     this.running = false;
     this.legs.gotoAndStop('stand');
+
+    this.horizontalSpeed = 0;
   },
+
+  runRight: function() {
+    this.faceRight();
+    if (!this.running) {
+      this.startRunning();
+    }
+    this.horizontalSpeed = this.runningSpeed;
+  },
+
+  runLeft: function() {
+    this.faceLeft();
+    if (!this.running) {
+      this.startRunning();
+    }
+    this.horizontalSpeed = -this.runningSpeed;
+  },
+  faceLeft: function() {
+    this.facingLeft = true;
+
+    // flip sprite to face left
+    this.torso.scaleX = -1;
+    this.legs.scaleX = -1;
+
+    // sprite isn't symmetrical so launcher position needs to change
+    this.launcherOffset.x = -11;
+  },
+  faceRight: function() {
+    this.facingLeft = false;
+
+    // flip sprite to face right
+    this.torso.scaleX = 1;
+    this.legs.scaleX = 1;
+
+    // sprite isn't symmetrical so launcher position needs to change
+    this.launcherOffset.x = 11;
+  },
+
   aimChanged: function(body, crosshair) {
     var reference = {
       x: body.position[0] + this.launcherOffset.x,
