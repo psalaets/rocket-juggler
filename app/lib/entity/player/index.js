@@ -23,11 +23,11 @@ function Player(x, y) {
   this.torso.y = -20; // hack for now: offset by floor height
   this.view.addChild(this.torso);
 
-  this.wagonWheel = createWagonWheel();
-  this.view.addChild(this.wagonWheel);
+  // this.wagonWheel = createWagonWheel();
+  // this.view.addChild(this.wagonWheel);
 
-  this.wagonWheel2 = createWagonWheel(75);
-  this.view.addChild(this.wagonWheel2);
+  // this.wagonWheel2 = createWagonWheel(75);
+  // this.view.addChild(this.wagonWheel2);
 
   this.aimLine = createAimLine();
   this.view.addChild(this.aimLine);
