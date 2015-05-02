@@ -165,6 +165,7 @@ p.updateLauncher = function(tickEvent) {
     this.launcher.moveTo(launcherX, launcherY);
 
     if (this.wagonWheel) {
+      // wagon wheel is relative to player sprite so subtract player x/y
       this.wagonWheel.x = this.launcher.source.x - x;
       this.wagonWheel.y = this.launcher.source.y - y;
     }
