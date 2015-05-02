@@ -23,14 +23,18 @@ function Player(x, y) {
   this.torso.y = -20; // hack for now: offset by floor height
   this.view.addChild(this.torso);
 
-  //this.view.addChild(createWagonWheel());
+  // this.wagonWheel = createWagonWheel();
+  // this.view.addChild(this.wagonWheel);
+
+  // this.wagonWheel2 = createWagonWheel(75);
+  // this.view.addChild(this.wagonWheel2);
 
   this.aimLine = createAimLine();
   this.view.addChild(this.aimLine);
 
   this.body = createBody(x, y, this.width, this.height);
 
-  this.spriteManager = new SpriteManager(this.torso, this.legs);
+  this.spriteManager = new SpriteManager(this.body, this.torso, this.legs);
 }
 
 function createContainer(x, y) {
@@ -62,11 +66,11 @@ function createRect(width, height) {
   return shape;
 }
 
-function createWagonWheel() {
+function createWagonWheel(radius) {
   var g = new createjs.Graphics();
   g.beginStroke('#f00');
 
-  var radius = 100;
+  radius = radius || 200;
   g.drawCircle(0, 0, radius);
 
   drawQuarterSpokes(g, radius, 1, 1); // bottom right
@@ -124,7 +128,7 @@ p.update = function(tickEvent) {
 
   this.updateLauncher(tickEvent);
 
-  this.spriteManager.update(this.body);
+  this.spriteManager.update();
 };
 
 p.aim = function(x, y) {
@@ -135,14 +139,17 @@ p.aim = function(x, y) {
     y: y
   };
 
-  this.spriteManager.aimChanged(this.body, crosshair);
+  this.spriteManager.aimChanged(crosshair);
 }
 
 p.fire = function() {
   var x = this.launcher.source.x;
   var y = this.launcher.source.y;
 
-  var launchOffset = this.spriteManager.launchOffset();
+  var aimVector = this.launcher.aimVector();
+  aimVector.normalize();
+
+  var launchOffset = this.spriteManager.launchOffset(aimVector);
 
   x += launchOffset.x;
   y += launchOffset.y;
@@ -161,7 +168,19 @@ p.updateLauncher = function(tickEvent) {
     var launcherX = x + this.spriteManager.launcherOffset.x;
     var launcherY = y + this.spriteManager.launcherOffset.y;
 
-    this.launcher.move(launcherX, launcherY);
+    this.launcher.moveTo(launcherX, launcherY);
+
+    if (this.wagonWheel) {
+      // wagon wheel is relative to player sprite so subtract player x/y
+      this.wagonWheel.x = this.launcher.source.x - x;
+      this.wagonWheel.y = this.launcher.source.y - y;
+    }
+
+    if (this.wagonWheel2) {
+      // wagon wheel is relative to player sprite so subtract player x/y
+      this.wagonWheel2.x = this.launcher.source.x - x;
+      this.wagonWheel2.y = this.launcher.source.y - y;
+    }
 
     // update aim line for debug purposes
     this.aimLine.graphics
@@ -173,14 +192,14 @@ p.updateLauncher = function(tickEvent) {
   }
 }
 
-p.moveLeft = function(speed) {
-  this.body.velocity[0] = -speed;
+p.runLeft = function() {
+  this.spriteManager.runLeft();
 };
 
-p.moveRight = function(speed) {
-  this.body.velocity[0] = speed;
+p.runRight = function() {
+  this.spriteManager.runRight();
 };
 
 p.stop = function() {
-  this.body.velocity[0] = 0;
+  this.spriteManager.stopRunning();
 };

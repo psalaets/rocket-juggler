@@ -20,7 +20,7 @@ function Launcher() {
 var p = Launcher.prototype;
 
 // change where shots are fired from
-p.move = function(x, y) {
+p.moveTo = function(x, y) {
   this.source.x = x;
   this.source.y = y;
 };
@@ -42,6 +42,9 @@ p.fire = function(x, y) {
   }
 };
 
+/**
+* @return non-normalized aim vector
+*/
 p.aimVector = function() {
   var vector = new Vec2(this.target.x, this.target.y);
   vector.subtract(this.source.x, this.source.y);
