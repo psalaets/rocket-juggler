@@ -40,8 +40,8 @@ function SpriteManager(body, torso, legs) {
 }
 
 SpriteManager.prototype = {
-  update: function(body) {
-    body.velocity[0] = this.horizontalSpeed;
+  update: function() {
+    this.body.velocity[0] = this.horizontalSpeed;
   },
   startRunning: function() {
     this.running = true;
@@ -90,10 +90,10 @@ SpriteManager.prototype = {
     this.launcherOffset.x = 11;
   },
 
-  aimChanged: function(body, crosshair) {
+  aimChanged: function(crosshair) {
     var reference = {
-      x: body.position[0] + this.launcherOffset.x,
-      y: body.position[1] + this.launcherOffset.y
+      x: this.body.position[0] + this.launcherOffset.x,
+      y: this.body.position[1] + this.launcherOffset.y
     };
 
     this.slice = this.torso.aimChanged(reference, crosshair, this.facingLeft);

@@ -128,7 +128,7 @@ p.update = function(tickEvent) {
 
   this.updateLauncher(tickEvent);
 
-  this.spriteManager.update(this.body);
+  this.spriteManager.update();
 };
 
 p.aim = function(x, y) {
@@ -139,7 +139,7 @@ p.aim = function(x, y) {
     y: y
   };
 
-  this.spriteManager.aimChanged(this.body, crosshair);
+  this.spriteManager.aimChanged(crosshair);
 }
 
 p.fire = function() {
