@@ -83,20 +83,15 @@ SpriteManager.prototype = {
 
     this.slice = this.torso.aimChanged(reference, crosshair, this.facingLeft);
   },
-  // where rocket starts from relative to launcher
-  launchOffset: function() {
-    var offsets = [
-      {x: 0, y: -115}, // 0
-      {x: 42, y: -90},
-      {x: 70, y: -65},
-      {x: 85, y: -33},
-      {x: 86, y: 0},  // 4
-      {x: 78, y: 30},
-      {x: 56, y: 55},
-      {x: 36, y: 75},
-      {x: 5, y: 85} // 8
-    ];
+  /**
+  * Tells where rocket starts from relative to launcher.
+  *
+  * @param {vec2} aimVector normalized aim vector
+  */
+  launchOffset: function(aimVector) {
+    // up-facing slice fires from a bit further away
+    var scaleFactor = (this.slice === 0) ? 115 : 85;
 
-    return offsets[this.slice] || {x: 0, y: 0};
+    return aimVector.multiply(scaleFactor);
   }
 };

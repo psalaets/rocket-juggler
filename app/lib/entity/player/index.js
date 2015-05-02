@@ -146,7 +146,10 @@ p.fire = function() {
   var x = this.launcher.source.x;
   var y = this.launcher.source.y;
 
-  var launchOffset = this.spriteManager.launchOffset();
+  var aimVector = this.launcher.aimVector();
+  aimVector.normalize();
+
+  var launchOffset = this.spriteManager.launchOffset(aimVector);
 
   x += launchOffset.x;
   y += launchOffset.y;
