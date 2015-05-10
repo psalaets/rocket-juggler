@@ -1,6 +1,9 @@
 var createjs = require('createjs');
 var p2 = require('p2');
 var ghostBody = require('ghost-body');
+var Vec2 = require('vec2');
+
+var loader = require('../loader');
 
 module.exports = Rocket;
 
@@ -17,15 +20,28 @@ function Rocket(x, y, radius) {
 var p = Rocket.prototype;
 
 function createView(radius) {
-  var g = new createjs.Graphics();
+  var spritesheet = new createjs.SpriteSheet({
+    images: [loader.get('rocket')],
+    frames: {
+      width: 20,
+      height: 20,
+      regX: 10,
+      regY: 10
+    }
+  });
 
-  // blue inside
-  g.beginFill('#0000ff');
-  g.drawCircle(0, 0, radius);
+  var sprite = new createjs.Sprite(spritesheet);
+  return sprite;
 
-  var shape = new createjs.Shape(g);
-  shape.cache(-radius, -radius, radius * 2, radius * 2);
-  return shape;
+  // var g = new createjs.Graphics();
+
+  // // blue inside
+  // g.beginFill('#0000ff');
+  // g.drawCircle(0, 0, radius);
+
+  // var shape = new createjs.Shape(g);
+  // shape.cache(-radius, -radius, radius * 2, radius * 2);
+  // return shape;
 }
 
 function createBody(x, y, radius) {
@@ -59,7 +75,25 @@ p.update = function(tickEvent) {
 */
 p.launch = function(aimVector) {
   aimVector.normalize();
+  this.pointAt(aimVector);
+
   aimVector.multiply(this.speed);
 
   this.body.velocity = [aimVector.x, aimVector.y];
+};
+
+/**
+* Rotate this rocket so it points at an aim vector
+*
+* @param {vec2} normalizedAimVector - aim vector with length near or equal to 1
+*/
+p.pointAt = function(normalizedAimVector) {
+  var radians = new Vec2(0, -1).angleTo(normalizedAimVector);
+  var degrees = radians * (180 / Math.PI);
+
+  if (degrees < 0) {
+    degrees = 360 - (-degrees)
+  }
+
+  this.view.rotation = degrees;
 };
