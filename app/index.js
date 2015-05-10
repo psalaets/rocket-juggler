@@ -18,6 +18,8 @@ var loader = require('./lib/loader');
 loader.loadImage('torso', 'assets/torso.png');
 loader.loadImage('legs', 'assets/legs.png');
 loader.loadImage('background', 'assets/background.png');
+loader.loadImage('rocket', 'assets/rocket.png');
+loader.loadImage('meteor', 'assets/meteor.png');
 
 loader.on('ready', function() {
   // start game after everything is loaded

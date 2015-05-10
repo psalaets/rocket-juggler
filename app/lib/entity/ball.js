@@ -1,5 +1,6 @@
 var createjs = require('createjs');
 var p2 = require('p2');
+var loader = require('../loader');
 
 module.exports = Ball;
 
@@ -12,15 +13,28 @@ function Ball(x, y, radius) {
 }
 
 function createView(radius) {
-  var graphics = new createjs.Graphics();
+  var spritesheet = new createjs.SpriteSheet({
+    images: [loader.get('meteor')],
+    frames: {
+      width: 100,
+      height: 100,
+      regX: 50,
+      regY: 50
+    }
+  });
 
-  // red inside
-  graphics.beginFill('#ff0000');
-  graphics.drawCircle(0, 0, radius);
+  var sprite = new createjs.Sprite(spritesheet);
+  return sprite;
 
-  var shape = new createjs.Shape(graphics);
-  shape.cache(-radius, -radius, radius * 2, radius * 2);
-  return shape;
+  // var graphics = new createjs.Graphics();
+
+  // // red inside
+  // graphics.beginFill('#ff0000');
+  // graphics.drawCircle(0, 0, radius);
+
+  // var shape = new createjs.Shape(graphics);
+  // shape.cache(-radius, -radius, radius * 2, radius * 2);
+  // return shape;
 };
 
 function createBody(x, y, radius) {
