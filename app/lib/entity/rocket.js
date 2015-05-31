@@ -92,7 +92,7 @@ p.pointAt = function(normalizedAimVector) {
   var degrees = radians * (180 / Math.PI);
 
   if (degrees < 0) {
-    degrees = 360 - (-degrees)
+    degrees = 360 - Math.abs(degrees);
   }
 
   this.view.rotation = degrees;
