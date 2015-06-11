@@ -116,7 +116,6 @@ gulp.task('clean', function(cb) {
   ], cb);
 });
 
-// for now this just copies assets to build/
 gulp.task('prep-assets', function() {
   return gulp.src('app/assets/**/*')
     .pipe(imagemin())
