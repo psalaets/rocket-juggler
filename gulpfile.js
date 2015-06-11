@@ -10,6 +10,7 @@ var gulp        = require('gulp'),
     inject      = require('gulp-inject'),
     del         = require('del'),
     filelog     = require('gulp-filelog'),
+    imagemin    = require('gulp-imagemin'),
     mocha       = require('gulp-mocha');
 
 function makeBundle(options) {
@@ -115,9 +116,9 @@ gulp.task('clean', function(cb) {
   ], cb);
 });
 
-// for now this just copies assets to build/
 gulp.task('prep-assets', function() {
   return gulp.src('app/assets/**/*')
+    .pipe(imagemin())
     .pipe(gulp.dest('build/assets'));
 });
 
