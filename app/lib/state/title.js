@@ -25,19 +25,25 @@ var titleState = {
       // set background
       stage.addChild(new createjs.Bitmap(loader.get('title-screen')));
 
+      var insertCoinWidth = 172;
+      var insertCoinHeight = 26;
+
+      var insertCoin = new createjs.Bitmap(loader.get('insert-coin'));
+      insertCoin.regX = insertCoinWidth / 2;
+      insertCoin.regY = insertCoinHeight / 2;
+      insertCoin.x = 1024 / 2;
+      insertCoin.y = 280;
+      stage.addChild(insertCoin);
+
+      function cycleInsertCoin() {
+        insertCoin.visible = !insertCoin.visible;
+        game.timer.addCountdown(700, cycleInsertCoin);
+      }
+
+      cycleInsertCoin();
+
       var buttonWidth = 188;
       var buttonHeight = 44;
-
-      var about = new createjs.Bitmap(loader.get('about-button'));
-      about.regX = buttonWidth / 2;
-      about.regY = buttonHeight / 2;
-      about.x = 1024 / 2;
-      about.y = 465;
-      stage.addChild(about);
-
-      about.on('click', function() {
-        game.changeState('help');
-      });
 
       var start = new createjs.Bitmap(loader.get('play-button'));
       start.regX = buttonWidth / 2;
@@ -48,6 +54,17 @@ var titleState = {
 
       start.on('click', function() {
         game.changeState('gameplay');
+      });
+
+      var about = new createjs.Bitmap(loader.get('about-button'));
+      about.regX = buttonWidth / 2;
+      about.regY = buttonHeight / 2;
+      about.x = 1024 / 2;
+      about.y = 465;
+      stage.addChild(about);
+
+      about.on('click', function() {
+        game.changeState('help');
       });
     }.bind(this));
 
@@ -62,7 +79,7 @@ var titleState = {
 
   },
   tearDown: function(game) {
-
+    game.timer.clearCountdowns();
   }
 };
 
