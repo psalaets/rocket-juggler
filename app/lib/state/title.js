@@ -17,13 +17,30 @@ var titleState = {
         highScoreText = 'NEW! ' + highScoreText;
       }
 
-      game.addEntity(entities.text(500, 300, 'GAME OVER'));
-      game.addEntity(entities.text(500, 320, 'Score: ' + score));
+      // game.addEntity(entities.text(500, 300, 'GAME OVER'));
+      // game.addEntity(entities.text(500, 320, 'Score: ' + score));
     }
 
     game.withStage(function(stage) {
       // set background
       stage.addChild(new createjs.Bitmap(loader.get('title-screen')));
+
+      var buttonWidth = 188;
+      var buttonHeight = 44;
+
+      var about = new createjs.Bitmap(loader.get('about-button'));
+      about.regX = buttonWidth / 2;
+      about.regY = buttonHeight / 2;
+      about.x = 1024 / 2;
+      about.y = 465;
+      stage.addChild(about);
+
+      var start = new createjs.Bitmap(loader.get('play-button'));
+      start.regX = buttonWidth / 2;
+      start.regY = buttonHeight / 2;
+      start.x = 1024 / 2;
+      start.y = 395;
+      stage.addChild(start);
     }.bind(this));
 
     highScoreText += (highScore.getHighScore() || 'N/A');
