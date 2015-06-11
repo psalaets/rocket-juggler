@@ -11,7 +11,7 @@ function createWalls(game) {
   var gameWidth = game.width;
   var gameHeight = game.height;
 
-  var floorHeight = 20;
+  var floorHeight = 16;
   // make walls extra thick to prevent physics tunneling
   var extraPadding = 500;
 
@@ -82,7 +82,13 @@ var gameplayState = {
 
     incrementScore();
 
-    this.player = entities.player(1024 / 2, 768 - (192 / 2) - 20);
+    var playerX = 1024 / 2; // middle
+    playerX -= 68; // scoot left a bit to line up with title screen's character
+
+    var playerY = 768 - (192 / 2); // half player height from bottom
+    playerY -= 16; // move up by floor height
+
+    this.player = entities.player(playerX,  playerY);
     this.player.launcher = new Launcher();
     game.addEntity(this.player);
 
