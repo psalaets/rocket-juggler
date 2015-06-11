@@ -15,11 +15,18 @@ game.defineState('help', require('./lib/state/help'));
 game.defineState('gameplay', require('./lib/state/gameplay'));
 
 var loader = require('./lib/loader');
+// gameplay state
 loader.loadImage('torso', 'assets/torso.png');
 loader.loadImage('legs', 'assets/legs.png');
 loader.loadImage('background', 'assets/background.png');
 loader.loadImage('rocket', 'assets/rocket.png');
 loader.loadImage('meteor', 'assets/meteor.png');
+// title state
+loader.loadImage('about-button', 'assets/aboutbutton.png');
+loader.loadImage('about-button-hover', 'assets/aboutbuttonhover.png');
+loader.loadImage('play-button', 'assets/playbutton.png');
+loader.loadImage('play-button-hover', 'assets/playbuttonhover.png');
+loader.loadImage('title-screen', 'assets/withoutbuttons.png');
 
 loader.on('ready', function() {
   // start game after everything is loaded

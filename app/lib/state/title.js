@@ -1,5 +1,8 @@
+var createjs = require('createjs');
+
 var entities = require('../entity');
 var highScore = require('../high-score');
+var loader = require('../loader');
 
 var titleState = {
   init: function(game) {
@@ -18,12 +21,17 @@ var titleState = {
       game.addEntity(entities.text(500, 320, 'Score: ' + score));
     }
 
+    game.withStage(function(stage) {
+      // set background
+      stage.addChild(new createjs.Bitmap(loader.get('title-screen')));
+    }.bind(this));
+
     highScoreText += (highScore.getHighScore() || 'N/A');
 
-    game.addEntity(entities.text(500, 100, 'ROCKET JUGGLER'));
-    game.addEntity(entities.text(500, 120, 'Press <enter> to begin'));
-    game.addEntity(entities.text(500, 140, 'Press <h> for help'));
-    game.addEntity(entities.text(500, 170, highScoreText));
+    // game.addEntity(entities.text(500, 100, 'ROCKET JUGGLER'));
+    // game.addEntity(entities.text(500, 120, 'Press <enter> to begin'));
+    // game.addEntity(entities.text(500, 140, 'Press <h> for help'));
+    // game.addEntity(entities.text(500, 170, highScoreText));
   },
   update: function(game, input, tickEvent) {
     if (input.keys[13]) { // enter
