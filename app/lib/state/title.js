@@ -35,12 +35,20 @@ var titleState = {
       about.y = 465;
       stage.addChild(about);
 
+      about.on('click', function() {
+        game.changeState('help');
+      });
+
       var start = new createjs.Bitmap(loader.get('play-button'));
       start.regX = buttonWidth / 2;
       start.regY = buttonHeight / 2;
       start.x = 1024 / 2;
       start.y = 395;
       stage.addChild(start);
+
+      start.on('click', function() {
+        game.changeState('gameplay');
+      });
     }.bind(this));
 
     highScoreText += (highScore.getHighScore() || 'N/A');
@@ -51,11 +59,7 @@ var titleState = {
     // game.addEntity(entities.text(500, 170, highScoreText));
   },
   update: function(game, input, tickEvent) {
-    if (input.keys[13]) { // enter
-      game.changeState('gameplay');
-    } else if (input.keys[72]) { // H key
-      game.changeState('help');
-    }
+
   },
   tearDown: function(game) {
 
