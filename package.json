@@ -16,6 +16,7 @@
     "gulp": "3.8.10",
     "gulp-filelog": "0.4.1",
     "gulp-filter": "1.0.2",
+    "gulp-imagemin": "2.2.1",
     "gulp-inject": "1.0.2",
     "gulp-mocha": "^2.0.0",
     "gulp-rev": "2.0.1",
