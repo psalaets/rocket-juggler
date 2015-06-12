@@ -51,7 +51,21 @@ function createBody(x, y, radius) {
 
 var p = Ball.prototype;
 p.update = function(tickEvent) {
+  var body = this.body;
+  var x = body.position[0];
+  var y = body.position[1];
+
   // place shape at body's position
-  this.view.x = this.body.position[0];
-  this.view.y = this.body.position[1];
+  this.view.x = x;
+  this.view.y = y;
+};
+
+p.moveTo = function(x, y) {
+  this.body.position[0] = x;
+  this.body.position[1] = y;
+};
+
+p.setVelocity = function(x, y) {
+  this.body.velocity[0] = x;
+  this.body.velocity[1] = y;
 };
