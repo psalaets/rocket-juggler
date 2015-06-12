@@ -13,8 +13,8 @@ module.exports = {
     rocket.speed = gameConfig.get('rocketSpeed');
     return rocket;
   },
-  ball: function(x, y) {
-    var ball = new Ball(x, y, gameConfig.get('ballRadius'));
+  ball: function() {
+    var ball = new Ball(0, 0, gameConfig.get('ballRadius'));
     ball.body.mass = gameConfig.get('ballMass');
     return ball;
   },

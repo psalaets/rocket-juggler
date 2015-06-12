@@ -67,7 +67,7 @@ p.update = function(tickEvent) {
 };
 
 p.pushBall = function(ball) {
-  if (this.alreadyHit.indexOf(ball) == -1) {
+  if (ball.fairGame && this.alreadyHit.indexOf(ball) == -1) {
     this.alreadyHit.push(ball);
 
     var pushVector = new Vec2(ball.body.position[0], ball.body.position[1]);
