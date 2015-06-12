@@ -7,10 +7,10 @@ module.exports = function() {
   ];
 
   var velocities = [
-    {x: 0, y: 60},
-    {x: 40, y: 70},
-    {x: -20, y: 60},
-    {x: 20, y: 70}
+    {x: -100, y: 80},
+    {x: 100, y: 70},
+    {x: -70, y: 60},
+    {x: 50, y: 80}
   ];
 
   return {
