@@ -17,7 +17,7 @@ function createWalls(game) {
 
   // wall pieces
   var left = entities.leftWall(0);
-  var right = entities.rightWall(gameWidth - 150);
+  var right = entities.rightWall(gameWidth);
   var ceiling = entities.ceiling(0);
   var floor = entities.floor(gameHeight - floorHeight);
 
