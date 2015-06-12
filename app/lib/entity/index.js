@@ -18,8 +18,17 @@ module.exports = {
     ball.body.mass = gameConfig.get('ballMass');
     return ball;
   },
-  wall: function(left, top, width, height) {
-    return new Wall(left, top, width, height);
+  ceiling: function(position) {
+    return new Wall(position, 'top');
+  },
+  floor: function(position) {
+    return new Wall(position, 'bottom');
+  },
+  leftWall: function(position) {
+    return new Wall(position, 'left');
+  },
+  rightWall: function(position) {
+    return new Wall(position, 'right');
   },
   explosion: function(x, y) {
     var explosion = new Explosion(x, y, gameConfig.get('explosionRadius'));

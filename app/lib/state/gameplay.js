@@ -16,10 +16,10 @@ function createWalls(game) {
   var extraPadding = 500;
 
   // wall pieces
-  var left = entities.wall(0 - extraPadding, 0, extraPadding, gameHeight - floorHeight);
-  var right = entities.wall(gameWidth, 0, extraPadding, gameHeight - floorHeight);
-  var ceiling = entities.wall(0 - extraPadding, 0 - extraPadding, gameWidth + (2 * extraPadding), extraPadding);
-  var floor = entities.wall(0 - extraPadding, gameHeight - floorHeight, gameWidth + (2 * extraPadding), floorHeight + extraPadding);
+  var left = entities.leftWall(0);
+  var right = entities.rightWall(gameWidth - 150);
+  var ceiling = entities.ceiling(0);
+  var floor = entities.floor(gameHeight - floorHeight);
 
   // flag to simplify detecting game over
   floor.isFloor = true;
