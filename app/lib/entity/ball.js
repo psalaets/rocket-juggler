@@ -1,5 +1,7 @@
 var createjs = require('createjs');
 var p2 = require('p2');
+var ghostBody = require('ghost-body');
+
 var loader = require('../loader');
 
 module.exports = Ball;
@@ -9,7 +11,11 @@ function Ball(x, y, radius) {
   this.view.x = x;
   this.view.y = y;
 
+  this.radius = radius;
   this.body = createBody(x, y, radius);
+
+  // starts off not hitting stuff
+  ghostBody.ghostify(this.body);
 }
 
 function createView(radius) {
@@ -58,6 +64,12 @@ p.update = function(tickEvent) {
   // place shape at body's position
   this.view.x = x;
   this.view.y = y;
+
+  // it's fully on screen, it's fair game now
+  if (ghostBody.isGhost(body) && y > this.radius + 1) {
+    this.fairGame = true;
+    ghostBody.unghostify(body);
+  }
 };
 
 p.moveTo = function(x, y) {
