@@ -29,8 +29,8 @@ function Player(x, y) {
   // this.wagonWheel2 = createWagonWheel(75);
   // this.view.addChild(this.wagonWheel2);
 
-  this.aimLine = createAimLine();
-  this.view.addChild(this.aimLine);
+  // this.aimLine = createAimLine();
+  // this.view.addChild(this.aimLine);
 
   this.body = createBody(x, y, this.width, this.height);
 
@@ -183,7 +183,7 @@ p.updateLauncher = function(tickEvent) {
     }
 
     // update aim line for debug purposes
-    this.aimLine.graphics
+    this.aimLine && this.aimLine.graphics
       .clear()
       .beginStroke('#00f')
       // these locations are relative to player position

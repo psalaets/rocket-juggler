@@ -49,7 +49,9 @@ function createBody(x, y, radius) {
     mass: 10,
     // doesn't spin
     fixedRotation: true,
-    position: [x, y]
+    position: [x, y],
+    // turn off damping which is like air resistance?
+    damping: 0
   });
 
   // not affected by gravity
