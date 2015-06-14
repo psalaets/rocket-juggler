@@ -48,7 +48,9 @@ function createBody(x, y, radius) {
     mass: 1,
     // doesn't spin
     fixedRotation: true,
-    position: [x, y]
+    position: [x, y],
+    // turn off damping which is like air resistance?
+    damping: 0
   });
   body.addShape(new p2.Circle(radius));
   body.gravityScale = 0.5;
