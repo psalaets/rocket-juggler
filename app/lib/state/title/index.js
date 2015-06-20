@@ -64,10 +64,12 @@ var titleState = {
       });
 
       playButton.on('mouseover', function() {
+        startButtonHover();
         playButton.gotoAndStop('play-hover');
       });
 
       playButton.on('mouseout', function() {
+        stopButtonHover();
         playButton.gotoAndStop('play');
       });
 
@@ -84,12 +86,22 @@ var titleState = {
       });
 
       aboutButton.on('mouseover', function() {
+        startButtonHover();
         aboutButton.gotoAndStop('about-hover');
       });
 
       aboutButton.on('mouseout', function() {
+        stopButtonHover();
         aboutButton.gotoAndStop('about');
       });
+
+      function startButtonHover() {
+        stage.canvas.classList.add('over-button');
+      }
+
+      function stopButtonHover() {
+        stage.canvas.classList.remove('over-button');
+      }
     }.bind(this));
 
     highScoreText += (highScore.getHighScore() || 'N/A');
