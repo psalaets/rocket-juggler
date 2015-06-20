@@ -1,8 +1,8 @@
 var createjs = require('createjs');
 
-var entities = require('../entity');
-var highScore = require('../high-score');
-var loader = require('../loader');
+var entities = require('../../entity');
+var highScore = require('../../high-score');
+var loader = require('../../loader');
 
 var titleState = {
   init: function(game) {
