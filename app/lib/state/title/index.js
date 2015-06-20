@@ -50,44 +50,44 @@ var titleState = {
       var buttonWidth = 188;
       var buttonHeight = 44;
 
-      var start = createButton();
-      start.regX = buttonWidth / 2;
-      start.regY = buttonHeight / 2;
-      start.x = 1024 / 2;
-      start.y = 395;
-      start.gotoAndStop('play');
+      var playButton = createButton();
+      playButton.regX = buttonWidth / 2;
+      playButton.regY = buttonHeight / 2;
+      playButton.x = 1024 / 2;
+      playButton.y = 395;
+      playButton.gotoAndStop('play');
 
-      stage.addChild(start);
+      stage.addChild(playButton);
 
-      start.on('click', function() {
+      playButton.on('click', function() {
         game.changeState('gameplay');
       });
 
-      start.on('mouseover', function() {
-        start.gotoAndStop('play-hover');
+      playButton.on('mouseover', function() {
+        playButton.gotoAndStop('play-hover');
       });
 
-      start.on('mouseout', function() {
-        start.gotoAndStop('play');
+      playButton.on('mouseout', function() {
+        playButton.gotoAndStop('play');
       });
 
-      var about = createButton();
-      about.regX = buttonWidth / 2;
-      about.regY = buttonHeight / 2;
-      about.x = 1024 / 2;
-      about.y = 465;
-      stage.addChild(about);
+      var aboutButton = createButton();
+      aboutButton.regX = buttonWidth / 2;
+      aboutButton.regY = buttonHeight / 2;
+      aboutButton.x = 1024 / 2;
+      aboutButton.y = 465;
+      stage.addChild(aboutButton);
 
-      about.on('click', function() {
+      aboutButton.on('click', function() {
         game.changeState('help');
       });
 
-      about.on('mouseover', function() {
-        about.gotoAndStop('about-hover');
+      aboutButton.on('mouseover', function() {
+        aboutButton.gotoAndStop('about-hover');
       });
 
-      about.on('mouseout', function() {
-        about.gotoAndStop('about');
+      aboutButton.on('mouseout', function() {
+        aboutButton.gotoAndStop('about');
       });
     }.bind(this));
 
