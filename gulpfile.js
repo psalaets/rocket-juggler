@@ -2,7 +2,7 @@ var gulp        = require('gulp'),
     browserify  = require('browserify'),
     watchify    = require('watchify'),
     source      = require('vinyl-source-stream'),
-    browserSync = require('browser-sync'),
+    browserSync = require('browser-sync').create(),
     uglify      = require('gulp-uglify'),
     rev         = require('gulp-rev'),
     inject      = require('gulp-inject'),
@@ -59,7 +59,7 @@ gulp.task('watchify', ['clean'], function() {
 });
 
 gulp.task('watch', ['watchify'], function(cb) {
-  browserSync({
+  browserSync.init({
     server: {
       baseDir: './app/'
     }
@@ -70,6 +70,12 @@ gulp.task('watch', ['watchify'], function(cb) {
       // reload when html page changes
       'app/index.html'
     ], {}, browserSync.reload);
+
+    // inject css changes into page
+    gulp.watch('app/css/*', function(event) {
+      gulp.src(event.path)
+        .pipe(browserSync.stream());
+    });
 
     // signal to gulp that this task is done
     cb();

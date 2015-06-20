@@ -45,7 +45,7 @@ function createView(radius) {
 
 function createBody(x, y, radius) {
   var body = new p2.Body({
-    mass: 1,
+    mass: 3,
     // doesn't spin
     fixedRotation: true,
     position: [x, y],

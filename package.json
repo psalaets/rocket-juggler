@@ -9,7 +9,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "browser-sync": "1.7.0",
+    "browser-sync": "2.7.12",
     "browserify": "6.3.2",
     "browserify-shim": "3.8.0",
     "del": "0.1.3",
