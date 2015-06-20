@@ -27,7 +27,7 @@ loader.loadImage('about-button-hover',  'assets/aboutbuttonhover.png');
 loader.loadImage('play-button',         'assets/playbutton.png');
 loader.loadImage('play-button-hover',   'assets/playbuttonhover.png');
 loader.loadImage('title-screen',        'assets/withoutbuttons.png');
-loader.loadImage('insert-coin',         'assets/insertcoin.gif');
+loader.loadImage('insert-coin',         'assets/insertcoin.png');
 
 // start game after everything is loaded
 loader.on('ready', function() {
