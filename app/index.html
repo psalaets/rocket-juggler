@@ -4,40 +4,38 @@
     <meta charset="UTF-8">
     <title>Rocket Juggler</title>
     <style>
-        body {
-            background: #000000;
-        }
+body {
+  background: #000000;
+}
 
-        #stage {
-            display: block;
+#stage {
+  display: block;
+  width: 1024px;
+  background: #000000;
+}
 
-            width: 1024px;
-            background: #000000;
-        }
+#stage.playing {
+  cursor: crosshair;
+}
 
-        #stage.playing {
-            cursor: crosshair;
-        }
+#stage.hover-button {
+  cursor: pointer;
+}
 
-        #stage.hover-button {
-            cursor: pointer;
-        }
+#container {
+  margin: 0 auto;
+  width: 1024px;
+}
 
-        #container {
-            margin: 0 auto;
+#about {
+  background: #cccccc;
+  color: #000000;
+  padding: 1rem;
+}
 
-            width: 1024px;
-        }
-
-        #about {
-            background: #cccccc;
-            color: #000000;
-            padding: 1rem;
-        }
-
-        #about h1 {
-            margin-top: 0;
-        }
+#about h1 {
+  margin-top: 0;
+}
     </style>
 </head>
 <body>
