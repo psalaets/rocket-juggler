@@ -64,12 +64,12 @@ var titleState = {
       });
 
       playButton.on('mouseover', function() {
-        startButtonHover();
+        startButtonHover(stage);
         playButton.gotoAndStop('play-hover');
       });
 
       playButton.on('mouseout', function() {
-        stopButtonHover();
+        stopButtonHover(stage);
         playButton.gotoAndStop('play');
       });
 
@@ -86,22 +86,14 @@ var titleState = {
       });
 
       aboutButton.on('mouseover', function() {
-        startButtonHover();
+        startButtonHover(stage);
         aboutButton.gotoAndStop('about-hover');
       });
 
       aboutButton.on('mouseout', function() {
-        stopButtonHover();
+        stopButtonHover(stage);
         aboutButton.gotoAndStop('about');
       });
-
-      function startButtonHover() {
-        stage.canvas.classList.add('over-button');
-      }
-
-      function stopButtonHover() {
-        stage.canvas.classList.remove('over-button');
-      }
     }.bind(this));
 
     highScoreText += (highScore.getHighScore() || 'N/A');
@@ -120,8 +112,18 @@ var titleState = {
     game.withStage(function(stage) {
       // turn off mouse events on display objects
       stage.enableMouseOver(0);
+
+      stopButtonHover(stage);
     });
   }
 };
+
+function startButtonHover(stage) {
+  stage.canvas.classList.add('hover-button');
+}
+
+function stopButtonHover(stage) {
+  stage.canvas.classList.remove('hover-button');
+}
 
 module.exports = titleState;
