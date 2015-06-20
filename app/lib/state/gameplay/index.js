@@ -1,10 +1,10 @@
 var ghostBody = require('ghost-body');
 
-var loader = require('../loader');
-var entities = require('../entity');
-var Launcher = require('../launcher');
-var createCollisionHandler = require('./gameplay-collision-handler');
-var gameConfig = require('../config/game-config');
+var loader = require('../../loader');
+var entities = require('../../entity');
+var Launcher = require('../../launcher');
+var gameConfig = require('../../config/game-config');
+var createCollisionHandler = require('./collision-handler');
 var createBallSpawnConfigs = require('./ball-spawn-configs');
 
 function createWalls(game) {
