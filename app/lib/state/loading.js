@@ -9,17 +9,21 @@ module.exports = function(loader) {
       this.game = game;
     },
     setUp: function(game, score) {
-      this.loadingText = entities.text(50, 50, '', '#ffffff');
+      game.withStage(function(stage) {
+        this.loadingText = new createjs.Text('', '20px Arial', '#FFFFFF');
+        this.loadingText.x = 50;
+        this.loadingText.y = 50;
 
-      loader.on('progress', function(event) {
-        this.loadingText.message = 'Loading ' + event.percent + '%';
-      }, this);
+        stage.addChild(this.loadingText);
 
-      loader.on('ready', function() {
-        game.changeState('title');
-      });
+        loader.on('progress', function(event) {
+          this.loadingText.text = 'Loading... ' + event.percent + '%';
+        }, this);
 
-      game.addEntity(this.loadingText);
+        loader.on('ready', function() {
+          game.changeState('title');
+        });
+      }.bind(this));
     },
     update: function(game, input, tickEvent) {
 
