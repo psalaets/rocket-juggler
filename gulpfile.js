@@ -12,7 +12,9 @@ var gulp        = require('gulp'),
     filelog     = require('gulp-filelog'),
     imagemin    = require('gulp-imagemin'),
     mocha       = require('gulp-mocha'),
-    minifyHtml  = require('gulp-minify-html');
+    minifyHtml  = require('gulp-minify-html'),
+    concat      = require('gulp-concat'),
+    domSrc      = require('gulp-dom-src');
 
 function makeBundle(options) {
   options = options || {};
@@ -79,29 +81,20 @@ gulp.task('prep-scripts', ['clean', 'browserify'], function() {
   var jsFilter = filter('**/*.js');
 
   return gulp.src('app/index.html')
-    // read files between build/endbuild marker comments and concat them into
-    // file with name specified by marker comment
-    .pipe(useref.assets())
-    // filter that down to just js files (there's no css yet so this isn't
-    // necessary right now)
-    .pipe(jsFilter)
-    // minify
+    .pipe(domSrc.duplex({
+      selector: 'script',
+      attribute: 'src'
+    }))
+    .pipe(concat('main.js'))
     .pipe(uglify())
-    // assign unique filename based on content
     .pipe(rev())
     .pipe(gulp.dest('build/scripts'));
 });
 
 gulp.task('prep-html', ['clean', 'prep-scripts'], function() {
-  var vendorFile = gulp.src('build/scripts/vendor-*.js', {read: false});
   var mainFile = gulp.src('build/scripts/main-*.js', {read: false});
 
   return gulp.src('app/index.html')
-    .pipe(inject(vendorFile, {
-      addRootSlash: false,
-      ignorePath: 'build/',
-      name: 'inject-vendor'
-    }))
     .pipe(inject(mainFile, {
       addRootSlash: false,
       ignorePath: 'build/',
