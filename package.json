@@ -34,7 +34,8 @@
   "browserify-shim": {
     "createjs": "global:createjs",
     "window": "global:window",
-    "local-storage": "global:localStorage"
+    "local-storage": "global:localStorage",
+    "smooth-scroll": "global:smoothScroll"
   },
   "dependencies": {
     "ghost-body": "1.1.1",

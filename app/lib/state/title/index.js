@@ -1,4 +1,5 @@
 var createjs = require('createjs');
+var smoothScroll = require('smooth-scroll');
 
 var entities = require('../../entity');
 var highScore = require('../../high-score');
@@ -82,9 +83,7 @@ var titleState = {
       stage.addChild(aboutButton);
 
       aboutButton.on('click', function() {
-        // game.changeState('help');
-
-        document.getElementById('about').scrollIntoView()
+        smoothScroll(document.getElementById('about'));
       });
 
       aboutButton.on('mouseover', function() {
