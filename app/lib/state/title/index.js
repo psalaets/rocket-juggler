@@ -82,7 +82,9 @@ var titleState = {
       stage.addChild(aboutButton);
 
       aboutButton.on('click', function() {
-        game.changeState('help');
+        // game.changeState('help');
+
+        document.getElementById('about').scrollIntoView()
       });
 
       aboutButton.on('mouseover', function() {

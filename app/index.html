@@ -5,12 +5,11 @@
     <title>Rocket Juggler</title>
     <style>
         body {
-            background: #777777;
+            background: #000000;
         }
 
         #stage {
             display: block;
-            margin: 0 auto;
 
             width: 1024px;
             background: #000000;
@@ -23,10 +22,57 @@
         #stage.hover-button {
             cursor: pointer;
         }
+
+        #container {
+            margin: 0 auto;
+
+            width: 1024px;
+        }
+
+        #about {
+            background: #cccccc;
+            color: #000000;
+            padding: 1rem;
+        }
+
+        #about h1 {
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
-    <canvas id="stage" width="1024" height="768"></canvas>
+    <div id="container">
+        <canvas id="stage" width="1024" height="768"></canvas>
+        <div id="about">
+            <h1>About</h1>
+            <p>Juggle those meteorites!</p>
+
+            <h2>Controls</h2>
+
+            <b>Aim</b> - move mouse<br>
+            <b>Shoot</b> - mouse click or <kbd>&lt;shift&gt;</kbd><br>
+            <b>Run left</b> - <kbd>&lt;left arrow&gt;</kbd> or <kbd>&lt;a&gt;</kbd><br>
+            <b>Run right</b> - <kbd>&lt;right arrow&gt;</kbd> or <kbd>&lt;d&gt;</kbd><br>
+
+            <h2>Credits</h2>
+
+            <h3>Code</h3>
+            TODO
+
+            <h3>Art</h3>
+            TODO
+
+            <h3>Made with</h3>
+            <ul>
+                <li>CreateJS - <a href="http://createjs.com/">http://createjs.com/</a></li>
+                <li>p2.js - <a href="http://schteppe.github.io/p2.js/">http://schteppe.github.io/p2.js/</a></li>
+                <li>Browserify - <a href="http://browserify.org/">http://browserify.org/</a></li>
+            </ul>
+
+            <h2>Source</h2>
+            <a href="https://github.com/psalaets/rocket-juggler">psalaets/rocket-juggler</a>
+        </div>
+    </div>
 
     <!-- build:js vendor.js -->
     <!-- inject-vendor:js -->
