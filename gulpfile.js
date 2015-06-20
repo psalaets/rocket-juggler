@@ -3,8 +3,6 @@ var gulp        = require('gulp'),
     watchify    = require('watchify'),
     source      = require('vinyl-source-stream'),
     browserSync = require('browser-sync'),
-    useref      = require('gulp-useref'),
-    filter      = require('gulp-filter'),
     uglify      = require('gulp-uglify'),
     rev         = require('gulp-rev'),
     inject      = require('gulp-inject'),
@@ -14,7 +12,8 @@ var gulp        = require('gulp'),
     mocha       = require('gulp-mocha'),
     minifyHtml  = require('gulp-minify-html'),
     concat      = require('gulp-concat'),
-    domSrc      = require('gulp-dom-src');
+    domSrc      = require('gulp-dom-src'),
+    minifyCss   = require('gulp-minify-css');
 
 function makeBundle(options) {
   options = options || {};
@@ -78,8 +77,6 @@ gulp.task('watch', ['watchify'], function(cb) {
 });
 
 gulp.task('prep-scripts', ['clean', 'browserify'], function() {
-  var jsFilter = filter('**/*.js');
-
   return gulp.src('app/index.html')
     .pipe(domSrc.duplex({
       selector: 'script',
@@ -91,14 +88,32 @@ gulp.task('prep-scripts', ['clean', 'browserify'], function() {
     .pipe(gulp.dest('build/scripts'));
 });
 
-gulp.task('prep-html', ['clean', 'prep-scripts'], function() {
-  var mainFile = gulp.src('build/scripts/main-*.js', {read: false});
+gulp.task('prep-styles', ['clean'], function() {
+  return gulp.src('app/index.html')
+    .pipe(domSrc.duplex({
+      selector: 'link',
+      attribute: 'href'
+    }))
+    .pipe(concat('main.css'))
+    .pipe(minifyCss())
+    .pipe(rev())
+    .pipe(gulp.dest('build/css'));
+});
+
+gulp.task('prep-html', ['clean', 'prep-scripts', 'prep-styles'], function() {
+  var mainJsFile = gulp.src('build/scripts/main-*.js', {read: false});
+  var mainCssFile = gulp.src('build/css/main-*.css', {read: false});
 
   return gulp.src('app/index.html')
-    .pipe(inject(mainFile, {
+    .pipe(inject(mainJsFile, {
       addRootSlash: false,
       ignorePath: 'build/',
-      name: 'inject-main'
+      name: 'inject-main-js'
+    }))
+    .pipe(inject(mainCssFile, {
+      addRootSlash: false,
+      ignorePath: 'build/',
+      name: 'inject-main-css'
     }))
     .pipe(minifyHtml())
     .pipe(gulp.dest('build'));

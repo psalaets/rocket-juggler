@@ -3,40 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Rocket Juggler</title>
-    <style>
-body {
-  background: #000000;
-}
-
-#stage {
-  display: block;
-  width: 1024px;
-  background: #000000;
-}
-
-#stage.playing {
-  cursor: crosshair;
-}
-
-#stage.hover-button {
-  cursor: pointer;
-}
-
-#container {
-  margin: 0 auto;
-  width: 1024px;
-}
-
-#about {
-  background: #cccccc;
-  color: #000000;
-  padding: 1rem;
-}
-
-#about h1 {
-  margin-top: 0;
-}
-    </style>
+    <!-- inject-main-css:css -->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- endinject -->
 </head>
 <body>
     <div id="container">
@@ -73,7 +42,7 @@ body {
         </div>
     </div>
 
-    <!-- inject-main:js -->
+    <!-- inject-main-js:js -->
     <script src="bower_components/easeljs/lib/easeljs-0.8.0.min.js"></script>
     <script src="bower_components/PreloadJS/lib/preloadjs-0.6.0.min.js"></script>
     <script src="bower_components/smoothScroll/smoothscroll.js"></script>

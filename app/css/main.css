@@ -1,0 +1,32 @@
+body {
+  background: #000000;
+}
+
+#stage {
+  display: block;
+  width: 1024px;
+  background: #000000;
+}
+
+#stage.playing {
+  cursor: crosshair;
+}
+
+#stage.hover-button {
+  cursor: pointer;
+}
+
+#container {
+  margin: 0 auto;
+  width: 1024px;
+}
+
+#about {
+  background: #cccccc;
+  color: #000000;
+  padding: 1rem;
+}
+
+#about h1 {
+  margin-top: 0;
+}
