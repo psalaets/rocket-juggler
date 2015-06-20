@@ -8,6 +8,13 @@ function Loader() {
   this.queue.on('complete', function() {
     this.dispatchEvent('ready');
   }, this);
+
+  this.queue.on('progress', function(event) {
+    var progressEvent = new createjs.Event('progress');
+    progressEvent.percent = Math.floor(event.loaded * 100);
+
+    this.dispatchEvent(progressEvent);
+  }, this);
 }
 
 var p = Loader.prototype;

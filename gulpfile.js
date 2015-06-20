@@ -11,7 +11,8 @@ var gulp        = require('gulp'),
     del         = require('del'),
     filelog     = require('gulp-filelog'),
     imagemin    = require('gulp-imagemin'),
-    mocha       = require('gulp-mocha');
+    mocha       = require('gulp-mocha'),
+    minifyHtml  = require('gulp-minify-html');
 
 function makeBundle(options) {
   options = options || {};
@@ -106,6 +107,7 @@ gulp.task('prep-html', ['clean', 'prep-scripts'], function() {
       ignorePath: 'build/',
       name: 'inject-main'
     }))
+    .pipe(minifyHtml())
     .pipe(gulp.dest('build'));
 });
 

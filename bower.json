@@ -15,6 +15,7 @@
   ],
   "dependencies": {
     "easeljs": "0.8.0",
-    "PreloadJS": "0.6.0"
+    "PreloadJS": "0.6.0",
+    "smoothScroll": "alicelieutier/smoothScroll#4720c4043ffe5f951f18af0995b04387f9583cc0"
   }
 }

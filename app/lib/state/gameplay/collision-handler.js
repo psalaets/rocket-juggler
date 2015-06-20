@@ -1,9 +1,9 @@
-var Ball = require('../entity/ball');
-var Wall = require('../entity/wall');
-var Rocket = require('../entity/rocket');
-var Explosion = require('../entity/explosion');
-var createCollisionHandler = require('../collision-handler');
-var entities = require('../entity');
+var Ball = require('../../entity/ball');
+var Wall = require('../../entity/wall');
+var Rocket = require('../../entity/rocket');
+var Explosion = require('../../entity/explosion');
+var createCollisionHandler = require('../../collision-handler');
+var entities = require('../../entity');
 
 module.exports = function(game, gameplayState) {
   var collisionHandler = createCollisionHandler();

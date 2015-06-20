@@ -10,10 +10,6 @@ var Game = require('./lib/game');
 var canvas = document.getElementById('stage');
 var game = new Game(canvas);
 
-game.defineState('title', require('./lib/state/title'));
-game.defineState('help', require('./lib/state/help'));
-game.defineState('gameplay', require('./lib/state/gameplay'));
-
 var loader = require('./lib/loader');
 // gameplay state
 loader.loadImage('torso',               'assets/torso.png');
@@ -27,11 +23,13 @@ loader.loadImage('about-button-hover',  'assets/aboutbuttonhover.png');
 loader.loadImage('play-button',         'assets/playbutton.png');
 loader.loadImage('play-button-hover',   'assets/playbuttonhover.png');
 loader.loadImage('title-screen',        'assets/withoutbuttons.png');
-loader.loadImage('insert-coin',         'assets/insertcoin.gif');
+loader.loadImage('insert-coin',         'assets/insertcoin.png');
 
-// start game after everything is loaded
-loader.on('ready', function() {
-  game.changeState('title');
-  game.start();
-});
+var makeLoadingState = require('./lib/state/loading');
+game.defineState('loading', makeLoadingState(loader));
 
+game.defineState('title', require('./lib/state/title'));
+game.defineState('gameplay', require('./lib/state/gameplay'));
+
+game.changeState('loading');
+game.start();
