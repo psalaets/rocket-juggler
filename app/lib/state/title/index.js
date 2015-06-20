@@ -76,6 +76,7 @@ var titleState = {
       aboutButton.regY = buttonHeight / 2;
       aboutButton.x = 1024 / 2;
       aboutButton.y = 465;
+      aboutButton.gotoAndStop('about');
       stage.addChild(aboutButton);
 
       aboutButton.on('click', function() {
