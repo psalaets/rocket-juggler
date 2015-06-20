@@ -4,6 +4,8 @@ var entities = require('../../entity');
 var highScore = require('../../high-score');
 var loader = require('../../loader');
 
+var createButton = require('./buttons');
+
 var titleState = {
   init: function(game) {
     this.game = game;
@@ -22,6 +24,9 @@ var titleState = {
     }
 
     game.withStage(function(stage) {
+      // turn on mouse events on display objects
+      stage.enableMouseOver();
+
       // set background
       stage.addChild(new createjs.Bitmap(loader.get('title-screen')));
 
@@ -45,18 +50,28 @@ var titleState = {
       var buttonWidth = 188;
       var buttonHeight = 44;
 
-      var start = new createjs.Bitmap(loader.get('play-button'));
+      var start = createButton('start');
       start.regX = buttonWidth / 2;
       start.regY = buttonHeight / 2;
       start.x = 1024 / 2;
       start.y = 395;
+      start.gotoAndStop('play');
+
       stage.addChild(start);
 
       start.on('click', function() {
         game.changeState('gameplay');
       });
 
-      var about = new createjs.Bitmap(loader.get('about-button'));
+      start.on('mouseover', function() {
+        start.gotoAndStop('play-hover');
+      });
+
+      start.on('mouseout', function() {
+        start.gotoAndStop('play');
+      });
+
+      var about = createButton('about');
       about.regX = buttonWidth / 2;
       about.regY = buttonHeight / 2;
       about.x = 1024 / 2;
@@ -65,6 +80,14 @@ var titleState = {
 
       about.on('click', function() {
         game.changeState('help');
+      });
+
+      about.on('mouseover', function() {
+        about.gotoAndStop('about-hover');
+      });
+
+      about.on('mouseout', function() {
+        about.gotoAndStop('about');
       });
     }.bind(this));
 
@@ -80,6 +103,11 @@ var titleState = {
   },
   tearDown: function(game) {
     game.timer.clearCountdowns();
+
+    game.withStage(function(stage) {
+      // turn off mouse events on display objects
+      stage.enableMouseOver(0);
+    });
   }
 };
 
