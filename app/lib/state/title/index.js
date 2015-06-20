@@ -101,7 +101,6 @@ var titleState = {
 
     // game.addEntity(entities.text(500, 100, 'ROCKET JUGGLER'));
     // game.addEntity(entities.text(500, 120, 'Press <enter> to begin'));
-    // game.addEntity(entities.text(500, 140, 'Press <h> for help'));
     // game.addEntity(entities.text(500, 170, highScoreText));
   },
   update: function(game, input, tickEvent) {

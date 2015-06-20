@@ -29,7 +29,6 @@ var makeLoadingState = require('./lib/state/loading');
 game.defineState('loading', makeLoadingState(loader));
 
 game.defineState('title', require('./lib/state/title'));
-game.defineState('help', require('./lib/state/help'));
 game.defineState('gameplay', require('./lib/state/gameplay'));
 
 game.changeState('loading');
