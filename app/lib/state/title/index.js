@@ -50,7 +50,7 @@ var titleState = {
       var buttonWidth = 188;
       var buttonHeight = 44;
 
-      var start = createButton('start');
+      var start = createButton();
       start.regX = buttonWidth / 2;
       start.regY = buttonHeight / 2;
       start.x = 1024 / 2;
@@ -71,7 +71,7 @@ var titleState = {
         start.gotoAndStop('play');
       });
 
-      var about = createButton('about');
+      var about = createButton();
       about.regX = buttonWidth / 2;
       about.regY = buttonHeight / 2;
       about.x = 1024 / 2;

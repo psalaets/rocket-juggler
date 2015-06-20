@@ -1,13 +1,7 @@
 var createjs = require('createjs');
 var loader = require('../../loader');
 
-var buttonTypes = ['start', 'about'];
-
-module.exports = function(type) {
-  if (buttonTypes.indexOf(type) == -1) {
-    throw new Error('Unknown button type: ' + type + '. Expected one of: ' + buttonTypes.join(', '));
-  }
-
+module.exports = function() {
   var spritesheet = new createjs.SpriteSheet({
     images: [
       loader.get('play-button'),
@@ -29,5 +23,5 @@ module.exports = function(type) {
     }
   });
 
-  return new createjs.Sprite(spritesheet, type);
+  return new createjs.Sprite(spritesheet);
 };
