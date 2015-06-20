@@ -9,7 +9,7 @@ module.exports = function(loader) {
       this.game = game;
     },
     setUp: function(game, score) {
-      this.loadingText = entities.text(50, 50, '', '#000000');
+      this.loadingText = entities.text(50, 50, '', '#ffffff');
 
       loader.on('progress', function(event) {
         this.loadingText.message = 'Loading ' + event.percent + '%';
