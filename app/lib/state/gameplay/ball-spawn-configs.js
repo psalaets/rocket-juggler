@@ -2,8 +2,8 @@ module.exports = function() {
   var index = 0;
 
   var locations = [
-    {x: 656, y: -100},
-    {x: 328, y: -100}
+    {x: 656, y: -50},
+    {x: 328, y: -50}
   ];
 
   var velocities = [
