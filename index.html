@@ -1,39 +1,34 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Rocket Juggler</title>
-    <style>
-        body {
-            background: #cccccc;
-        }
+<!doctype html><html><head><meta charset=UTF-8><title>Rocket Juggler</title><style>
+body {
+  background: #000000;
+}
 
-        #stage {
-            display: block;
-            margin: 0 auto;
+#stage {
+  display: block;
+  width: 1024px;
+  background: #000000;
+}
 
-            width: 1024px;
-            background: #ffffff;
-        }
+#stage.playing {
+  cursor: crosshair;
+}
 
-        #stage.playing {
-            cursor: crosshair;
-        }
-    </style>
-</head>
-<body>
-    <canvas id="stage" width="1024" height="768"></canvas>
+#stage.hover-button {
+  cursor: pointer;
+}
 
-    <!-- build:js vendor.js -->
-    <!-- inject-vendor:js -->
-    <script src="scripts/vendor-ce53a455.js"></script>
-    <!-- endinject -->
-    <!-- endbuild -->
+#container {
+  margin: 0 auto;
+  width: 1024px;
+}
 
-    <!-- build:js main.js -->
-    <!-- inject-main:js -->
-    <script src="scripts/main-d1a8053b.js"></script>
-    <!-- endinject -->
-    <!-- endbuild -->
-</body>
-</html>
+#about {
+  background: #cccccc;
+  color: #000000;
+  padding: 1rem;
+}
+
+#about h1 {
+  margin-top: 0;
+}
+    </style></head><body><div id=container><canvas id=stage width=1024 height=768></canvas><div id=about><h1>About</h1><p>Juggle those meteorites!</p><h2>Controls</h2><b>Aim</b> - move mouse<br><b>Shoot</b> - mouse click or <kbd>&lt;shift&gt;</kbd><br><b>Run left</b> - <kbd>&lt;left arrow&gt;</kbd> or <kbd>&lt;a&gt;</kbd><br><b>Run right</b> - <kbd>&lt;right arrow&gt;</kbd> or <kbd>&lt;d&gt;</kbd><br><h2>Credits</h2><h3>Code</h3>TODO<h3>Art</h3>TODO<h3>Made with</h3><ul><li>CreateJS - <a href="http://createjs.com/">http://createjs.com/</a></li><li>p2.js - <a href="http://schteppe.github.io/p2.js/">http://schteppe.github.io/p2.js/</a></li><li>Browserify - <a href="http://browserify.org/">http://browserify.org/</a></li><li>smoothScroll - <a href=https://github.com/alicelieutier/smoothScroll>https://github.com/alicelieutier/smoothScroll</a></li></ul><h2>Source</h2><a href=https://github.com/psalaets/rocket-juggler>https://github.com/psalaets/rocket-juggler</a></div></div><script src=scripts/vendor-567d21ce.js></script><script src=scripts/main-494b0723.js></script></body></html>
