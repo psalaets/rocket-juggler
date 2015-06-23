@@ -91,7 +91,7 @@ var gameplayState = {
     game.addEntity(this.player);
 
     // debug related
-    this.scoreText = entities.text(40, 20, '', '#FFFFFF');
+    this.scoreText = entities.text(20, 20, '', '#FFFFFF');
     // this.actualFps = entities.text(40, 30, '', '#FFFFFF');
     // this.targetFps = entities.text(40, 40, '', '#FFFFFF');
 
