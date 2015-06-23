@@ -91,19 +91,18 @@ var gameplayState = {
     game.addEntity(this.player);
 
     // debug related
-    var white = '#FFFFFF';
-    this.actualFps = entities.text(40, 30, '', '#FFFFFF');
-    this.targetFps = entities.text(40, 40, '', '#FFFFFF');
-    this.scoreText = entities.text(40, 50, '', '#FFFFFF');
+    this.scoreText = entities.text(20, 20, '', '#FFFFFF');
+    // this.actualFps = entities.text(40, 30, '', '#FFFFFF');
+    // this.targetFps = entities.text(40, 40, '', '#FFFFFF');
 
-    game.addEntity(this.actualFps);
-    game.addEntity(this.targetFps);
     game.addEntity(this.scoreText);
+    // game.addEntity(this.actualFps);
+    // game.addEntity(this.targetFps);
   },
   update: function(game, input, tickEvent) {
-    this.actualFps.message = createjs.Ticker.getMeasuredFPS();
-    this.targetFps.message = createjs.Ticker.getFPS();
     this.scoreText.message = 'Score: ' + this.score;
+    // this.actualFps.message = createjs.Ticker.getMeasuredFPS();
+    // this.targetFps.message = createjs.Ticker.getFPS();
 
     // react to input
     if (input.keys[16]) { // shift key
