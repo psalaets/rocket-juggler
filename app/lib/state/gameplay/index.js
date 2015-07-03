@@ -80,7 +80,7 @@ var gameplayState = {
 
     incrementScore();
 
-    var playerX = 1024 / 2; // middle
+    var playerX = game.width / 2; // middle
     playerX -= 68; // scoot left a bit to line up with title screen's character
 
     var playerY = 768 - (192 / 2); // half player height from bottom
