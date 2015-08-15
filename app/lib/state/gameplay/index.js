@@ -89,8 +89,10 @@ var gameplayState = {
     this.score = 0;
 
     var incrementScore = function() {
-      this.score += 1;
-      game.timer.addCountdown(1000, incrementScore);
+      if (!this.gameOverSequence) {
+        this.score += 1;
+        game.timer.addCountdown(1000, incrementScore);
+      }
     }.bind(this);
 
     incrementScore();
