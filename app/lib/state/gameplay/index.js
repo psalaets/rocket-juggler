@@ -54,6 +54,21 @@ var gameplayState = {
 
       // set background
       stage.addChild(new createjs.Bitmap(loader.get('background')));
+
+      // prepare game over message
+      var gameOverTitleSize = {
+        width: 508,
+        height: 100
+      };
+
+      var gameOverTitle = new createjs.Bitmap(loader.get('game-over'));
+      gameOverTitle.regX = gameOverTitleSize.width / 2;
+      gameOverTitle.regY = gameOverTitleSize.height / 2;
+      gameOverTitle.x = game.width / 2;
+      gameOverTitle.y = 280;
+      gameOverTitle.visible = false;
+      stage.addChild(gameOverTitle);
+      this.gameOverTitle = gameOverTitle;
     }.bind(this));
 
     createWalls(game).forEach(game.addWall, game);
@@ -100,6 +115,16 @@ var gameplayState = {
     // game.addEntity(this.targetFps);
   },
   update: function(game, input, tickEvent) {
+    if (this.gameOverSequence) {
+      this.gameOverTitle.visible = true;
+
+      if (this.gameOverMillis > 0) {
+        this.gameOverMillis -= tickEvent.delta;
+      } else {
+        game.changeState('title', this.score);
+      }
+    }
+
     this.scoreText.message = 'Score: ' + this.score;
     // this.actualFps.message = createjs.Ticker.getMeasuredFPS();
     // this.targetFps.message = createjs.Ticker.getFPS();
@@ -131,11 +156,19 @@ var gameplayState = {
       // turn off crosshair
       stage.canvas.classList.remove('playing');
     });
+
+    this.gameOverSequence = null;
   },
   fire: function() {
     var rocket = this.player.fire();
     if (rocket) {
       this.game.addRocket(rocket);
+    }
+  },
+  gameOver: function() {
+    if (!this.gameOverSequence) {
+      this.gameOverSequence = true;
+      this.gameOverMillis = 5000;
     }
   }
 };

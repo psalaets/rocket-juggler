@@ -41,7 +41,7 @@ module.exports = function(game, gameplayState) {
       },
       function(ball, floor) {
         // temporarily off for debug purposes
-        //game.changeState('title', gameplayState.score);
+        gameplayState.gameOver();
       }
     );
 

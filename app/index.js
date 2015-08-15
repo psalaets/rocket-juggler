@@ -15,6 +15,7 @@ loader.loadImage('background',          'assets/background.png');
 loader.loadImage('rocket',              'assets/rocket.png');
 loader.loadImage('meteor',              'assets/meteor.png');
 loader.loadImage('explosion',           'assets/explosion.png');
+loader.loadImage('game-over',           'assets/gameover.png');
 // title state
 loader.loadImage('about-button',        'assets/aboutbutton.png');
 loader.loadImage('about-button-hover',  'assets/aboutbuttonhover.png');
