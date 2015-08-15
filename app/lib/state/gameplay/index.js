@@ -168,7 +168,7 @@ var gameplayState = {
   gameOver: function() {
     if (!this.gameOverSequence) {
       this.gameOverSequence = true;
-      this.gameOverMillis = 5000;
+      this.gameOverMillis = 3500;
     }
   }
 };
