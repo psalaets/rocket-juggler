@@ -19,17 +19,19 @@ function Ball(x, y, radius) {
 }
 
 function createView(radius) {
-  var spritesheet = new createjs.SpriteSheet({
-    images: [loader.get('meteor')],
-    frames: {
-      width: 100,
-      height: 100,
-      regX: 50,
-      regY: 50
-    }
-  });
+  if (!Ball.spriteSheet) {
+    Ball.spriteSheet = new createjs.SpriteSheet({
+      images: [loader.get('meteor')],
+      frames: {
+        width: 100,
+        height: 100,
+        regX: 50,
+        regY: 50
+      }
+    });
+  }
 
-  var sprite = new createjs.Sprite(spritesheet);
+  var sprite = new createjs.Sprite(Ball.spriteSheet);
   return sprite;
 
   // var graphics = new createjs.Graphics();

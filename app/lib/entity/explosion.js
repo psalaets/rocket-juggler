@@ -25,37 +25,39 @@ function Explosion(x, y, radius) {
 }
 
 function createView(radius) {
-  var spritesheet = new createjs.SpriteSheet({
-    images: [loader.get('explosion')],
-    frames: [
-      // x, y, width, height, imageIndex*, regX*, regY*
-      [1,   1,   70, 70, 0, 35, 35], // 0
-      [74,  1,   70, 70, 0, 35, 35], // 1
-      [147, 1,   70, 70, 0, 35, 35], // 2
-      [220, 1,   70, 70, 0, 35, 35], // 3
-      [1,   74,  70, 70, 0, 35, 35], // 4
-      [74,  74,  70, 70, 0, 35, 35], // 5
-      [147, 74,  70, 70, 0, 35, 35], // 6
-      [220, 74,  70, 70, 0, 35, 35], // 7
-      [1,   147, 70, 70, 0, 35, 35]  // 8
-    ],
-    animations: {
-      explode: {
-        frames: [
-          0, 1, 2,
-          3, 3,
-          4, 4, 4,
-          5, 5, 5, 5,
-          6, 6, 6, 6, 6,
-          7, 7, 7, 7, 7,
-          8, 8, 8, 8, 8
-        ]
-      }
-    },
-    speed: 4
-  });
+  if (!Explosion.spriteSheet) {
+    Explosion.spriteSheet = new createjs.SpriteSheet({
+      images: [loader.get('explosion')],
+      frames: [
+        // x, y, width, height, imageIndex*, regX*, regY*
+        [1,   1,   70, 70, 0, 35, 35], // 0
+        [74,  1,   70, 70, 0, 35, 35], // 1
+        [147, 1,   70, 70, 0, 35, 35], // 2
+        [220, 1,   70, 70, 0, 35, 35], // 3
+        [1,   74,  70, 70, 0, 35, 35], // 4
+        [74,  74,  70, 70, 0, 35, 35], // 5
+        [147, 74,  70, 70, 0, 35, 35], // 6
+        [220, 74,  70, 70, 0, 35, 35], // 7
+        [1,   147, 70, 70, 0, 35, 35]  // 8
+      ],
+      animations: {
+        explode: {
+          frames: [
+            0, 1, 2,
+            3, 3,
+            4, 4, 4,
+            5, 5, 5, 5,
+            6, 6, 6, 6, 6,
+            7, 7, 7, 7, 7,
+            8, 8, 8, 8, 8
+          ]
+        }
+      },
+      speed: 4
+    });
+  }
 
-  var sprite = new createjs.Sprite(spritesheet, 'explode');
+  var sprite = new createjs.Sprite(Explosion.spriteSheet, 'explode');
   return sprite;
 }
 

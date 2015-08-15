@@ -20,17 +20,19 @@ function Rocket(x, y, radius) {
 var p = Rocket.prototype;
 
 function createView(radius) {
-  var spritesheet = new createjs.SpriteSheet({
-    images: [loader.get('rocket')],
-    frames: {
-      width: 20,
-      height: 20,
-      regX: 10,
-      regY: 10
-    }
-  });
+  if (!Rocket.spriteSheet) {
+    Rocket.spritesheet = new createjs.SpriteSheet({
+      images: [loader.get('rocket')],
+      frames: {
+        width: 20,
+        height: 20,
+        regX: 10,
+        regY: 10
+      }
+    });
+  }
 
-  var sprite = new createjs.Sprite(spritesheet);
+  var sprite = new createjs.Sprite(Rocket.spritesheet);
   return sprite;
 
   // var g = new createjs.Graphics();
