@@ -9,13 +9,13 @@ var Player = require('./player');
 
 module.exports = {
   rocket: function(x, y) {
-    var rocket = new Rocket(x, y, gameConfig.get('rocketRadius'));
-    rocket.speed = gameConfig.get('rocketSpeed');
+    var rocket = new Rocket(x, y, gameConfig.rocketRadius);
+    rocket.speed = gameConfig.rocketSpeed;
     return rocket;
   },
   ball: function() {
-    var ball = new Ball(0, 0, gameConfig.get('ballRadius'));
-    ball.body.mass = gameConfig.get('ballMass');
+    var ball = new Ball(0, 0, gameConfig.ballRadius);
+    ball.body.mass = gameConfig.ballMass;
     return ball;
   },
   ceiling: function(position) {
@@ -31,9 +31,9 @@ module.exports = {
     return new Wall(position, 'right');
   },
   explosion: function(x, y) {
-    var explosion = new Explosion(x, y, gameConfig.get('explosionRadius'));
-    explosion.ballPush = gameConfig.get('explosionBallPush');
-    explosion.timeLeft = gameConfig.get('explosionDuration');
+    var explosion = new Explosion(x, y, gameConfig.explosionRadius);
+    explosion.ballPush = gameConfig.explosionBallPush;
+    explosion.timeLeft = gameConfig.explosionDuration;
     return explosion;
   },
   text: function(x, y, message, color) {

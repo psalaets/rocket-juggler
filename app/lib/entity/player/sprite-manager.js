@@ -26,7 +26,7 @@ function SpriteManager(body, torso, legs) {
 
   // player left/right speed
   this.horizontalSpeed = 0;
-  this.runningSpeed = gameConfig.get('playerSpeed');
+  this.runningSpeed = gameConfig.playerSpeed;
 
   // how far from body's position that launcher aims from
   this.launcherOffset = {

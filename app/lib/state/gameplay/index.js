@@ -65,7 +65,7 @@ var gameplayState = {
       ballSpawnConfigs.nextConfig()(ball);
 
       game.addBall(ball);
-      game.timer.addCountdown(gameConfig.get('ballSpawnDelay'), spawnBall);
+      game.timer.addCountdown(gameConfig.ballSpawnDelay, spawnBall);
     }
 
     spawnBall();
