@@ -37,7 +37,7 @@ var titleState = {
       var insertCoin = new createjs.Bitmap(loader.get('insert-coin'));
       insertCoin.regX = insertCoinWidth / 2;
       insertCoin.regY = insertCoinHeight / 2;
-      insertCoin.x = 1024 / 2;
+      insertCoin.x = game.width / 2;
       insertCoin.y = 280;
       stage.addChild(insertCoin);
 
@@ -54,7 +54,7 @@ var titleState = {
       var playButton = createButton();
       playButton.regX = buttonWidth / 2;
       playButton.regY = buttonHeight / 2;
-      playButton.x = 1024 / 2;
+      playButton.x = game.width / 2;
       playButton.y = 395;
       playButton.gotoAndStop('play');
 
@@ -77,7 +77,7 @@ var titleState = {
       var aboutButton = createButton();
       aboutButton.regX = buttonWidth / 2;
       aboutButton.regY = buttonHeight / 2;
-      aboutButton.x = 1024 / 2;
+      aboutButton.x = game.width / 2;
       aboutButton.y = 465;
       aboutButton.gotoAndStop('about');
       stage.addChild(aboutButton);

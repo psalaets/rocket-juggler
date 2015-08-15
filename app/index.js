@@ -1,9 +1,6 @@
 var document = require('window').document;
 
-// load config and apply it to game
-var configPersistence = require('./lib/config/persistence');
 var gameConfig = require('./lib/config/game-config');
-gameConfig.apply(configPersistence.load());
 
 // create game
 var Game = require('./lib/game');
@@ -17,6 +14,8 @@ loader.loadImage('legs',                'assets/legs.png');
 loader.loadImage('background',          'assets/background.png');
 loader.loadImage('rocket',              'assets/rocket.png');
 loader.loadImage('meteor',              'assets/meteor.png');
+loader.loadImage('explosion',           'assets/explosion.png');
+loader.loadImage('game-over',           'assets/gameover.png');
 // title state
 loader.loadImage('about-button',        'assets/aboutbutton.png');
 loader.loadImage('about-button-hover',  'assets/aboutbuttonhover.png');

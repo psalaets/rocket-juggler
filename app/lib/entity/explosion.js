@@ -3,6 +3,8 @@ var p2 = require('p2');
 var ghostBody = require('ghost-body');
 var Vec2 = require('vec2');
 
+var loader = require('../loader');
+
 module.exports = Explosion;
 
 function Explosion(x, y, radius) {
@@ -13,7 +15,8 @@ function Explosion(x, y, radius) {
   this.body = createBody(x, y, radius);
 
   // how many ms an explosion lasts
-  this.timeLeft = 100;
+  this.timeLeft = 900;
+  this.pushTimeLeft = 100;
 
   this.ballPush = 800;
 
@@ -22,15 +25,40 @@ function Explosion(x, y, radius) {
 }
 
 function createView(radius) {
-  var g = new createjs.Graphics();
+  if (!Explosion.spriteSheet) {
+    Explosion.spriteSheet = new createjs.SpriteSheet({
+      images: [loader.get('explosion')],
+      frames: [
+        // x, y, width, height, imageIndex*, regX*, regY*
+        [1,   1,   70, 70, 0, 35, 35], // 0
+        [74,  1,   70, 70, 0, 35, 35], // 1
+        [147, 1,   70, 70, 0, 35, 35], // 2
+        [220, 1,   70, 70, 0, 35, 35], // 3
+        [1,   74,  70, 70, 0, 35, 35], // 4
+        [74,  74,  70, 70, 0, 35, 35], // 5
+        [147, 74,  70, 70, 0, 35, 35], // 6
+        [220, 74,  70, 70, 0, 35, 35], // 7
+        [1,   147, 70, 70, 0, 35, 35]  // 8
+      ],
+      animations: {
+        explode: {
+          frames: [
+            0, 1, 2,
+            3, 3,
+            4, 4, 4,
+            5, 5, 5, 5,
+            6, 6, 6, 6, 6,
+            7, 7, 7, 7, 7,
+            8, 8, 8, 8, 8
+          ]
+        }
+      },
+      speed: 4
+    });
+  }
 
-  // green outline
-  g.beginStroke('#00ff00');
-  g.drawCircle(0, 0, radius);
-
-  var shape = new createjs.Shape(g);
-  shape.cache(-radius, -radius, radius * 2, radius * 2);
-  return shape;
+  var sprite = new createjs.Sprite(Explosion.spriteSheet, 'explode');
+  return sprite;
 }
 
 function createBody(x, y, radius) {
@@ -64,10 +92,11 @@ p.update = function(tickEvent) {
   }
 
   this.timeLeft -= tickEvent.delta;
+  this.pushTimeLeft -= tickEvent.delta;
 };
 
 p.pushBall = function(ball) {
-  if (ball.fairGame && this.alreadyHit.indexOf(ball) == -1) {
+  if (this.pushTimeLeft > 0 && ball.fairGame && this.alreadyHit.indexOf(ball) == -1) {
     this.alreadyHit.push(ball);
 
     var pushVector = new Vec2(ball.body.position[0], ball.body.position[1]);
