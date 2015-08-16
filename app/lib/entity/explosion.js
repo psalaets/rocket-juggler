@@ -28,18 +28,14 @@ function createView(radius) {
   if (!Explosion.spriteSheet) {
     Explosion.spriteSheet = new createjs.SpriteSheet({
       images: [loader.get('explosion')],
-      frames: [
-        // x, y, width, height, imageIndex*, regX*, regY*
-        [1,   1,   70, 70, 0, 35, 35], // 0
-        [74,  1,   70, 70, 0, 35, 35], // 1
-        [147, 1,   70, 70, 0, 35, 35], // 2
-        [220, 1,   70, 70, 0, 35, 35], // 3
-        [1,   74,  70, 70, 0, 35, 35], // 4
-        [74,  74,  70, 70, 0, 35, 35], // 5
-        [147, 74,  70, 70, 0, 35, 35], // 6
-        [220, 74,  70, 70, 0, 35, 35], // 7
-        [1,   147, 70, 70, 0, 35, 35]  // 8
-      ],
+      frames: {
+        width: 70,
+        height: 70,
+        regX: 35,
+        regY: 35,
+        spacing: 1,
+        margin: 1
+      },
       animations: {
         explode: {
           frames: [
@@ -84,8 +80,8 @@ var p = Explosion.prototype;
 
 p.update = function(tickEvent) {
   // place shape at body's position
-  this.view.x = this.body.position[0];
-  this.view.y = this.body.position[1];
+  this.view.x = Math.floor(this.body.position[0]);
+  this.view.y = Math.floor(this.body.position[1]);
 
   if (this.timeLeft <= 0) {
     this.inactive = true;
