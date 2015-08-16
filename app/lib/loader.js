@@ -4,6 +4,7 @@ createjs.EventDispatcher.initialize(Loader.prototype);
 
 function Loader() {
   this.queue = new createjs.LoadQueue();
+  this.queue.setMaxConnections(10);
 
   this.queue.on('complete', function() {
     this.dispatchEvent('ready');
