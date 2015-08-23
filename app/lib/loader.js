@@ -30,7 +30,7 @@ p.loadImage = function(name, url) {
 
 p.get = function(name) {
   if (!this.queue.loaded) {
-    throw new Error('resource are not finished loading');
+    throw new Error('tried to get "' + name + '" but resources are not finished loading');
   }
 
   var resource = this.queue.getResult(name);

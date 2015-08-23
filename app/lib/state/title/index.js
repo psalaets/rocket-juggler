@@ -12,16 +12,11 @@ var titleState = {
     this.game = game;
   },
   setUp: function(game, score) {
-    var highScoreText = 'High Score: '
-
     // if a score was passed, a game just ended
     if (score !== undefined) {
       if (highScore.newScore(score)) {
-        highScoreText = 'NEW! ' + highScoreText;
+        // new high score
       }
-
-      // game.addEntity(entities.text(500, 300, 'GAME OVER'));
-      // game.addEntity(entities.text(500, 320, 'Score: ' + score));
     }
 
     game.withStage(function(stage) {
@@ -96,12 +91,6 @@ var titleState = {
         aboutButton.gotoAndStop('about');
       });
     }.bind(this));
-
-    highScoreText += (highScore.getHighScore() || 'N/A');
-
-    // game.addEntity(entities.text(500, 100, 'ROCKET JUGGLER'));
-    // game.addEntity(entities.text(500, 120, 'Press <enter> to begin'));
-    // game.addEntity(entities.text(500, 170, highScoreText));
   },
   update: function(game, input, tickEvent) {
 
