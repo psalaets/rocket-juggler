@@ -36,9 +36,7 @@ module.exports = function(game, gameplayState) {
     // game over when ball hits floor
     .addHandler(
       isFrom(Ball),
-      function(entityB) {
-        return entityB.isFloor;
-      },
+      isFloor,
       function(ball, floor) {
         gameplayState.gameOver();
       }
@@ -46,6 +44,10 @@ module.exports = function(game, gameplayState) {
 
   return collisionHandler;
 };
+
+function isFloor(entity) {
+  return !!entity.isFloor;
+}
 
 function isFrom(constructorFn) {
   return function isEntityFrom(entity) {
