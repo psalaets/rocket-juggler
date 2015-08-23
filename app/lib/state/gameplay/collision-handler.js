@@ -40,7 +40,6 @@ module.exports = function(game, gameplayState) {
         return entityB.isFloor;
       },
       function(ball, floor) {
-        // temporarily off for debug purposes
         gameplayState.gameOver();
       }
     );

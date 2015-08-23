@@ -6,6 +6,7 @@ var Launcher = require('../../launcher');
 var gameConfig = require('../../config/game-config');
 var createCollisionHandler = require('./collision-handler');
 var createBallSpawnConfigs = require('./ball-spawn-configs');
+var makeNumbers = require('./numbers');
 
 function createWalls(game) {
   var gameWidth = game.width;
@@ -54,6 +55,11 @@ var gameplayState = {
 
       // set background
       stage.addChild(new createjs.Bitmap(loader.get('background')));
+
+      var scoreText = this.scoreText = makeNumbers();
+      scoreText.x = 15;
+      scoreText.y = 15;
+      stage.addChild(scoreText);
 
       // prepare game over message
       var gameOverTitleSize = {
@@ -108,11 +114,9 @@ var gameplayState = {
     game.addEntity(this.player);
 
     // debug related
-    this.scoreText = entities.text(20, 20, '', '#FFFFFF');
     // this.actualFps = entities.text(40, 30, '', '#FFFFFF');
     // this.targetFps = entities.text(40, 40, '', '#FFFFFF');
 
-    game.addEntity(this.scoreText);
     // game.addEntity(this.actualFps);
     // game.addEntity(this.targetFps);
   },
@@ -127,7 +131,7 @@ var gameplayState = {
       }
     }
 
-    this.scoreText.message = 'Score: ' + this.score;
+    this.scoreText.text = String(this.score);
     // this.actualFps.message = createjs.Ticker.getMeasuredFPS();
     // this.targetFps.message = createjs.Ticker.getFPS();
 
